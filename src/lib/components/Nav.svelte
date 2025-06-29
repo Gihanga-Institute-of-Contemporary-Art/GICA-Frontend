@@ -16,8 +16,8 @@
 		justify-content: center;
 		height: var(--nav-height);
 		align-items: center;
-		background: #ffff00;
-		background: linear-gradient(0deg, rgba(255, 255, 0, 0) 0%, rgba(255, 255, 0, 1) 80%);
+		background: var(--color-primary);
+		background: linear-gradient(0deg, rgba(255, 255, 0, 0) 0%, var(--color-primary) 80%);
 	}
 	nav ul {
 		width: 100%;

@@ -1,17 +1,52 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	const imageCount = 10;
 	const timePerImage = 20; // seconds per image
 	const animationDuration = imageCount * timePerImage;
 
-	let isPaused = false;
+	let isPaused = $state(false);
+	let sliderUl: HTMLUListElement;
 
 	function toggleAnimation() {
 		isPaused = !isPaused;
 	}
+
+	// Method to set paused state externally
+	export function setPaused(paused: boolean) {
+		isPaused = paused;
+	}
+
+	// Preload images for better performance
+	onMount(() => {
+		const preloadImages = () => {
+			for (let i = 0; i < imageCount; i++) {
+				const img = new Image();
+				img.src = `https://picsum.photos/600/400?random=${i}`;
+			}
+		};
+
+		preloadImages();
+
+		// Optimize animation performance
+		if (sliderUl) {
+			sliderUl.style.willChange = 'transform';
+		}
+
+		return () => {
+			if (sliderUl) {
+				sliderUl.style.willChange = 'auto';
+			}
+		};
+	});
 </script>
 
 <div class="slider-container">
-	<ul style="--animation-duration: {animationDuration}s;" class:paused={isPaused}>
+	<ul
+		style="--animation-duration: {animationDuration}s;"
+		class:paused={isPaused}
+		bind:this={sliderUl}
+	>
 		<!-- First set of images -->
 		{#each Array(imageCount) as _, index}
 			<li>
@@ -26,12 +61,12 @@
 		{/each}
 	</ul>
 	<div class="slider-btn">
-		<button on:click={toggleAnimation}>
+		<button onclick={toggleAnimation}>
 			{isPaused ? 'Play' : 'Pause'}
 		</button>
 		<button
 			class="icon"
-			on:click={toggleAnimation}
+			onclick={toggleAnimation}
 			aria-label={isPaused ? 'Play animation' : 'Pause animation'}
 		>
 			<div class="pause" class:hidden={isPaused}>
@@ -104,13 +139,16 @@
 	.slider-container ul {
 		display: flex;
 		height: fit-content;
-		width: 90%;
+		width: 75%;
 		flex-direction: column;
 		gap: 5rem;
 		list-style: none;
 		padding: 0;
 		margin: 0;
 		animation: moveUp var(--animation-duration) linear infinite;
+		will-change: transform;
+		transform: translateZ(0); /* Force hardware acceleration */
+		backface-visibility: hidden; /* Optimize for animations */
 	}
 
 	.slider-container ul.paused {
@@ -122,11 +160,12 @@
 		height: 100%;
 		background-color: white;
 		mix-blend-mode: multiply;
+		contain: layout style paint; /* CSS containment for performance */
 	}
 
-	.slider-container li:hover {
+	/* .slider-container li:hover {
 		mix-blend-mode: normal;
-	}
+	} */
 
 	.slider-container li:hover img {
 		filter: none;
@@ -137,6 +176,8 @@
 		height: auto;
 		display: block;
 		filter: url(#duotone-filter);
+		transform: translateZ(0); /* Force hardware acceleration for images */
+		backface-visibility: hidden;
 	}
 
 	/* Responsive Design */

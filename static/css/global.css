@@ -4,7 +4,7 @@
 
 :root {
 	/* Color variables */
-	--color-primary: #ffff00;
+	--color-primary: rgb(255, 195, 0);
 	--color-primary-light: #f9acac;
 	--color-primary-dark: #c53030;
 
