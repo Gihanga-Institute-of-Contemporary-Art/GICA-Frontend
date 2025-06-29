@@ -37,6 +37,6 @@
 		text-transform: uppercase;
 		font-weight: bold;
 		font-size: var(--font-size-xl);
-		letter-spacing: 1px;
+		letter-spacing: 0.5px;
 	}
 </style>

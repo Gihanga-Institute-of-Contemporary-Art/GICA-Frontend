@@ -1,8 +1,55 @@
+/* Font face declarations */
+@font-face {
+	font-family: 'Ivory Mono LL Trial Web';
+	src: url('/fonts/IvoryMonoLLTrialWeb-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory Mono LL Trial Web';
+	src: url('/fonts/IvoryMonoLLTrialWeb-Light.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory Mono LL Trial Web';
+	src: url('/fonts/IvoryMonoLLTrialWeb-LightItalic.woff2') format('woff2');
+	font-weight: 300;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory Mono LL Trial Web';
+	src: url('/fonts/IvoryMonoLLTrialWeb-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory Mono LL Trial Web';
+	src: url('/fonts/IvoryMonoLLTrialWeb-MediumItalic.woff2') format('woff2');
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory Mono LL Trial Web';
+	src: url('/fonts/IvoryMonoLLTrialWeb-Italic.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
 /* Typography variables */
 :root {
-	--font-primary:
-		system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-		'Open Sans', 'Helvetica Neue', sans-serif;
+	--font-primary: 'Ivory Mono LL Trial Web', 'Courier New', Monaco, 'Lucida Console', monospace;
 	/* --font-secondary: Georgia, 'Times New Roman', Times, serif; */
 	--font-secondary:
 		system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
@@ -31,9 +78,11 @@
 	--margin-paragraph: 0.75rem;
 
 	/* Font weights */
+	--font-weight-light: 300;
 	--font-weight-normal: 400;
-	--font-weight-semibold: 600;
-	--font-weight-bold: 700;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 500; /* Using medium since semibold (600) isn't available */
+	--font-weight-bold: 500; /* Using medium since bold (700) isn't available */
 }
 
 /* Responsive typography - Tablet */
