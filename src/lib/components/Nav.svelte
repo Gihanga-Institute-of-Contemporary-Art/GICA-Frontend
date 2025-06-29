@@ -1,7 +1,6 @@
 <nav>
 	<ul>
 		<li><a href="/">Home</a></li>
-		<li><a href="/about">About us</a></li>
 		<li><a href="/exhibitions">Exhibitions</a></li>
 		<li><a href="/programme">Programme</a></li>
 		<li><a href="/contributors">Contributors</a></li>
