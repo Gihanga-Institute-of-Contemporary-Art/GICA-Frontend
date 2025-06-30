@@ -97,6 +97,10 @@
 		margin-bottom: 4rem;
 	}
 
+	section.content .blurb {
+		font-size: var(--font-size-xl);
+	}
+
 	.programmes {
 		max-width: 75vw;
 		margin: 0 auto;
