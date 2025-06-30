@@ -48,7 +48,6 @@
 		align-items: center;
 		justify-content: center;
 		color: var(--color-primary);
-		padding: var(--space-8);
 		font-size: var(--font-size-xl);
 	}
 
@@ -71,7 +70,7 @@
 	}
 
 	.content {
-		max-width: 70vw;
+		max-width: 75vw;
 		margin: 0 auto;
 	}
 

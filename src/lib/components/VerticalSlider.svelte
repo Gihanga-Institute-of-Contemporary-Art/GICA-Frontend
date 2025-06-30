@@ -139,7 +139,7 @@
 	.slider-container ul {
 		display: flex;
 		height: fit-content;
-		width: 75%;
+		width: 75vw;
 		flex-direction: column;
 		gap: 5rem;
 		list-style: none;
