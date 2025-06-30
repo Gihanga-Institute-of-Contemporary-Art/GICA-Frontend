@@ -5,7 +5,7 @@
 :root {
 	/* Color variables */
 	--color-primary: rgb(255, 195, 0);
-	--color-primary-light: #f9acac;
+	--color-primary-light: #00d000;
 	--color-primary-dark: #c53030;
 
 	--color-secondary: #225800;
@@ -19,7 +19,7 @@
 	--color-gray-600: #4b5563;
 	--color-gray-700: #374151;
 	--color-gray-800: #1f2937;
-	--color-gray-900: #011500;
+	--color-gray-900: #003e00;
 
 	/* Spacing */
 	--space-1: 0.25rem;
