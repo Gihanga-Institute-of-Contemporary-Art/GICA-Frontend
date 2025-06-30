@@ -1,39 +1,37 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
 	import Nav from '$lib/components/Nav.svelte';
+	import ProgrammeModal from '$lib/components/ProgrammeModal.svelte';
+	import type { Programme } from '$lib/api/types';
 
-	const programmes = [
-		{
-			title: 'Kamelah Janan Rasheed: The Unseen',
-			type: 'Exhibition',
-			link: '#',
-			date: '2023-10-01',
-			startTime: '10:00 AM',
-			cover: 'https://picsum.photos/600/400?random=1'
-		},
-		{
-			title: 'Black Girl',
-			type: 'Screening',
-			link: '#',
-			date: '2023-11-15',
-			startTime: '09:00 AM',
-			cover: 'https://picsum.photos/600/400?random=2'
-		},
-		{
-			title: 'Beloved By Toni Morrison',
-			type: 'Library',
-			link: '#',
-			date: '2023-12-01',
-			startTime: '11:00 AM',
-			cover: null
+	const { data } = $props();
+
+	let isModalOpen = $state(false);
+	let selectedProgramme = $state<Programme | null>(null);
+
+	function openModal(programme: Programme) {
+		selectedProgramme = programme;
+		isModalOpen = true;
+	}
+
+	function closeModal() {
+		isModalOpen = false;
+		selectedProgramme = null;
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && isModalOpen) {
+			closeModal();
 		}
-	];
+	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <main>
 	<Nav />
 	<section class="content">
-		<div class="blurb">
+		<article class="blurb">
 			<p>
 				Gihanga Institute of Contemporary Art (GICA) is a non-profit center for the arts in Kigali,
 				Rwanda. Founded on the belief that art can be a catalyst for social progress, GICA is home
@@ -45,45 +43,50 @@
 				unite, support, and propel the cultural community in Rwanda, as a living space for art,
 				research, and shared possibility.
 			</p>
-		</div>
-	</section>
-	<section class="programmes">
-		<div class="programmes-grid">
-			{#each programmes as programme}
-				<a href={programme.link} class="programme-card">
-					<div
-						class="programme-image"
-						style="background-color: #003e00; {programme.cover
-							? `background-image: url(${programme.cover})`
-							: ''}"
-					>
-						<div class="programme-overlay">
-							<h3 class="programme-title">{programme.title}</h3>
-							<p class="programme-date">{programme.date}</p>
-							<p class="programme-time">{programme.startTime}</p>
+		</article>
+		<article class="programmes">
+			<div class="programmes-grid">
+				{#each data.site.programmes as programme}
+					<button type="button" class="programme-card" onclick={() => openModal(programme)}>
+						<div
+							class="programme-image"
+							style="background-color: #003e00; {programme.cover
+								? `background-image: url(${programme.cover})`
+								: ''}"
+						>
+							<div class="programme-overlay">
+								<p class="programme-title">{programme.title}</p>
+								<p class="programme-date">{programme.date}</p>
+								<p class="programme-time">{programme.startTime}</p>
+							</div>
 						</div>
-					</div>
-				</a>
-			{/each}
-			{#each programmes as programme}
-				<a href={programme.link} class="programme-card">
-					<div
-						class="programme-image"
-						style="background-color: #003e00; {programme.cover
-							? `background-image: url(${programme.cover})`
-							: ''}"
-					>
-						<div class="programme-overlay">
-							<h3 class="programme-title">{programme.title}</h3>
-							<p class="programme-date">{programme.date}</p>
-							<p class="programme-time">{programme.startTime}</p>
+					</button>
+				{/each}
+				{#each data.site.programmes as programme}
+					<button type="button" class="programme-card" onclick={() => openModal(programme)}>
+						<div
+							class="programme-image"
+							style="background-color: #003e00; {programme.cover
+								? `background-image: url(${programme.cover})`
+								: ''}"
+						>
+							<div class="programme-overlay">
+								<p class="programme-title">{programme.title}</p>
+								<p class="programme-date">{programme.date}</p>
+								<p class="programme-time">{programme.startTime}</p>
+							</div>
 						</div>
-					</div>
-				</a>
-			{/each}
-		</div>
+					</button>
+				{/each}
+			</div>
+		</article>
 	</section>
+
 	<Footer />
+
+	{#if isModalOpen && selectedProgramme}
+		<ProgrammeModal programme={selectedProgramme} {closeModal} />
+	{/if}
 </main>
 
 <style>
@@ -101,7 +104,7 @@
 		font-size: var(--font-size-xl);
 	}
 
-	.programmes {
+	article.programmes {
 		max-width: 75vw;
 		margin: 0 auto;
 		padding-bottom: var(--space-16);
@@ -115,8 +118,14 @@
 	}
 
 	.programme-card {
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
 		text-decoration: none;
+		text-transform: uppercase;
 		color: inherit;
+		width: 100%;
 	}
 
 	.programme-card:hover {
@@ -152,23 +161,16 @@
 		text-align: center;
 		padding: 1.5rem;
 		color: white;
+		font-size: var(--font-size-lg);
 	}
 
 	.programme-title {
-		font-size: 1.25rem;
-		font-weight: 600;
 		margin-bottom: 0.5rem;
 		line-height: 1.3;
 	}
 
 	.programme-date {
-		font-size: 1rem;
 		margin-bottom: 0.25rem;
-	}
-
-	.programme-time {
-		font-size: 0.9rem;
-		opacity: 0.9;
 	}
 
 	/* Responsive design */

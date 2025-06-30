@@ -35,7 +35,6 @@
 		font-size: 16px;
 		padding: 10px 15px;
 		text-transform: uppercase;
-		font-weight: bold;
 		font-size: var(--font-size-xl);
 		letter-spacing: 0.5px;
 	}
