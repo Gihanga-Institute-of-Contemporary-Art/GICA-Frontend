@@ -61,7 +61,7 @@
 	section.lang button {
 		background: none;
 		border: none;
-		color: var(--color-secondary);
+		color: var(--color-primary-dark);
 		font-size: var(--font-size-xl);
 		text-transform: uppercase;
 		cursor: pointer;
