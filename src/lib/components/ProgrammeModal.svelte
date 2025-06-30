@@ -86,7 +86,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: var(--color-primary);
+		background-color: var(--color-primary-light);
 	}
 
 	.modal-content {
@@ -167,21 +167,6 @@
 		line-height: 1.6;
 		color: #444;
 		margin-bottom: 1.5rem;
-	}
-
-	.programme-link {
-		display: inline-block;
-		padding: 0.75rem 1.5rem;
-		background-color: var(--color-primary, #003e00);
-		color: white;
-		text-decoration: none;
-		border-radius: 4px;
-		font-weight: 500;
-		transition: background-color 0.2s ease;
-	}
-
-	.programme-link:hover {
-		background-color: var(--color-primary-dark, #002200);
 	}
 
 	/* Responsive design */
