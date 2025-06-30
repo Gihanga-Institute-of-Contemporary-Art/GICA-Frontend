@@ -5,10 +5,10 @@
 :root {
 	/* Color variables */
 	--color-primary: rgb(255, 195, 0);
-	--color-primary-light: #00d000;
-	--color-primary-dark: #c53030;
+	--color-primary-light: #ffd456;
+	--color-primary-dark: #a68c07;
 
-	--color-secondary: #225800;
+	--color-secondary: #00d000;
 
 	--color-gray-50: #f9fafb;
 	--color-gray-100: #f3f4f6;
@@ -40,12 +40,12 @@
 
 	/* Component heights */
 	--nav-height: calc(
-		var(--font-size-xl) * 1.5 + 20px + 2rem
+		(var(--font-size-xl) * 1.5 + 20px + 2rem) * 1.5
 	); /* font-size * line-height + padding + margin */
 }
 
 body {
-	background-color: var(--color-primary);
+	background-color: var(--color-primary-light);
 	color: var(--color-gray-900);
 	position: relative;
 }

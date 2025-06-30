@@ -90,14 +90,10 @@
 </main>
 
 <style>
-	main {
-		padding-inline: 2rem;
-	}
-
 	section.content {
 		max-width: 75vw;
 		margin: 0 auto;
-		margin-bottom: 4rem;
+		margin-block: var(--space-2);
 	}
 
 	section.content .blurb {
@@ -108,7 +104,7 @@
 		max-width: 75vw;
 		margin: 0 auto;
 		padding-bottom: var(--space-16);
-		margin-bottom: 4rem;
+		margin-block: var(--space-16);
 	}
 
 	.programmes-grid {
@@ -129,10 +125,10 @@
 	}
 
 	.programme-card:hover {
-		outline: 2px solid var(--color-primary-light);
+		outline: 2px solid var(--color-secondary);
 	}
 	.programme-card:hover .programme-overlay {
-		color: var(--color-primary-light);
+		color: var(--color-secondary);
 	}
 
 	.programme-card:hover .programme-image {

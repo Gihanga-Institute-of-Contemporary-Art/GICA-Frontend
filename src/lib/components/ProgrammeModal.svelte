@@ -44,11 +44,6 @@
 
 		<div class="modal-body">
 			<p>Programme details and description would go here.</p>
-			{#if programme.link}
-				<a href={programme.link} class="programme-link" target="_blank" rel="noopener noreferrer">
-					Learn More
-				</a>
-			{/if}
 		</div>
 
 		<div class="modal-header">

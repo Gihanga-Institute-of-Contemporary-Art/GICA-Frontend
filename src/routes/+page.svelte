@@ -26,11 +26,6 @@
 </main>
 
 <style>
-	main {
-		/* background-color: var(--color-primary); */
-		padding-inline: var(--space-8);
-	}
-
 	section.content {
 		display: flex;
 		justify-content: center;
