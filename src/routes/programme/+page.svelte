@@ -6,7 +6,7 @@
 		{
 			title: 'Kamelah Janan Rasheed: The Unseen',
 			type: 'Exhibition',
-			link: '/exhibitions',
+			link: '#',
 			date: '2023-10-01',
 			startTime: '10:00 AM',
 			cover: 'https://picsum.photos/600/400?random=1'
@@ -14,7 +14,7 @@
 		{
 			title: 'Black Girl',
 			type: 'Screening',
-			link: '/residency',
+			link: '#',
 			date: '2023-11-15',
 			startTime: '09:00 AM',
 			cover: 'https://picsum.photos/600/400?random=2'
@@ -22,7 +22,7 @@
 		{
 			title: 'Beloved By Toni Morrison',
 			type: 'Library',
-			link: '/education',
+			link: '#',
 			date: '2023-12-01',
 			startTime: '11:00 AM',
 			cover: null
