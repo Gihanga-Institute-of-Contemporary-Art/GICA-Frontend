@@ -11,6 +11,9 @@
 	let modalContent: HTMLDivElement | undefined;
 
 	$effect(() => {
+		// Scroll to top of the page first
+		window.scrollTo(0, 0);
+
 		// Set body overflow to hidden when modal opens
 		const originalOverflow = document.body.style.overflow;
 		document.body.style.overflow = 'hidden';
