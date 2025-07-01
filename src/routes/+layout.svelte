@@ -63,8 +63,8 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		width: 50px;
-		height: 50px;
+		width: 25px;
+		height: 25px;
 		background-color: #04cf00;
 		border-radius: 50%;
 		pointer-events: none;

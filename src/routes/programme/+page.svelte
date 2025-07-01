@@ -8,6 +8,26 @@
 
 	let isModalOpen = $state(false);
 	let selectedProgramme = $state<Programme | null>(null);
+	let selectedFilter = $state('all');
+
+	// Get unique programme types and create submenu
+	const programmeTypes = Array.from(new Set(data.site.programmes.map((p) => p.type)));
+
+	const submenu = $derived([
+		{ label: 'All', value: 'all', isActive: selectedFilter === 'all' },
+		...programmeTypes.map((type) => ({
+			label: type,
+			value: type.toLowerCase(),
+			isActive: selectedFilter === type.toLowerCase()
+		}))
+	]);
+
+	// Filter programmes based on selected filter
+	const filteredProgrammes = $derived(
+		selectedFilter === 'all'
+			? data.site.programmes
+			: data.site.programmes.filter((p) => p.type.toLowerCase() === selectedFilter)
+	);
 
 	function openModal(programme: Programme) {
 		selectedProgramme = programme;
@@ -24,12 +44,16 @@
 			closeModal();
 		}
 	}
+
+	function handleSubmenuSelect(value: string) {
+		selectedFilter = value;
+	}
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
 
 <main>
-	<Nav />
+	<Nav {submenu} onSubmenuSelect={handleSubmenuSelect} />
 	<section class="content">
 		<article class="blurb">
 			<p>
@@ -46,23 +70,7 @@
 		</article>
 		<article class="programmes">
 			<div class="programmes-grid">
-				{#each data.site.programmes as programme}
-					<button type="button" class="programme-card" onclick={() => openModal(programme)}>
-						<div
-							class="programme-image"
-							style="background-color: #003e00; {programme.cover
-								? `background-image: url(${programme.cover})`
-								: ''}"
-						>
-							<div class="programme-overlay">
-								<p class="programme-title">{programme.title}</p>
-								<p class="programme-date">{programme.date}</p>
-								<p class="programme-time">{programme.startTime}</p>
-							</div>
-						</div>
-					</button>
-				{/each}
-				{#each data.site.programmes as programme}
+				{#each filteredProgrammes as programme}
 					<button type="button" class="programme-card" onclick={() => openModal(programme)}>
 						<div
 							class="programme-image"
@@ -91,7 +99,7 @@
 
 <style>
 	main {
-		padding-block-start: var(--nav-height);
+		padding-block-start: calc(var(--nav-height) + 4rem);
 	}
 	section.content {
 		max-width: 75vw;
