@@ -7,12 +7,18 @@
 		isActive?: boolean;
 	}
 
+	interface SubmenuRow {
+		items: SubmenuItem[];
+		onSelect: (value: string) => void;
+	}
+
 	interface Props {
 		submenu?: SubmenuItem[];
+		submenuRows?: SubmenuRow[];
 		onSubmenuSelect?: (value: string) => void;
 	}
 
-	let { submenu = [], onSubmenuSelect }: Props = $props();
+	let { submenu = [], submenuRows = [], onSubmenuSelect }: Props = $props();
 
 	function isActive(href: string): boolean {
 		if (href === '/') {
@@ -41,6 +47,10 @@
 			onSubmenuSelect(item.value);
 		}
 	}
+
+	function handleSubmenuRowClick(row: SubmenuRow, item: SubmenuItem) {
+		row.onSelect(item.value);
+	}
 </script>
 
 <nav>
@@ -57,22 +67,31 @@
 		</section>
 	</div>
 	{#if submenu.length > 0}
-		<div class="submenu">
-			<ul class="submenu-list">
-				{#each submenu as item}
-					<li>
-						<button
-							class="submenu-item {item.isActive ? 'active' : ''}"
-							onclick={() => handleSubmenuClick(item)}
-						>
-							{item.label}
-						</button>
-					</li>
-				{/each}
-			</ul>
-		</div>
+		{@render submenuTemplate(submenu, handleSubmenuClick)}
+	{/if}
+	{#if submenuRows.length > 0}
+		{#each submenuRows as row}
+			{@render submenuTemplate(row.items, (item) => handleSubmenuRowClick(row, item))}
+		{/each}
 	{/if}
 </nav>
+
+{#snippet submenuTemplate(items: SubmenuItem[], clickHandler: (item: SubmenuItem) => void)}
+	<div class="submenu">
+		<ul class="submenu-list">
+			{#each items as item}
+				<li>
+					<button
+						class="submenu-item {item.isActive ? 'active' : ''}"
+						onclick={() => clickHandler(item)}
+					>
+						{item.label}
+					</button>
+				</li>
+			{/each}
+		</ul>
+	</div>
+{/snippet}
 
 <style>
 	nav {
@@ -124,7 +143,7 @@
 	nav a {
 		text-decoration: none;
 		font-size: 16px;
-		padding: 10px 15px;
+		/* padding: 10px 15px; */
 		text-transform: uppercase;
 		font-size: var(--font-size-xl);
 		letter-spacing: 0.5px;
@@ -146,6 +165,9 @@
 	}
 
 	/* Submenu styles */
+	.submenu {
+		padding-block-start: var(--space-1);
+	}
 
 	.submenu-list {
 		list-style: none;
@@ -164,7 +186,7 @@
 		text-transform: uppercase;
 		cursor: pointer;
 		font-weight: normal;
-		padding: var(--space-2) var(--space-4);
+		/* padding: var(--space-2) var(--space-4); */
 		transition: all 0.2s ease;
 		letter-spacing: 0.5px;
 	}

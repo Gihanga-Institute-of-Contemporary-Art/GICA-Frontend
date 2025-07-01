@@ -8,25 +8,79 @@
 
 	let isModalOpen = $state(false);
 	let selectedProgramme = $state<Programme | null>(null);
-	let selectedFilter = $state('all');
+	let selectedFilter = $state<string | null>(null);
+	let selectedTimeFilter = $state<string | null>(null);
+	let programmesSection: HTMLElement | undefined;
+
+	// Helper function to determine programme status based on date
+	function getProgrammeStatus(dateString: string): 'past' | 'current' | 'upcoming' {
+		const programmeDate = new Date(dateString);
+		const today = new Date();
+		const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+		const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+
+		if (programmeDate < todayStart) {
+			return 'past';
+		} else if (programmeDate >= todayStart && programmeDate < todayEnd) {
+			return 'current';
+		} else {
+			return 'upcoming';
+		}
+	}
 
 	// Get unique programme types and create submenu
 	const programmeTypes = Array.from(new Set(data.site.programmes.map((p) => p.type)));
 
-	const submenu = $derived([
-		{ label: 'All', value: 'all', isActive: selectedFilter === 'all' },
-		...programmeTypes.map((type) => ({
+	const typeSubmenu = $derived(
+		programmeTypes.map((type) => ({
 			label: type,
 			value: type.toLowerCase(),
 			isActive: selectedFilter === type.toLowerCase()
 		}))
+	);
+
+	const timeSubmenu = $derived([
+		{ label: 'Past', value: 'past', isActive: selectedTimeFilter === 'past' },
+		{ label: 'Current', value: 'current', isActive: selectedTimeFilter === 'current' },
+		{ label: 'Upcoming', value: 'upcoming', isActive: selectedTimeFilter === 'upcoming' }
 	]);
 
-	// Filter programmes based on selected filter
+	const submenuRows = $derived([
+		{
+			items: typeSubmenu,
+			onSelect: (value: string) => {
+				// Toggle logic: if already selected, deselect it
+				selectedFilter = selectedFilter === value ? null : value;
+				scrollToProgrammes();
+			}
+		},
+		{
+			items: timeSubmenu,
+			onSelect: (value: string) => {
+				// Toggle logic: if already selected, deselect it
+				selectedTimeFilter = selectedTimeFilter === value ? null : value;
+				scrollToProgrammes();
+			}
+		}
+	]);
+
+	// Filter programmes based on both selected filters
 	const filteredProgrammes = $derived(
-		selectedFilter === 'all'
-			? data.site.programmes
-			: data.site.programmes.filter((p) => p.type.toLowerCase() === selectedFilter)
+		(() => {
+			let filtered = data.site.programmes;
+
+			// Filter by type (only if a type is selected)
+			if (selectedFilter) {
+				filtered = filtered.filter((p) => p.type.toLowerCase() === selectedFilter);
+			}
+
+			// Filter by time (only if a time filter is selected)
+			if (selectedTimeFilter) {
+				filtered = filtered.filter((p) => getProgrammeStatus(p.date) === selectedTimeFilter);
+			}
+
+			return filtered;
+		})()
 	);
 
 	function openModal(programme: Programme) {
@@ -45,15 +99,32 @@
 		}
 	}
 
-	function handleSubmenuSelect(value: string) {
-		selectedFilter = value;
+	function scrollToProgrammes() {
+		// Scroll to programmes section when filter is selected
+		if (programmesSection) {
+			// Calculate the offset to position programmes section right under the nav + submenus
+			const navHeight = (document.querySelector('nav') as HTMLElement)?.offsetHeight || 0;
+			const submenuElements = document.querySelectorAll('.submenu');
+			const totalSubmenuHeight = Array.from(submenuElements).reduce((total, submenu) => {
+				return total + ((submenu as HTMLElement)?.offsetHeight || 0);
+			}, 0);
+			const totalOffset = navHeight + totalSubmenuHeight + 16; // Adding 16px for some visual breathing room
+
+			const elementPosition = programmesSection.offsetTop;
+			const offsetPosition = elementPosition - totalOffset;
+
+			window.scrollTo({
+				top: Math.max(0, offsetPosition), // Ensure we don't scroll to negative values
+				behavior: 'smooth'
+			});
+		}
 	}
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
 
 <main>
-	<Nav {submenu} onSubmenuSelect={handleSubmenuSelect} />
+	<Nav {submenuRows} />
 	<section class="content">
 		<article class="blurb">
 			<p>
@@ -68,7 +139,7 @@
 				research, and shared possibility.
 			</p>
 		</article>
-		<article class="programmes">
+		<article class="programmes" bind:this={programmesSection}>
 			<div class="programmes-grid">
 				{#each filteredProgrammes as programme}
 					<button type="button" class="programme-card" onclick={() => openModal(programme)}>
@@ -99,12 +170,12 @@
 
 <style>
 	main {
-		padding-block-start: calc(var(--nav-height) + 4rem);
+		padding-block-start: var(--nav-height);
 	}
 	section.content {
 		max-width: 75vw;
 		margin: 0 auto;
-		margin-block: var(--space-2);
+		padding-block-end: var(--space-2);
 	}
 
 	section.content .blurb {
@@ -114,7 +185,7 @@
 	article.programmes {
 		max-width: 75vw;
 		margin: 0 auto;
-		padding-bottom: var(--space-16);
+		/* padding-bottom: var(--space-16); */
 		margin-block: var(--space-16);
 	}
 
