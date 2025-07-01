@@ -39,7 +39,9 @@
 
 <style>
 	nav {
-		position: relative;
+		position: fixed;
+		top: 0;
+		width: 100%;
 		z-index: 1000;
 		display: flex;
 		justify-content: space-between;

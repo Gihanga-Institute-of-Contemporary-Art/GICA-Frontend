@@ -90,6 +90,9 @@
 </main>
 
 <style>
+	main {
+		padding-block-start: var(--nav-height);
+	}
 	section.content {
 		max-width: 75vw;
 		margin: 0 auto;

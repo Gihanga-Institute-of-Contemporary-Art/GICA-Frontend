@@ -11,6 +11,6 @@
 
 <style>
 	main {
-		padding-inline: 2rem;
+		padding-block-start: var(--nav-height);
 	}
 </style>
