@@ -259,8 +259,11 @@
 	}
 
 	@media (max-width: 768px) {
+		section.content {
+			max-width: 90vw;
+		}
 		.programmes-grid {
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: 1fr;
 			gap: 1.5rem;
 		}
 	}

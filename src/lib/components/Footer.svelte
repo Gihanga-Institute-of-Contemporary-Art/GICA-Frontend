@@ -89,4 +89,15 @@
 			transform: translateY(0);
 		}
 	}
+
+	@media (max-width: 768px) {
+		footer {
+			padding-inline: var(--space-8);
+			justify-content: start;
+		}
+
+		.content {
+			margin: 0;
+		}
+	}
 </style>

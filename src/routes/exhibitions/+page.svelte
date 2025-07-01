@@ -37,4 +37,10 @@
 	section.content .blurb {
 		font-size: var(--font-size-xl);
 	}
+
+	@media (max-width: 768px) {
+		section.content {
+			max-width: 90vw;
+		}
+	}
 </style>

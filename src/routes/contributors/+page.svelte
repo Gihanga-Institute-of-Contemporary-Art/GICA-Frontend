@@ -93,4 +93,10 @@
 		padding-block-start: var(--space-16);
 		padding-block-end: calc(2 * var(--space-16));
 	}
+
+	@media (max-width: 768px) {
+		section.content {
+			max-width: 90vw;
+		}
+	}
 </style>

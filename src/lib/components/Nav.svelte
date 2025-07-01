@@ -99,7 +99,6 @@
 		top: 0;
 		width: 100%;
 		z-index: 1000;
-
 		height: var(--nav-height);
 		align-items: start;
 		background: var(--color-primary);
@@ -197,5 +196,16 @@
 
 	.submenu-item.active {
 		color: var(--color-secondary);
+	}
+
+	@media (max-width: 768px) {
+		nav ul {
+			flex-wrap: wrap;
+			column-gap: var(--space-8);
+		}
+
+		nav li {
+			margin: 0;
+		}
 	}
 </style>

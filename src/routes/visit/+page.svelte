@@ -72,4 +72,10 @@
 		text-transform: uppercase;
 		margin-bottom: var(--space-2);
 	}
+
+	@media (max-width: 768px) {
+		section.content {
+			max-width: 90vw;
+		}
+	}
 </style>
