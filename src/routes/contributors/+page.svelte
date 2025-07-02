@@ -59,11 +59,8 @@
 	<section class="content">
 		<article class="blurb">
 			<p>
-				We would like to thank the following individuals and organizations who have supported us
-				along the way, which has helped us build and provide a solid foundation for artistic
-				experiment ( ... space to thank below ) . If you like what we're doing and would like to
-				donate, send us books for our free reading room, please send us a note using the form in the
-				next column. We will be in touch soon
+				If you like what we're doing and would like to donate, send us books for our free reading
+				room, please send us a note using the form in the next column. We will be in touch soon...
 			</p>
 		</article>
 		<article class="collaborators">

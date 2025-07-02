@@ -8,15 +8,11 @@
 	<section class="content">
 		<article class="blurb">
 			<p>
-				Gihanga Institute of Contemporary Art (GICA) is a non-profit center for the arts in Kigali,
-				Rwanda. Founded on the belief that art can be a catalyst for social progress, GICA is home
-				to a library, exhibition spaces, platforms for performance and contemporary theatre,
-				screening room, studio, and an artist residency. Working from Kigali as a nexus of
-				contemporary art and intellectual discourse, GICA aims to elevate Rwanda's artistic
-				landscape, opening new possibilities through thoughtfully curated, high-quality exhibition
-				spaces, collaborative platforms, and innovative educational programs. The institute aims to
-				unite, support, and propel the cultural community in Rwanda, as a living space for art,
-				research, and shared possibility.
+				Quarterly exhibitions anchor the work of Rwandan artists and their practices alongside
+				global contemporaries. These exhibitions celebrate experimentation, dialogue, and the
+				diverse ways artists engage with local and international contexts. Each show is curated to
+				spark critical conversation and offer new perspectives on artmaking today. Through these
+				exhibitions, the space cultivates a dynamic and inclusive platform for creative exchange.
 			</p>
 		</article>
 	</section>
