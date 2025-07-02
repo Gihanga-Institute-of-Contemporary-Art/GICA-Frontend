@@ -98,7 +98,8 @@
 	.slider-btn {
 		position: absolute;
 		bottom: 0;
-		right: 0;
+		right: var(--space-4);
+		height: 5rem;
 		padding: 1.5rem;
 		display: flex;
 		gap: 1.5rem;

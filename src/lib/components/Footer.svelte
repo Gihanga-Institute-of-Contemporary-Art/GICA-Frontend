@@ -15,7 +15,21 @@
 			onclick={toggleFooter}
 			onkeydown={(e) => e.key === 'Enter' && toggleFooter()}
 		>
-			GICA — A LIVING SPACE FOR ART, RESEARCH, AND COLLECTIVE IMAGINATION.
+			<div class="arrow-btn" class:flipped={isActive}>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="0.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="feather feather-chevron-up"
+				>
+					<polyline points="18 15 12 9 6 15"></polyline>
+				</svg>
+			</div>
+			<p>GICA — A LIVING SPACE FOR ART, RESEARCH, AND COLLECTIVE IMAGINATION.</p>
 		</div>
 		{#if isActive}
 			<div class="sub-text">
@@ -59,6 +73,23 @@
 	.headline {
 		cursor: pointer;
 		transition: opacity 0.2s ease;
+		display: flex;
+	}
+
+	.headline .arrow-btn {
+		display: inline;
+		width: 4rem;
+		aspect-ratio: 1;
+		transition: transform 0.3s ease;
+	}
+
+	.headline .arrow-btn.flipped {
+		transform: rotate(180deg);
+	}
+
+	.headline p {
+		margin: 0;
+		padding: 0 1rem;
 	}
 
 	.headline:hover {
