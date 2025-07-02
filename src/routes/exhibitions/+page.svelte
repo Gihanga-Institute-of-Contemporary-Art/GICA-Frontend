@@ -35,6 +35,7 @@
 	}
 
 	section.content .blurb {
+		font-family: var(--font-secondary);
 		font-size: var(--font-size-xl);
 	}
 

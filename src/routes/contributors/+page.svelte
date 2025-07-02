@@ -69,7 +69,7 @@
 		<article class="collaborators">
 			<!-- List all collaborators -->
 			{#each collaborators as collaborator}
-				<p>{collaborator.name}, {collaborator.title}</p>
+				<p>{collaborator.name}, <span class="title">{collaborator.title}</span></p>
 			{/each}
 		</article>
 	</section>
@@ -84,14 +84,23 @@
 		max-width: 75vw;
 		margin: 0 auto;
 		margin-block: var(--space-2);
+	}
+
+	section.content .blurb {
+		font-family: var(--font-secondary);
 		font-size: var(--font-size-xl);
 	}
 
 	article.collaborators {
 		width: fit-content;
 		margin: 0 auto;
+		font-size: var(--font-size-lg);
 		padding-block-start: var(--space-16);
 		padding-block-end: calc(2 * var(--space-16));
+	}
+
+	.collaborators span {
+		font-family: var(--font-secondary);
 	}
 
 	@media (max-width: 768px) {

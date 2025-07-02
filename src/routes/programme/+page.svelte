@@ -150,9 +150,9 @@
 								: ''}"
 						>
 							<div class="programme-overlay">
-								<p class="programme-title">{programme.title}</p>
-								<p class="programme-date">{programme.date}</p>
-								<p class="programme-time">{programme.startTime}</p>
+								<h5 class="programme-title">{programme.title}</h5>
+								<h5 class="programme-date">{programme.date}</h5>
+								<h5 class="programme-time">{programme.startTime}</h5>
 							</div>
 						</div>
 					</button>
@@ -179,6 +179,7 @@
 	}
 
 	section.content .blurb {
+		font-family: var(--font-secondary);
 		font-size: var(--font-size-xl);
 	}
 

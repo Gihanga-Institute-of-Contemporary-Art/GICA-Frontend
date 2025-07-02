@@ -9,52 +9,36 @@
 
 @font-face {
 	font-family: 'Ivory Mono LL Trial Web';
-	src: url('/fonts/IvoryMonoLLTrialWeb-Light.woff2') format('woff2');
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Ivory Mono LL Trial Web';
-	src: url('/fonts/IvoryMonoLLTrialWeb-LightItalic.woff2') format('woff2');
-	font-weight: 300;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Ivory Mono LL Trial Web';
-	src: url('/fonts/IvoryMonoLLTrialWeb-Medium.woff2') format('woff2');
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Ivory Mono LL Trial Web';
-	src: url('/fonts/IvoryMonoLLTrialWeb-MediumItalic.woff2') format('woff2');
-	font-weight: 500;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Ivory Mono LL Trial Web';
 	src: url('/fonts/IvoryMonoLLTrialWeb-Italic.woff2') format('woff2');
 	font-weight: 400;
 	font-style: italic;
 	font-display: swap;
 }
 
+@font-face {
+	font-family: 'Ivory LL Trial Web';
+	src: url('/fonts/IvoryLLTrialWeb-Italic.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory LL Trial Web';
+	src: url('/fonts/IvoryLLTrialWeb-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
 /* Typography variables */
 :root {
-	--font-primary: 'Ivory Mono LL Trial Web', 'Courier New', Monaco, 'Lucida Console', monospace;
+	--font-primary: 'Ivory LL Trial Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	--font-secondary: 'Ivory Mono LL Trial Web', 'Courier New', Monaco, 'Lucida Console', monospace;
 
 	/* Font sizes using a scale approach */
 	--font-size-base: 0.875rem; /* Smaller base size for mobile */
-	--font-scale-ratio: 1.2;
+	--font-scale-ratio: 1.3;
 	--font-size-xs: calc(var(--font-size-base) / var(--font-scale-ratio) / var(--font-scale-ratio));
 	--font-size-sm: calc(var(--font-size-base) / var(--font-scale-ratio));
 	--font-size-lg: calc(var(--font-size-base) * var(--font-scale-ratio));
@@ -111,7 +95,6 @@
 
 /* Base styles */
 body {
-	font-family: var(--font-primary);
 	font-size: var(--font-size-base);
 	line-height: var(--line-height-normal);
 	color: #333;
@@ -124,10 +107,11 @@ h3,
 h4,
 h5,
 h6 {
-	margin-top: var(--margin-heading-top);
-	margin-bottom: var(--margin-heading-bottom);
+	/* margin-top: var(--margin-heading-top); */
+	/* margin-bottom: var(--margin-heading-bottom); */
 	line-height: var(--line-height-tight);
 	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-secondary);
 }
 
 h1,
@@ -172,7 +156,7 @@ p,
 span,
 small {
 	margin-bottom: var(--margin-paragraph);
-	font-family: var(--font-secondary);
+	font-family: var(--font-primary);
 	line-height: 120%;
 }
 

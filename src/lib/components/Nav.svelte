@@ -56,14 +56,20 @@
 <nav>
 	<div class="top-nav">
 		<ul>
-			<li><a href="/" class={getLinkClass('/')}>Home</a></li>
-			<li><a href="/exhibitions" class={getLinkClass('/exhibitions')}>Exhibitions</a></li>
-			<li><a href="/programme" class={getLinkClass('/programme')}>Programme</a></li>
-			<li><a href="/contributors" class={getLinkClass('/contributors')}>Contributors</a></li>
-			<li><a href="/visit" class={getLinkClass('/visit')}>Visit us</a></li>
+			<li><a href="/" class={getLinkClass('/')}><h5>Home</h5></a></li>
+			<li><a href="/exhibitions" class={getLinkClass('/exhibitions')}><h5>Exhibitions</h5></a></li>
+			<li><a href="/programme" class={getLinkClass('/programme')}><h5>Programme</h5></a></li>
+			<li>
+				<a href="/contributors" class={getLinkClass('/contributors')}><h5>Contributors</h5></a>
+			</li>
+			<li><a href="/visit" class={getLinkClass('/visit')}><h5>Visit us</h5></a></li>
 		</ul>
 		<section class="lang">
-			<button>RW</button>
+			<button>
+				<h5>EN</h5>
+			</button>
+			<span> / </span>
+			<button><h5>RW</h5></button>
 		</section>
 	</div>
 	{#if submenu.length > 0}
@@ -85,7 +91,7 @@
 						class="submenu-item {item.isActive ? 'active' : ''}"
 						onclick={() => clickHandler(item)}
 					>
-						{item.label}
+						<h5>{item.label}</h5>
 					</button>
 				</li>
 			{/each}
@@ -113,20 +119,17 @@
 
 	section.lang {
 		padding-block-start: var(--space-8);
-	}
-
-	section.lang button {
-		margin: 0 15px;
+		font-family: var(--font-secondary);
+		color: var(--color-primary-dark);
 	}
 
 	section.lang button {
 		background: none;
 		border: none;
+		font-size: var(--font-size-lg);
 		color: var(--color-primary-dark);
-		font-size: var(--font-size-xl);
 		text-transform: uppercase;
 		cursor: pointer;
-		font-weight: bold;
 	}
 	nav ul {
 		list-style: none;
@@ -144,7 +147,7 @@
 		font-size: 16px;
 		/* padding: 10px 15px; */
 		text-transform: uppercase;
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-lg);
 		letter-spacing: 0.5px;
 	}
 
