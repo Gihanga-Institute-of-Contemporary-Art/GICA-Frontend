@@ -4,52 +4,36 @@
 
 	const collaborators = [
 		{
-			name: 'KENEZA SCHAAL',
-			title: 'Founding Director'
+			name: 'Kami Gahiga',
+			title: 'Co-Founding Director'
 		},
 		{
-			name: 'KAMI GAHIGA',
-			title: 'Co-Founder Director'
+			name: 'Kaneza Schaal',
+			title: 'Co-Founding Director'
 		},
 		{
-			name: 'AMINA EL-ABD',
-			title: 'Visual Artist'
+			name: 'Christian Nyampeta',
+			title: 'Library & Film Custodian'
 		},
 		{
-			name: 'JAMES ODURO',
-			title: 'Writer'
+			name: 'Alvin Ashiatey',
+			title: 'Website Design Partner'
 		},
 		{
-			name: 'LILA MENSAH',
-			title: 'Performance Artist'
+			name: 'Nontsikelelo Mutiti',
+			title: 'Visual Design Partner'
 		},
 		{
-			name: 'SOFIA RUIZ',
-			title: 'Curator'
+			name: 'Amin Gafaranga',
+			title: 'Architect'
 		},
 		{
-			name: 'DAVID KIM',
-			title: 'Composer'
+			name: 'Eric Kacou',
+			title: 'Strategic Advisor'
 		},
 		{
-			name: 'FATIMA ALI',
-			title: 'Poet'
-		},
-		{
-			name: 'MARCUS TAYLOR',
-			title: 'Film Director'
-		},
-		{
-			name: 'YARA HASSAN',
-			title: 'Multimedia Artist'
-		},
-		{
-			name: 'CHLOE BROWN',
-			title: 'Dramaturg'
-		},
-		{
-			name: 'RAHUL SINGH',
-			title: 'Installation Artist'
+			name: 'Lydie Murorunkwere',
+			title: 'Strategic Advisoret'
 		}
 	];
 </script>
@@ -66,7 +50,10 @@
 		<article class="collaborators">
 			<!-- List all collaborators -->
 			{#each collaborators as collaborator}
-				<p>{collaborator.name}, <span class="title">{collaborator.title}</span></p>
+				<p>
+					<span class="name">{collaborator.name}</span>,
+					<span class="title">{collaborator.title}</span>
+				</p>
 			{/each}
 		</article>
 	</section>
@@ -98,6 +85,10 @@
 
 	.collaborators span {
 		font-family: var(--font-secondary);
+	}
+
+	.collaborators .name {
+		text-transform: uppercase;
 	}
 
 	@media (max-width: 768px) {

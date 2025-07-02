@@ -128,15 +128,32 @@
 	<section class="content">
 		<article class="blurb">
 			<p>
-				Gihanga Institute of Contemporary Art (GICA) is a non-profit center for the arts in Kigali,
-				Rwanda. Founded on the belief that art can be a catalyst for social progress, GICA is home
-				to a library, exhibition spaces, platforms for performance and contemporary theatre,
-				screening room, studio, and an artist residency. Working from Kigali as a nexus of
-				contemporary art and intellectual discourse, GICA aims to elevate Rwanda's artistic
-				landscape, opening new possibilities through thoughtfully curated, high-quality exhibition
-				spaces, collaborative platforms, and innovative educational programs. The institute aims to
-				unite, support, and propel the cultural community in Rwanda, as a living space for art,
-				research, and shared possibility.
+				LIBRARY: <br />
+				Named after the late visionary curator and thinker, the Koyo Kouoh library, is dedicated to nurturing
+				independent thought, innovative dialogue, and cross-disciplinary research. It aims to inspire
+				and foster critical engagement, and to support the development of artistic and intellectual practices,
+				honoring Koyo's legacy of empowering creative agency and cultural resilience.
+			</p>
+
+			<p>
+				WORKSHOPS: <br />
+				GICA's in-person and online workshops are designed to create space for collective learning, exchange,
+				and experimentation. Led by artists and cultural practitioners, they invite the public to engage
+				directly through making, discussion, and experimentation.
+			</p>
+
+			<p>
+				SCREENINGS: <br />
+				Our screening programme showcases film and moving image works that expand how we see, feel, and
+				think. From artist films and experimental shorts to documentaries and archival footage, screenings
+				offer a space for visual storytelling and critical engagement.
+			</p>
+
+			<p>
+				TALKS & EVENTS: <br />
+				Talks and events at GICA bring together artists, thinkers, and the public for conversation and
+				critical inquiry. Through lectures, roundtables, and informal gatherings, they invite critical
+				reflection on the evolving practices and ideas shaping contemporary art.
 			</p>
 		</article>
 		<article class="programmes" bind:this={programmesSection}>
