@@ -137,6 +137,7 @@
 		padding-block-start: var(--space-8);
 		display: flex;
 		justify-content: start;
+		gap: var(--space-8);
 	}
 	nav li {
 		margin: 0 15px;
@@ -176,7 +177,7 @@
 		margin: 0;
 		display: flex;
 		justify-content: start;
-		gap: var(--space-4);
+		gap: var(--space-8);
 	}
 
 	.submenu-item {
