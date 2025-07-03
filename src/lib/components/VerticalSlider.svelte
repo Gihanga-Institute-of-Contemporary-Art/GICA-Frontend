@@ -99,9 +99,11 @@
 		position: absolute;
 		bottom: 0;
 		right: var(--space-4);
-		height: 5rem;
+		height: var(--footer-height);
 		padding: 1.5rem;
 		display: flex;
+		align-items: center;
+		justify-content: center;
 		gap: 1.5rem;
 	}
 
