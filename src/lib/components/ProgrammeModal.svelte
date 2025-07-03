@@ -96,7 +96,26 @@
 		{/if}
 	</div>
 	<div class="modal-content" bind:this={modalContent} tabindex="-1">
-		<button class="modal-close" onclick={closeModal}>×</button>
+		<button class="modal-close" onclick={closeModal} aria-label="Close modal">
+			<svg
+				viewBox="0 0 208 208"
+				version="1.1"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink"
+				xml:space="preserve"
+				style="fill-rule:evenodd;clip-rule:evenodd;"
+				class="feather feather-x"
+			>
+				<g transform="matrix(1,0,0,1,-1243,-1099)">
+					<g id="Close" transform="matrix(4.16667,0,0,4.16667,1347,1203)">
+						<path
+							d="M-12,-12L12,12M12,-12L-12,12"
+							style="fill:none;fill-rule:nonzero;stroke:rgb(26,36,0);stroke-width:2px;"
+						/>
+					</g>
+				</g>
+			</svg>
+		</button>
 
 		<div class="modal-left">
 			<h5>
@@ -152,26 +171,29 @@
 
 	.modal-close {
 		position: absolute;
-		top: 1rem;
-		right: 1rem;
+		top: -4rem;
+		right: 0;
 		background: none;
 		border: none;
-		font-size: 2rem;
 		cursor: pointer;
-		color: #666;
+		color: var(--primary-color-dark);
 		z-index: 1001;
-		width: 40px;
-		height: 40px;
 		display: flex;
+		width: 5rem;
+		aspect-ratio: 1;
 		align-items: center;
 		justify-content: center;
-		border-radius: 50%;
-		transition: background-color 0.2s ease;
+		transition: opacity 0.3s ease;
+		padding: 0;
 	}
 
 	.modal-close:hover {
-		background-color: rgba(0, 0, 0, 0.1);
-		color: #000;
+		opacity: 0.7;
+	}
+
+	.modal-close svg {
+		width: 100%;
+		height: 100%;
 	}
 
 	.modal-middle {
