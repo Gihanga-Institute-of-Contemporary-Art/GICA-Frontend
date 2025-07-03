@@ -25,7 +25,7 @@
 	}
 
 	section.content {
-		max-width: 75vw;
+		max-width: var(--content-width);
 		margin: 0 auto;
 		padding-block-end: var(--space-2);
 	}

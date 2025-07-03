@@ -172,7 +172,7 @@
 						<button type="button" class="programme-card" onclick={() => openModal(programme)}>
 							<div
 								class="programme-image"
-								style="background-color: var(--color-primary-dark); {programme.cover
+								style="background-color: var(--color-primary-mid); {programme.cover
 									? `background-image: url(${programme.cover})`
 									: ''}"
 							>
@@ -207,7 +207,7 @@
 		padding-block-start: var(--nav-height);
 	}
 	section.content {
-		max-width: 75vw;
+		max-width: var(--content-width);
 		margin: 0 auto;
 		padding-block-end: var(--space-2);
 	}
@@ -222,7 +222,7 @@
 	}
 
 	article.programmes {
-		max-width: 75vw;
+		max-width: var(--content-width);
 		margin: 0 auto;
 		/* padding-bottom: var(--space-16); */
 		margin-block: var(--space-16);

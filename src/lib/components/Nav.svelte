@@ -120,14 +120,13 @@
 	section.lang {
 		padding-block-start: var(--space-8);
 		font-family: var(--font-secondary);
-		color: var(--font-color-dark);
 	}
 
 	section.lang button {
 		background: none;
 		border: none;
 		font-size: var(--font-size-lg);
-		color: var(--font-color-dark);
+		color: var(--font-color-mid);
 		text-transform: uppercase;
 		cursor: pointer;
 	}
@@ -163,7 +162,7 @@
 
 	nav a.inactive {
 		/* Non-active links when not on home */
-		color: var(--font-color-dark);
+		color: var(--font-color-mid);
 	}
 
 	/* Submenu styles */

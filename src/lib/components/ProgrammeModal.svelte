@@ -137,7 +137,6 @@
 
 		<div class="modal-right">
 			<h5 class="programme-title">{programme.title}</h5>
-			<p class="programme-type">{programme.type}</p>
 		</div>
 	</div>
 </section>
@@ -162,6 +161,10 @@
 		/* max-height: 80vh; */
 		/* overflow-y: auto; */
 		outline: none;
+	}
+
+	.modal-content h5 {
+		text-transform: uppercase;
 	}
 
 	.modal-left,
@@ -211,18 +214,7 @@
 
 	.programme-title {
 		color: #333;
-	}
-
-	.programme-type {
-		margin-bottom: 1rem;
 		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.modal-right p {
-		line-height: 1.6;
-		color: #444;
-		margin-bottom: 1.5rem;
 	}
 
 	.modal-nav {

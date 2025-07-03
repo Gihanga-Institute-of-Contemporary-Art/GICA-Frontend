@@ -65,7 +65,7 @@
 		padding-block-start: var(--nav-height);
 	}
 	section.content {
-		max-width: 75vw;
+		max-width: var(--content-width);
 		margin: 0 auto;
 		margin-block: var(--space-2);
 	}
