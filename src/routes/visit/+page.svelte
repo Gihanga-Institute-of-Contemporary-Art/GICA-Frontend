@@ -29,10 +29,13 @@
 				<p>Contact: <a href="mailto:test@test.local">test@test.local</a></p>
 			</div>
 			<div class="social">
-				<p class="title">Follow Us</p>
+				<p class="title">Instagram</p>
 				<ul>
-					<li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
-					<li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+					<li>
+						<a href="https://www.instagram.com/gica.kigali/profilecard/" target="_blank"
+							>Instagram</a
+						>
+					</li>
 				</ul>
 			</div>
 		</div>

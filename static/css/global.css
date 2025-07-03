@@ -4,10 +4,9 @@
 
 :root {
 	/* Color variables */
-	--color-primary: rgb(255, 195, 0);
-	--color-primary-light: #ffd456;
-	--color-primary-dark: #a68c07;
-
+	--color-primary: rgb(188, 146, 0);
+	--color-primary-light: #d5c593;
+	--color-primary-dark: rgb(55, 56, 0);
 	--color-secondary: #00d000;
 
 	--color-gray-50: #f9fafb;
@@ -19,7 +18,7 @@
 	--color-gray-600: #4b5563;
 	--color-gray-700: #374151;
 	--color-gray-800: #1f2937;
-	--color-gray-900: #003e00;
+	--color-gray-900: rgb(26, 36, 0);
 
 	/* Spacing */
 	--space-1: 0.25rem;
