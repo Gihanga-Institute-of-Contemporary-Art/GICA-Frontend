@@ -114,7 +114,7 @@
 		font-size: var(--font-size-xl);
 		text-transform: uppercase;
 		color: var(--color-primary);
-		z-index: 100;
+		z-index: 1001;
 	}
 
 	.slider-btn .icon {
