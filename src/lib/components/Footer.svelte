@@ -33,7 +33,7 @@
 				>
 			</div>
 			<div class="details">
-				<p>GICA — A LIVING SPACE FOR ART, RESEARCH, AND COLLECTIVE IMAGINATION.</p>
+				<p class="title">GICA — A LIVING SPACE FOR ART, RESEARCH, AND COLLECTIVE IMAGINATION.</p>
 				{#if isActive}
 					<div class="sub-text">
 						<p>
@@ -73,6 +73,7 @@
 		padding-top: var(--space-4);
 		color: var(--color-primary);
 		font-size: var(--font-size-xl);
+		z-index: 1000;
 	}
 
 	footer.active {
@@ -101,6 +102,10 @@
 	.headline p {
 		margin: 0;
 		padding: 0 1rem;
+	}
+
+	.headline .title {
+		font-family: var(--font-secondary);
 	}
 
 	.headline:hover {

@@ -17,6 +17,13 @@
 				<p class="title">Location</p>
 				<address>KN 14 St 28, Kimihurura Sector, Kimihurura, Kigali, Rwanda</address>
 			</div>
+		</div>
+		<div class="middle">
+			<div class="images">
+				<img src="https://picsum.photos/600/400?random=1" alt="Random Contact Image 1" />
+			</div>
+		</div>
+		<div class="right">
 			<div class="email">
 				<p class="title">Email</p>
 				<p>Contact: <a href="mailto:test@test.local">test@test.local</a></p>
@@ -29,14 +36,6 @@
 				</ul>
 			</div>
 		</div>
-		<div class="middle">
-			<div class="images">
-				<img src="https://picsum.photos/600/400?random=1" alt="Contact Image 1" />
-				<img src="https://picsum.photos/600/400?random=2" alt="Contact Image 2" />
-				<img src="https://picsum.photos/600/400?random=3" alt="Contact Image 3" />
-			</div>
-		</div>
-		<div class="right"></div>
 	</section>
 	<Footer />
 </main>
@@ -52,7 +51,9 @@
 		padding-block-end: var(--space-2);
 		display: grid;
 		grid-template-columns: 0.5fr 1fr 0.5fr;
-		font-size: var(--font-size-lg);
+		column-gap: var(--space-8);
+		font-size: var(--font-size-md);
+		font-family: var(--font-secondary);
 	}
 
 	.left,

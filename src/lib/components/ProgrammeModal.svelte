@@ -137,9 +137,9 @@
 		position: relative;
 		display: grid;
 		grid-template-columns: 0.5fr 1fr 0.5fr;
-		gap: 1rem;
 		max-width: 75vw;
 		width: 100%;
+		column-gap: var(--space-8);
 		/* max-height: 80vh; */
 		/* overflow-y: auto; */
 		outline: none;
@@ -212,7 +212,7 @@
 		display: flex;
 		justify-content: space-between;
 		pointer-events: none;
-		z-index: 1002;
+		z-index: 999;
 		padding: 0 1rem;
 	}
 
