@@ -11,15 +11,15 @@
 
 	let {
 		id = 'duotone-filter',
-		baseHex = '#225800',
+		baseHex = '#1A2400',
 		dither = false,
 		dithering_amount = 3,
 		noise_scale = 0.8
 	}: Props = $props();
 
-	let r = $state(0.133);
-	let g = $state(0.349);
-	let b = $state(0.133); // default RGB values for #225800
+	let r = $state(0);
+	let g = $state(0);
+	let b = $state(0);
 
 	// Convert hex to normalized RGB
 	function hexToNormalizedRGB(hex: string) {
