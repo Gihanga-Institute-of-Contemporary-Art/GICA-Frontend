@@ -8,6 +8,14 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+	// env variables
+
+	namespace NodeJS {
+		interface ProcessEnv {
+			KIRBY_BASE_URL: string;
+			KIRBY_API_TOKEN: string;
+		}
+	}
 }
 
 export {};

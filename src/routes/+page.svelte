@@ -7,6 +7,8 @@
 	let isFooterActive = $state(false);
 	let sliderRef: VerticalSlider;
 
+	// const props = $props();
+
 	// Reactive effect to pause/unpause slider based on footer state
 	$effect(() => {
 		if (sliderRef) {
