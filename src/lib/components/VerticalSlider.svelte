@@ -100,7 +100,7 @@
 		bottom: 0;
 		right: var(--space-4);
 		height: var(--footer-height);
-		padding: 1.5rem;
+		padding-top: var(--space-4);
 		display: flex;
 		align-items: center;
 		justify-content: center;
