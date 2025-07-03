@@ -5,5 +5,7 @@ export interface Programme {
 	link: string;
 	date: string;
 	startTime: string;
+	endTime: string;
+	venue: string;
 	cover: string;
 }

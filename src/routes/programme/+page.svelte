@@ -3,30 +3,16 @@
 	import Nav from '$lib/components/Nav.svelte';
 	import ProgrammeModal from '$lib/components/ProgrammeModal.svelte';
 	import type { Programme } from '$lib/api/types';
+	import { formatProgrammeDate, getProgrammeStatus } from '$lib/utils';
 
 	const { data } = $props();
 
 	let isModalOpen = $state(false);
 	let selectedProgramme = $state<Programme | null>(null);
+	let selectedProgrammeIndex = $state<number>(0);
 	let selectedFilter = $state<string | null>(null);
 	let selectedTimeFilter = $state<string | null>(null);
-	let programmesSection: HTMLElement | undefined;
-
-	// Helper function to determine programme status based on date
-	function getProgrammeStatus(dateString: string): 'past' | 'current' | 'upcoming' {
-		const programmeDate = new Date(dateString);
-		const today = new Date();
-		const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-		const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-
-		if (programmeDate < todayStart) {
-			return 'past';
-		} else if (programmeDate >= todayStart && programmeDate < todayEnd) {
-			return 'current';
-		} else {
-			return 'upcoming';
-		}
-	}
+	let programmesSection = $state<HTMLElement | undefined>(undefined);
 
 	// Get unique programme types and create submenu
 	const programmeTypes = Array.from(new Set(data.site.programmes.map((p) => p.type)));
@@ -85,6 +71,7 @@
 
 	function openModal(programme: Programme) {
 		selectedProgramme = programme;
+		selectedProgrammeIndex = filteredProgrammes.findIndex((p) => p === programme);
 		isModalOpen = true;
 	}
 
@@ -93,9 +80,31 @@
 		selectedProgramme = null;
 	}
 
+	function navigateToPreviousProgramme() {
+		if (selectedProgrammeIndex > 0) {
+			selectedProgrammeIndex--;
+			selectedProgramme = filteredProgrammes[selectedProgrammeIndex];
+		}
+	}
+
+	function navigateToNextProgramme() {
+		if (selectedProgrammeIndex < filteredProgrammes.length - 1) {
+			selectedProgrammeIndex++;
+			selectedProgramme = filteredProgrammes[selectedProgrammeIndex];
+		}
+	}
+
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape' && isModalOpen) {
 			closeModal();
+		} else if (isModalOpen) {
+			if (event.key === 'ArrowLeft') {
+				event.preventDefault();
+				navigateToPreviousProgramme();
+			} else if (event.key === 'ArrowRight') {
+				event.preventDefault();
+				navigateToNextProgramme();
+			}
 		}
 	}
 
@@ -125,64 +134,72 @@
 
 <main>
 	<Nav {submenuRows} />
-	<section class="content">
-		<article class="blurb">
-			<p>
-				LIBRARY: <br />
-				Named after the late visionary curator and thinker, the Koyo Kouoh library, is dedicated to nurturing
-				independent thought, innovative dialogue, and cross-disciplinary research. It aims to inspire
-				and foster critical engagement, and to support the development of artistic and intellectual practices,
-				honoring Koyo's legacy of empowering creative agency and cultural resilience.
-			</p>
+	{#if !isModalOpen}
+		<section class="content">
+			<article class="blurb">
+				<p>
+					LIBRARY: <br />
+					Named after the late visionary curator and thinker, the Koyo Kouoh library, is dedicated to
+					nurturing independent thought, innovative dialogue, and cross-disciplinary research. It aims
+					to inspire and foster critical engagement, and to support the development of artistic and intellectual
+					practices, honoring Koyo's legacy of empowering creative agency and cultural resilience.
+				</p>
 
-			<p>
-				WORKSHOPS: <br />
-				GICA's in-person and online workshops are designed to create space for collective learning, exchange,
-				and experimentation. Led by artists and cultural practitioners, they invite the public to engage
-				directly through making, discussion, and experimentation.
-			</p>
+				<p>
+					WORKSHOPS: <br />
+					GICA's in-person and online workshops are designed to create space for collective learning,
+					exchange, and experimentation. Led by artists and cultural practitioners, they invite the public
+					to engage directly through making, discussion, and experimentation.
+				</p>
 
-			<p>
-				SCREENINGS: <br />
-				Our screening programme showcases film and moving image works that expand how we see, feel, and
-				think. From artist films and experimental shorts to documentaries and archival footage, screenings
-				offer a space for visual storytelling and critical engagement.
-			</p>
+				<p>
+					SCREENINGS: <br />
+					Our screening programme showcases film and moving image works that expand how we see, feel,
+					and think. From artist films and experimental shorts to documentaries and archival footage,
+					screenings offer a space for visual storytelling and critical engagement.
+				</p>
 
-			<p>
-				TALKS & EVENTS: <br />
-				Talks and events at GICA bring together artists, thinkers, and the public for conversation and
-				critical inquiry. Through lectures, roundtables, and informal gatherings, they invite critical
-				reflection on the evolving practices and ideas shaping contemporary art.
-			</p>
-		</article>
-		<article class="programmes" bind:this={programmesSection}>
-			<div class="programmes-grid">
-				{#each filteredProgrammes as programme}
-					<button type="button" class="programme-card" onclick={() => openModal(programme)}>
-						<div
-							class="programme-image"
-							style="background-color: #003e00; {programme.cover
-								? `background-image: url(${programme.cover})`
-								: ''}"
-						>
-							<div class="programme-overlay">
-								<h5 class="programme-title">{programme.title}</h5>
-								<h5 class="programme-date">{programme.date}</h5>
-								<h5 class="programme-time">{programme.startTime}</h5>
+				<p>
+					TALKS & EVENTS: <br />
+					Talks and events at GICA bring together artists, thinkers, and the public for conversation
+					and critical inquiry. Through lectures, roundtables, and informal gatherings, they invite critical
+					reflection on the evolving practices and ideas shaping contemporary art.
+				</p>
+			</article>
+			<article class="programmes" bind:this={programmesSection}>
+				<div class="programmes-grid">
+					{#each filteredProgrammes as programme}
+						<button type="button" class="programme-card" onclick={() => openModal(programme)}>
+							<div
+								class="programme-image"
+								style="background-color: #003e00; {programme.cover
+									? `background-image: url(${programme.cover})`
+									: ''}"
+							>
+								<div class="programme-overlay">
+									<h5 class="programme-title">{programme.title}</h5>
+									<h5 class="programme-date">{formatProgrammeDate(programme.date)}</h5>
+									<h5 class="programme-time">{programme.startTime}</h5>
+								</div>
 							</div>
-						</div>
-					</button>
-				{/each}
-			</div>
-		</article>
-	</section>
-
-	<Footer />
+						</button>
+					{/each}
+				</div>
+			</article>
+		</section>
+	{/if}
 
 	{#if isModalOpen && selectedProgramme}
-		<ProgrammeModal programme={selectedProgramme} {closeModal} />
+		<ProgrammeModal
+			programme={selectedProgramme}
+			{closeModal}
+			{navigateToPreviousProgramme}
+			{navigateToNextProgramme}
+			canNavigatePrevious={selectedProgrammeIndex > 0}
+			canNavigateNext={selectedProgrammeIndex < filteredProgrammes.length - 1}
+		/>
 	{/if}
+	<Footer />
 </main>
 
 <style>
@@ -225,7 +242,7 @@
 	}
 
 	.programme-card:hover {
-		outline: 2px solid var(--color-secondary);
+		outline: 2.5px solid var(--color-secondary);
 	}
 	.programme-card:hover .programme-overlay {
 		color: var(--color-secondary);

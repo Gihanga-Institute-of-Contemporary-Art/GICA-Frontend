@@ -10,6 +10,8 @@ export const load = async () => {
 			link: '#',
 			date: '2023-10-01',
 			startTime: '10:00 AM',
+			endTime: '05:00 PM',
+			venue: 'GICA Gallery',
 			cover: 'https://picsum.photos/600/400?random=1'
 		},
 		{
@@ -20,16 +22,20 @@ export const load = async () => {
 			link: '#',
 			date: '2023-11-15',
 			startTime: '09:00 AM',
+			endTime: '11:00 AM',
+			venue: 'GICA Cinema',
 			cover: 'https://picsum.photos/600/400?random=2'
 		},
 		{
 			title: 'Beloved By Toni Morrison',
 			description:
-				'<p>Excepteur excepteur excepteur enim consectetur. Dolor amet incididunt ad excepteur. Adipisicing exercitation est excepteur pariatur. Dolore laboris in reprehenderit Lorem. Aute labore occaecat voluptate aliqua.</p> <p>Excepteur enim laborum do dolore. Nisi deserunt id eiusmod commodo. Dolor dolor aliquip fugiat ullamco. Laborum qui ipsum mollit officia.</p>				<p>Excepteur excepteur excepteur enim consectetur. Dolor amet incididunt ad excepteur. Adipisicing exercitation est excepteur pariatur. Dolore laboris in reprehenderit Lorem. Aute labore occaecat voluptate aliqua.</p><p>Excepteur enim laborum do dolore. Nisi deserunt id eiusmod commodo. Dolor dolor aliquip fugiat ullamco. Laborum qui ipsum mollit officia.</p> <p>Excepteur excepteur excepteur enim consectetur. Dolor amet incididunt ad excepteur. Adipisicing exercitation est excepteur pariatur. Dolore laboris in reprehenderit Lorem. Aute labore occaecat voluptate aliqua.</p>',
+				'<p>Excepteur excepteur excepteur enim consectetur. Dolor amet incididunt ad excepteur. Adipisicing exercitation est excepteur pariatur. Dolore laboris in reprehenderit Lorem. Aute labore occaecat voluptate aliqua.</p> <p>Excepteur enim laborum do dolore. Nisi deserunt id eiusmod commodo. Dolor dolor aliquip fugiat ullamco. Laborum qui ipsum mollit officia.</p>				<p>Excepteur excepteur excepteur enim consectetur. Dolor amet incididunt ad excepteur. Adipisicing exercitation est excepteur pariatur. Dolore laboris in reprehenderit Lorem. Aute labore occaecat voluptate aliqua.</p><p>Excepteur enim laborum do dolore. Nisi deserunt id eiusmod commodo. Dolor dolor aliquip fugiat ullamco. Laborum qui ipsum mollit officia.</p> <p>Excepteur excepteur excepteur enim consectetur. Dolor amet incididunt ad excepteur. Adipisicing exercitation est excepteur pariatur. Dolore laboris in reprehenderit Lorem. Aute labore occaecat voluptate aliqua.</p> <p>Excepteur excepteur excepteur enim consectetur. Dolor amet incididunt ad excepteur. Adipisicing exercitation est excepteur pariatur. Dolore laboris in reprehenderit Lorem. Aute labore occaecat voluptate aliqua.</p><p>Excepteur excepteur excepteur enim consectetur. Dolor amet incididunt ad excepteur. Adipisicing exercitation est excepteur pariatur. Dolore laboris in reprehenderit Lorem. Aute labore occaecat voluptate aliqua.</p>',
 			type: 'Library',
 			link: '#',
 			date: '2023-12-01',
 			startTime: '11:00 AM',
+			endTime: '01:00 PM',
+			venue: 'GICA Library',
 			cover: ''
 		}
 	];

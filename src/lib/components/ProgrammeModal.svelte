@@ -1,52 +1,112 @@
 <script lang="ts">
 	import type { Programme } from '$lib/api/types';
+	import { formatProgrammeDate } from '$lib/utils';
 
 	interface Props {
 		programme: Programme;
 		closeModal: () => void;
+		navigateToPreviousProgramme: () => void;
+		navigateToNextProgramme: () => void;
+		canNavigatePrevious: boolean;
+		canNavigateNext: boolean;
 	}
 
-	const { programme, closeModal }: Props = $props();
+	const {
+		programme,
+		closeModal,
+		navigateToPreviousProgramme,
+		navigateToNextProgramme,
+		canNavigatePrevious,
+		canNavigateNext
+	}: Props = $props();
 
 	let modalContent: HTMLDivElement | undefined;
 
 	$effect(() => {
-		// Scroll to top of the page first
-		window.scrollTo(0, 0);
-
-		// Set body overflow to hidden when modal opens
-		const originalOverflow = document.body.style.overflow;
-		document.body.style.overflow = 'hidden';
+		// Scroll to top of the page content, accounting for nav height
+		document.documentElement.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
 
 		// Focus the modal content
 		if (modalContent) {
 			modalContent.focus();
 		}
-
-		// Cleanup function - restore original overflow when modal closes
-		return () => {
-			document.body.style.overflow = originalOverflow;
-		};
 	});
 </script>
 
 <section class="programme-modal">
-	<div
-		class="modal-backdrop"
-		onclick={closeModal}
-		onkeydown={(e) => e.key === 'Escape' && closeModal()}
-		role="button"
-		tabindex="0"
-		aria-label="Close modal"
-	></div>
+	<div class="modal-nav">
+		{#if canNavigatePrevious}
+			<button
+				class="nav-button nav-left"
+				onclick={navigateToPreviousProgramme}
+				aria-label="Previous programme"
+			>
+				<svg
+					width="100%"
+					height="100%"
+					viewBox="0 0 208 365"
+					version="1.1"
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+					xml:space="preserve"
+					style="fill-rule:evenodd;clip-rule:evenodd;"
+					class="feather feather-chevron-left"
+				>
+					<g transform="matrix(1,0,0,1,-1243,-1099)">
+						<g id="Left" transform="matrix(4.16667,0,0,4.16667,1425,1437.3)">
+							<path
+								d="M0,-74.953L-37.477,-37.476L0,0"
+								style="fill:none;fill-rule:nonzero;stroke:rgb(26,36,0);stroke-width:3px;"
+							/>
+						</g>
+					</g>
+				</svg>
+			</button>
+		{/if}
+		{#if canNavigateNext}
+			<button
+				class="nav-button nav-right"
+				onclick={navigateToNextProgramme}
+				aria-label="Next programme"
+			>
+				<svg
+					width="100%"
+					height="100%"
+					viewBox="0 0 208 365"
+					version="1.1"
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+					xml:space="preserve"
+					style="fill-rule:evenodd;clip-rule:evenodd;"
+					class="feather feather-chevron-right"
+				>
+					<g transform="matrix(1,0,0,1,-1474,-1099)">
+						<g id="Right" transform="matrix(4.16667,0,0,4.16667,1500,1125)">
+							<path
+								d="M0,74.953L37.477,37.476L0,0"
+								style="fill:none;fill-rule:nonzero;stroke:rgb(26,36,0);stroke-width:3px;"
+							/>
+						</g>
+					</g>
+				</svg>
+			</button>
+		{/if}
+	</div>
 	<div class="modal-content" bind:this={modalContent} tabindex="-1">
 		<button class="modal-close" onclick={closeModal}>×</button>
 
-		<div class="modal-body">
-			<p>Programme details and description would go here.</p>
+		<div class="modal-left">
+			<h5>
+				{formatProgrammeDate(programme.date)}
+			</h5>
+			<h5>{programme.startTime}</h5>
+			<h5>{programme.venue}</h5>
 		</div>
 
-		<div class="modal-header">
+		<div class="modal-middle">
 			{#if programme.cover}
 				<img src={programme.cover} alt={programme.title} class="programme-cover" />
 			{/if}
@@ -56,37 +116,21 @@
 			</p>
 		</div>
 
-		<div class="programme-info">
-			<p class="programme-title">{programme.title}</p>
+		<div class="modal-right">
+			<h5 class="programme-title">{programme.title}</h5>
 			<p class="programme-type">{programme.type}</p>
-			<div class="programme-details">
-				<p class="programme-date">{programme.date}</p>
-				<p class="programme-time">{programme.startTime}</p>
-			</div>
 		</div>
 	</div>
 </section>
 
 <style>
 	.programme-modal {
-		position: fixed;
-		bottom: 0;
-		left: 0;
 		width: 100%;
 		height: calc(100% - var(--nav-height));
 		z-index: 1000;
 		display: flex;
 		justify-content: center;
-		padding: 2rem;
-	}
-
-	.modal-backdrop {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: var(--color-primary-light);
+		/* padding-bottom: var(--space-16); */
 	}
 
 	.modal-content {
@@ -99,6 +143,11 @@
 		/* max-height: 80vh; */
 		/* overflow-y: auto; */
 		outline: none;
+	}
+
+	.modal-left,
+	.modal-right {
+		padding-block-start: var(--space-8);
 	}
 
 	.modal-close {
@@ -125,8 +174,9 @@
 		color: #000;
 	}
 
-	.modal-header {
+	.modal-middle {
 		padding-bottom: 1rem;
+		font-size: var(--font-size-lg);
 	}
 
 	.programme-cover {
@@ -147,26 +197,55 @@
 		letter-spacing: 0.5px;
 	}
 
-	.programme-details {
-		display: flex;
-		gap: 1rem;
-		margin-bottom: 1rem;
-	}
-
-	.programme-date,
-	.programme-time {
-		font-size: 0.95rem;
-		color: #666;
-	}
-
-	.modal-body {
-		padding: 0 2rem 2rem;
-	}
-
-	.modal-body p {
+	.modal-right p {
 		line-height: 1.6;
 		color: #444;
 		margin-bottom: 1.5rem;
+	}
+
+	.modal-nav {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		transform: translateY(-50%);
+		display: flex;
+		justify-content: space-between;
+		pointer-events: none;
+		z-index: 1002;
+		padding: 0 1rem;
+	}
+
+	.nav-button {
+		background: none;
+		border: none;
+		cursor: pointer;
+		pointer-events: auto;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 6rem;
+		aspect-ratio: 1;
+		transition: opacity 0.3s ease;
+	}
+
+	.nav-button:hover {
+		opacity: 0.7;
+	}
+
+	.nav-button svg {
+		width: 100%;
+		height: 100%;
+		max-height: 6rem;
+	}
+
+	.nav-left {
+		margin-right: auto;
+	}
+
+	.nav-right {
+		margin-left: auto;
 	}
 
 	/* Responsive design */
@@ -179,22 +258,17 @@
 			max-height: 90vh;
 		}
 
-		.modal-header {
+		.modal-left {
 			padding: 1.5rem;
 			padding-bottom: 1rem;
 		}
 
-		.modal-body {
+		.modal-middle {
 			padding: 0 1.5rem 1.5rem;
 		}
 
 		.programme-title {
 			font-size: 1.5rem;
-		}
-
-		.programme-details {
-			flex-direction: column;
-			gap: 0.5rem;
 		}
 	}
 </style>
