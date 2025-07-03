@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	import { updateCSSVariables } from '$lib/colorTime';
+
 	let customCursor: HTMLDivElement;
 
 	onMount(() => {
@@ -41,6 +43,9 @@
 
 		// Start animation loop
 		animationId = requestAnimationFrame(animateCursor);
+
+		updateCSSVariables();
+		setInterval(updateCSSVariables, 10 * 60 * 1000); // every 10 minutes
 
 		return () => {
 			document.removeEventListener('mousemove', updateCursor);

@@ -113,7 +113,7 @@
 		cursor: pointer;
 		font-size: var(--font-size-lg);
 		text-transform: uppercase;
-		color: var(--font-color-primary);
+		color: rgb(188, 146, 0);
 		z-index: 1001;
 	}
 

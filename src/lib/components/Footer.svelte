@@ -71,7 +71,7 @@
 		display: flex;
 		align-items: center;
 		padding-top: var(--space-4);
-		color: var(--font-color-primary);
+		color: rgb(188, 146, 0);
 		z-index: 1000;
 	}
 
