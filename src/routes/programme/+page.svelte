@@ -172,7 +172,7 @@
 						<button type="button" class="programme-card" onclick={() => openModal(programme)}>
 							<div
 								class="programme-image"
-								style="background-color: #003e00; {programme.cover
+								style="background-color: var(--color-primary-dark); {programme.cover
 									? `background-image: url(${programme.cover})`
 									: ''}"
 							>
