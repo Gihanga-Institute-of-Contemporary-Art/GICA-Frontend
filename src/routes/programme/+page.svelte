@@ -217,6 +217,10 @@
 		font-size: var(--font-size-xl);
 	}
 
+	article.blurb p + p {
+		margin-top: var(--space-8);
+	}
+
 	article.programmes {
 		max-width: 75vw;
 		margin: 0 auto;

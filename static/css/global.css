@@ -46,7 +46,7 @@
 		(var(--font-size-xl) * 1.5 + 20px + 2rem) * 2
 	); /* font-size * line-height + padding + margin */
 
-	--footer-height: 6rem;
+	--footer-height: 8rem;
 }
 
 body {

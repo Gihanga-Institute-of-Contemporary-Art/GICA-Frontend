@@ -71,7 +71,7 @@
 	}
 
 	section.content .blurb {
-		font-family: var(--font-secondary);
+		font-family: var(--font-primary);
 		font-size: var(--font-size-xl);
 	}
 
@@ -83,8 +83,8 @@
 		padding-block-end: calc(2 * var(--space-16));
 	}
 
-	.collaborators span {
-		font-family: var(--font-secondary);
+	.collaborators span.name {
+		font-family: var(--font-primary);
 	}
 
 	.collaborators .name {

@@ -111,7 +111,7 @@
 		background-color: transparent;
 		border: none;
 		cursor: pointer;
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-lg);
 		text-transform: uppercase;
 		color: var(--font-color-primary);
 		z-index: 1001;
