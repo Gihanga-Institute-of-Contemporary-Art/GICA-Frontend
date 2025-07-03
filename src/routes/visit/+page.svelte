@@ -20,7 +20,7 @@
 		</div>
 		<div class="middle">
 			<div class="images">
-				<img src="https://picsum.photos/600/400?random=1" alt="Random Contact Image 1" />
+				<img src="https://picsum.photos/600/400?random=1" alt="Random Contact 1" />
 			</div>
 		</div>
 		<div class="right">

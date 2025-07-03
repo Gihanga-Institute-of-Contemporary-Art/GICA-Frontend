@@ -120,14 +120,14 @@
 	section.lang {
 		padding-block-start: var(--space-8);
 		font-family: var(--font-secondary);
-		color: var(--color-primary-dark);
+		color: var(--font-color-dark);
 	}
 
 	section.lang button {
 		background: none;
 		border: none;
 		font-size: var(--font-size-lg);
-		color: var(--color-primary-dark);
+		color: var(--font-color-dark);
 		text-transform: uppercase;
 		cursor: pointer;
 	}
@@ -163,7 +163,7 @@
 
 	nav a.inactive {
 		/* Non-active links when not on home */
-		color: var(--color-primary-dark);
+		color: var(--font-color-dark);
 	}
 
 	/* Submenu styles */
@@ -183,7 +183,7 @@
 	.submenu-item {
 		background: none;
 		border: none;
-		color: var(--color-primary-dark);
+		color: var(--font-color-dark);
 		font-size: var(--font-size-lg);
 		text-transform: uppercase;
 		cursor: pointer;

@@ -71,7 +71,7 @@
 		/* display: flex; */
 		/* align-items: center; */
 		padding-top: var(--space-4);
-		color: var(--color-primary);
+		color: var(--font-color-primary);
 		font-size: var(--font-size-xl);
 		z-index: 1000;
 	}

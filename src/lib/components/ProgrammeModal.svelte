@@ -176,7 +176,7 @@
 		background: none;
 		border: none;
 		cursor: pointer;
-		color: var(--primary-color-dark);
+		color: var(--font-color-dark);
 		z-index: 1001;
 		display: flex;
 		width: 5rem;

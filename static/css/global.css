@@ -9,6 +9,10 @@
 	--color-primary-dark: rgb(55, 56, 0);
 	--color-secondary: #00d000;
 
+	--font-color-primary: rgb(188, 146, 0);
+	--font-color-dark: rgb(26, 36, 0);
+	--font-color-inactive: rgb(55, 56, 0);
+
 	--color-gray-50: #f9fafb;
 	--color-gray-100: #f3f4f6;
 	--color-gray-200: #e5e7eb;
