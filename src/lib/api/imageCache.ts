@@ -1,6 +1,19 @@
-import fs from 'fs/promises';
-import path from 'path';
 import type { ContentBlock, ImageContent, MediaCover } from './types';
+
+// Dynamic imports for Node.js modules to avoid bundling issues in edge environments
+let fsPromises: typeof import('node:fs/promises') | null = null;
+let pathModule: typeof import('node:path') | null = null;
+
+async function ensureNodeModules() {
+	if (typeof process !== 'undefined' && process.versions?.node) {
+		if (!fsPromises) {
+			fsPromises = await import('node:fs/promises');
+		}
+		if (!pathModule) {
+			pathModule = await import('node:path');
+		}
+	}
+}
 
 /**
  * Cache an image from a URL to the local filesystem
@@ -8,22 +21,29 @@ import type { ContentBlock, ImageContent, MediaCover } from './types';
  * @returns The local path to the cached image
  */
 export async function cacheImage(url: string): Promise<string> {
+	// Ensure Node.js modules are available
+	await ensureNodeModules();
+
+	if (!fsPromises || !pathModule) {
+		throw new Error('Image caching is not supported in this environment (Node.js required)');
+	}
+
 	const destination = 'static/images/';
-	const filename = path.basename(url);
-	const filePath = path.resolve(process.cwd(), destination, filename);
-	const metadataPath = path.resolve(process.cwd(), destination, `.${filename}.metadata`);
+	const filename = pathModule.basename(url);
+	const filePath = pathModule.resolve(process.cwd(), destination, filename);
+	const metadataPath = pathModule.resolve(process.cwd(), destination, `.${filename}.metadata`);
 
 	try {
 		// Create destination directory if it doesn't exist
-		await fs.mkdir(path.dirname(filePath), { recursive: true });
+		await fsPromises.mkdir(pathModule.dirname(filePath), { recursive: true });
 
 		// Check if image is already cached and not expired
 		let shouldDownload = true;
 		try {
-			const metadataExists = await fs.stat(metadataPath).catch(() => null);
+			const metadataExists = await fsPromises.stat(metadataPath).catch(() => null);
 
 			if (metadataExists) {
-				const metadata = await fs.readFile(metadataPath, 'utf-8');
+				const metadata = await fsPromises.readFile(metadataPath, 'utf-8');
 				const cacheDate = new Date(metadata.trim());
 				const now = new Date();
 				const oneDayMs = 24 * 60 * 60 * 1000;
@@ -46,18 +66,20 @@ export async function cacheImage(url: string): Promise<string> {
 			const buffer = await response.arrayBuffer();
 
 			// Save image file
-			await fs.writeFile(filePath, Buffer.from(buffer));
+			await fsPromises.writeFile(filePath, Buffer.from(buffer));
 
 			// Save metadata with current date
-			await fs.writeFile(metadataPath, new Date().toISOString());
+			await fsPromises.writeFile(metadataPath, new Date().toISOString());
 
 			console.log(`Cached image ${filename} from ${url}`);
 		} else {
-			console.log(`Using cached image ${path.join(destination, filename)}, cache is still valid`);
+			console.log(
+				`Using cached image ${pathModule.join(destination, filename)}, cache is still valid`
+			);
 		}
 
 		// Return the path to the cached image
-		return '/' + path.join('images', filename).replace(/\\/g, '/');
+		return '/' + pathModule.join('images', filename).replace(/\\/g, '/');
 	} catch (error) {
 		console.error(`Image caching error for ${url}:`, error);
 		throw error;
