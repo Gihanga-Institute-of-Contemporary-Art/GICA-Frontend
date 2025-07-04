@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { isFooterActive } from '$lib/stores/footerStore';
+	import { navItems, initializeNavigation } from '$lib/stores/navStore';
+	import { onMount } from 'svelte';
 
 	interface SubmenuItem {
 		label: string;
@@ -20,6 +22,11 @@
 	}
 
 	let { submenu = [], submenuRows = [], onSubmenuSelect }: Props = $props();
+
+	// Initialize navigation on mount
+	onMount(() => {
+		initializeNavigation();
+	});
 
 	function isActive(href: string): boolean {
 		if (href === '/') {
@@ -61,27 +68,13 @@
 <nav>
 	<div class="top-nav">
 		<ul>
-			<li><a href="/" class={getLinkClass('/')} onclick={handleNavLinkClick}><h5>Home</h5></a></li>
-			<li>
-				<a href="/exhibitions" class={getLinkClass('/exhibitions')} onclick={handleNavLinkClick}
-					><h5>Exhibitions</h5></a
-				>
-			</li>
-			<li>
-				<a href="/programme" class={getLinkClass('/programme')} onclick={handleNavLinkClick}
-					><h5>Programme</h5></a
-				>
-			</li>
-			<li>
-				<a href="/contributors" class={getLinkClass('/contributors')} onclick={handleNavLinkClick}
-					><h5>Contributors</h5></a
-				>
-			</li>
-			<li>
-				<a href="/visit" class={getLinkClass('/visit')} onclick={handleNavLinkClick}
-					><h5>Visit us</h5></a
-				>
-			</li>
+			{#each $navItems as navItem}
+				<li>
+					<a href={navItem.href} class={getLinkClass(navItem.href)} onclick={handleNavLinkClick}>
+						<h5>{navItem.title}</h5>
+					</a>
+				</li>
+			{/each}
 		</ul>
 		<section class="lang">
 			<button>

@@ -133,7 +133,7 @@ async function cacheCollectionImages<
  * Cache all images in detail pages (individual announcement or program)
  */
 async function cacheDetailImages<
-	T extends { id: string; cover: MediaCover; text: ContentBlock[] | string }
+	T extends { id: string; cover: MediaCover; text?: ContentBlock[] | string }
 >(collectionKey: string): Promise<void> {
 	const collection = getStaticData<{ children: Array<{ id: string }> }>(collectionKey);
 

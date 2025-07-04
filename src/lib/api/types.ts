@@ -1,9 +1,9 @@
 export interface Contributor {
 	id: string;
 	title: string;
-	text: string;
+	role: string;
+	bio: string;
 	cover: MediaCover;
-	programs: Programme[];
 	socials: {
 		name: string;
 		url: string;
@@ -13,7 +13,6 @@ export interface Contributor {
 export interface Contributors {
 	id: string;
 	title: string;
-	text: ContentBlock[];
 	children: Contributor[];
 }
 export interface Programme {
@@ -42,7 +41,11 @@ export interface Home {
 	headline: string;
 	about: ContentBlock[];
 	carousel: MediaCover[];
-	pages: string[];
+	pages: {
+		title: string;
+		slug: string;
+		description: string;
+	};
 }
 
 interface SrcSet {
