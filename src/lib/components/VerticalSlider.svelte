@@ -1,9 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { MediaCover } from '$lib/api/types';
 
-	const imageCount = 10;
+	interface Props {
+		images: MediaCover[];
+	}
+
+	let { images }: Props = $props();
+
 	const timePerImage = 20; // seconds per image
-	const animationDuration = imageCount * timePerImage;
+	const imageCount = $derived(images.length);
+	const animationDuration = $derived(imageCount * timePerImage);
 
 	let isPaused = $state(false);
 	let sliderUl: HTMLUListElement;
@@ -20,10 +27,10 @@
 	// Preload images for better performance
 	onMount(() => {
 		const preloadImages = () => {
-			for (let i = 0; i < imageCount; i++) {
+			images.forEach((image) => {
 				const img = new Image();
-				img.src = `https://picsum.photos/600/400?random=${i}`;
-			}
+				img.src = image.url;
+			});
 		};
 
 		preloadImages();
@@ -48,15 +55,25 @@
 		bind:this={sliderUl}
 	>
 		<!-- First set of images -->
-		{#each Array(imageCount) as _, index}
+		{#each images as image, index}
 			<li>
-				<img src={`https://picsum.photos/600/400?random=${index}`} alt="Random Image {index + 1}" />
+				<img
+					src={image.url}
+					alt={image.alt || `Gallery Image ${index + 1}`}
+					width={image.width}
+					height={image.height}
+				/>
 			</li>
 		{/each}
 		<!-- Duplicate set for seamless looping -->
-		{#each Array(imageCount) as _, index}
+		{#each images as image, index}
 			<li>
-				<img src={`https://picsum.photos/600/400?random=${index}`} alt="Random Image {index + 1}" />
+				<img
+					src={image.url}
+					alt={image.alt || `Gallery Image ${index + 1}`}
+					width={image.width}
+					height={image.height}
+				/>
 			</li>
 		{/each}
 	</ul>
@@ -163,6 +180,7 @@
 		height: 100%;
 		background-color: white;
 		mix-blend-mode: multiply;
+		border-radius: var(--radius-xl);
 		contain: layout style paint; /* CSS containment for performance */
 	}
 

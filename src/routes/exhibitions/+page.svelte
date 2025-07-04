@@ -16,7 +16,6 @@
 			</p>
 		</article>
 	</section>
-	<Footer />
 </main>
 
 <style>

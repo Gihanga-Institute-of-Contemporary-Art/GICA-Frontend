@@ -72,8 +72,24 @@ function updateCSSVariables(): void {
 	document.documentElement.style.setProperty('--font-color-primary', contrastColor);
 }
 
-export { updateCSSVariables };
+function updateScopedColors(element: HTMLElement): void {
+	const currentTime = getTimeOfDayFloat();
+	const bgColor = getInterpolatedColor(currentTime);
+	const contrastColor = getContrastingColor(bgColor);
 
-// // Initial run and periodic updates
-// updateCSSVariables();
-// setInterval(updateCSSVariables, 10 * 60 * 1000); // every 10 minutes
+	element.style.setProperty('--color-primary-light', bgColor);
+	element.style.setProperty('--font-color-primary', contrastColor);
+}
+
+function getCurrentColors(): { backgroundColor: string; textColor: string } {
+	const currentTime = getTimeOfDayFloat();
+	const bgColor = getInterpolatedColor(currentTime);
+	const contrastColor = getContrastingColor(bgColor);
+
+	return {
+		backgroundColor: bgColor,
+		textColor: contrastColor
+	};
+}
+
+export { updateCSSVariables, updateScopedColors, getCurrentColors };

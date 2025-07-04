@@ -127,7 +127,7 @@
 
 		<div class="modal-middle">
 			{#if programme.cover}
-				<img src={programme.cover} alt={programme.title} class="programme-cover" />
+				<img src={programme.cover.url} alt={programme.title} class="programme-cover" />
 			{/if}
 
 			<p>
@@ -208,7 +208,7 @@
 		width: 100%;
 		height: 200px;
 		object-fit: cover;
-		border-radius: 4px;
+		border-radius: var(--radius-xl);
 		margin-bottom: 1.5rem;
 	}
 

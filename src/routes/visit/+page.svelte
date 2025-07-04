@@ -40,7 +40,6 @@
 			</div>
 		</div>
 	</section>
-	<Footer />
 </main>
 
 <style>

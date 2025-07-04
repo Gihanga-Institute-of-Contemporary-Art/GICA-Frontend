@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Footer from '$lib/components/Footer.svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import ProgrammeModal from '$lib/components/ProgrammeModal.svelte';
 	import type { Programme } from '$lib/api/types';
@@ -35,6 +34,10 @@
 		{
 			items: typeSubmenu,
 			onSelect: (value: string) => {
+				// Close modal if open
+				if (isModalOpen) {
+					closeModal();
+				}
 				// Toggle logic: if already selected, deselect it
 				selectedFilter = selectedFilter === value ? null : value;
 				scrollToProgrammes();
@@ -43,6 +46,10 @@
 		{
 			items: timeSubmenu,
 			onSelect: (value: string) => {
+				// Close modal if open
+				if (isModalOpen) {
+					closeModal();
+				}
 				// Toggle logic: if already selected, deselect it
 				selectedTimeFilter = selectedTimeFilter === value ? null : value;
 				scrollToProgrammes();
@@ -199,7 +206,6 @@
 			canNavigateNext={selectedProgrammeIndex < filteredProgrammes.length - 1}
 		/>
 	{/if}
-	<Footer />
 </main>
 
 <style>
@@ -241,6 +247,7 @@
 		cursor: pointer;
 		text-decoration: none;
 		text-transform: uppercase;
+		border-radius: var(--radius-xl);
 		color: inherit;
 		width: 100%;
 	}
@@ -262,7 +269,19 @@
 		aspect-ratio: 1;
 		background-size: cover;
 		background-position: center;
+		border-radius: var(--radius-xl);
 		overflow: hidden;
+	}
+
+	.programme-image::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 1;
 	}
 
 	.programme-overlay {
@@ -279,6 +298,7 @@
 		padding: 1.5rem;
 		color: white;
 		font-size: var(--font-size-lg);
+		z-index: 2;
 	}
 
 	.programme-title {

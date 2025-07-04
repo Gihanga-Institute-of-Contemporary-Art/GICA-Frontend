@@ -1,7 +1,8 @@
 <script lang="ts">
+	import Footer from '../lib/components/Footer.svelte';
 	import { onMount } from 'svelte';
 
-	import { updateCSSVariables } from '$lib/colorTime';
+	let { data, children } = $props();
 
 	let customCursor: HTMLDivElement;
 
@@ -44,9 +45,6 @@
 		// Start animation loop
 		animationId = requestAnimationFrame(animateCursor);
 
-		updateCSSVariables();
-		setInterval(updateCSSVariables, 10 * 60 * 1000); // every 10 minutes
-
 		return () => {
 			document.removeEventListener('mousemove', updateCursor);
 			document.removeEventListener('mouseleave', hideCursor);
@@ -61,7 +59,9 @@
 <div class="custom-cursor" bind:this={customCursor}></div>
 
 <!-- Page content -->
-<slot />
+{@render children()}
+
+<Footer headline={data.home.headline} about={data.home.about} />
 
 <style>
 	.custom-cursor {

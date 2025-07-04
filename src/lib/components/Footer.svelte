@@ -1,12 +1,18 @@
 <script lang="ts">
-	let { isActive = $bindable(false) } = $props();
+	import type { ContentBlock, TextContent } from '$lib/api/types';
+	import { isFooterActive } from '$lib/stores/footerStore';
+
+	let { headline, about } = $props<{
+		headline: string;
+		about: ContentBlock[];
+	}>();
 
 	function toggleFooter() {
-		isActive = !isActive;
+		isFooterActive.update((active) => !active);
 	}
 </script>
 
-<footer class:active={isActive}>
+<footer class:active={$isFooterActive}>
 	<div class="content">
 		<div
 			class="headline"
@@ -15,7 +21,7 @@
 			onclick={toggleFooter}
 			onkeydown={(e) => e.key === 'Enter' && toggleFooter()}
 		>
-			<div class="arrow-btn" class:flipped={isActive}>
+			<div class="arrow-btn" class:flipped={$isFooterActive}>
 				<svg
 					width="100%"
 					height="100%"
@@ -33,20 +39,15 @@
 				>
 			</div>
 			<div class="details">
-				<p class="title">GICA — A LIVING SPACE FOR ART, RESEARCH, AND COLLECTIVE IMAGINATION.</p>
-				{#if isActive}
+				<p class="title">{headline}</p>
+				{#if $isFooterActive}
 					<div class="sub-text">
-						<p>
-							Gihanga Institute of Contemporary Art (GICA) is a non-profit center for the arts in
-							Kigali, Rwanda. Founded on the belief that art can be a catalyst for social progress,
-							GICA is home to a library, exhibition spaces, platforms for performance and
-							contemporary theatre, screening room, studio, and an artist residency. Working from
-							Kigali as a nexus of contemporary art and intellectual discourse, GICA aims to elevate
-							Rwanda's artistic landscape, opening new possibilities through thoughtfully curated,
-							high-quality exhibition spaces, collaborative platforms, and innovative educational
-							programs. The institute aims to unite, support, and propel the cultural community in
-							Rwanda, as a living space for art, research, and shared possibility.
-						</p>
+						{#each about as block}
+							{#if block.type === 'text'}
+								{@const textContent = block.content as TextContent}
+								{@html textContent.text}
+							{/if}
+						{/each}
 					</div>
 				{/if}
 			</div>
@@ -77,7 +78,9 @@
 
 	footer.active {
 		height: 99vh;
+		display: block;
 		/* padding-block-start: var(--nav-height); */
+		padding-top: var(--nav-height);
 		background: linear-gradient(0deg, rgba(1, 21, 0, 1) 70%, rgba(255, 255, 0, 0) 92%);
 	}
 
@@ -107,9 +110,10 @@
 	.details .title {
 		font-size: var(--font-size-lg);
 		font-family: var(--font-secondary);
+		text-transform: uppercase;
 	}
 
-	.details .sub-text p {
+	.details .sub-text {
 		font-size: var(--font-size-xl);
 	}
 

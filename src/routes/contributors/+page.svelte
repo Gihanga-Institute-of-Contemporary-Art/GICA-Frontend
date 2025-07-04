@@ -57,7 +57,6 @@
 			{/each}
 		</article>
 	</section>
-	<Footer />
 </main>
 
 <style>

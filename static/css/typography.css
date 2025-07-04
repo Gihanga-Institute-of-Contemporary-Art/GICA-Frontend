@@ -1,31 +1,31 @@
 /* Font face declarations */
 @font-face {
-	font-family: 'Ivory Mono LL Trial Web';
-	src: url('/fonts/IvoryMonoLLTrialWeb-Regular.woff2') format('woff2');
+	font-family: 'Ivory Mono LL';
+	src: url('/fonts/IvoryMonoLLSub-Regular.woff2') format('woff2');
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Ivory Mono LL Trial Web';
-	src: url('/fonts/IvoryMonoLLTrialWeb-Italic.woff2') format('woff2');
+	font-family: 'Ivory Mono LL';
+	src: url('/fonts/IvoryMonoLLWeb-Regular.woff2') format('woff2');
 	font-weight: 400;
 	font-style: italic;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Ivory LL Trial Web';
-	src: url('/fonts/IvoryLLTrialWeb-Italic.woff2') format('woff2');
+	font-family: 'Ivory LL';
+	src: url('static/fonts/IvoryLLWeb-Regular.woff2') format('woff2');
 	font-weight: 400;
 	font-style: italic;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Ivory LL Trial Web';
-	src: url('/fonts/IvoryLLTrialWeb-Regular.woff2') format('woff2');
+	font-family: 'Ivory LL';
+	src: url('/fonts/IvoryLLSub-Regular.woff2') format('woff2');
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
@@ -33,8 +33,8 @@
 
 /* Typography variables */
 :root {
-	--font-primary: 'Ivory LL Trial Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	--font-secondary: 'Ivory Mono LL Trial Web', 'Courier New', Monaco, 'Lucida Console', monospace;
+	--font-primary: 'Ivory LL', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--font-secondary: 'Ivory Mono LL', 'Courier New', Monaco, 'Lucida Console', monospace;
 
 	/* Font sizes using a scale approach */
 	--font-size-base: 0.875rem; /* Smaller base size for mobile */

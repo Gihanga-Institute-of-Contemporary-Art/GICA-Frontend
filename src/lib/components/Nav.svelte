@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { isFooterActive } from '$lib/stores/footerStore';
 
 	interface SubmenuItem {
 		label: string;
@@ -51,18 +52,36 @@
 	function handleSubmenuRowClick(row: SubmenuRow, item: SubmenuItem) {
 		row.onSelect(item.value);
 	}
+
+	function handleNavLinkClick() {
+		isFooterActive.set(false);
+	}
 </script>
 
 <nav>
 	<div class="top-nav">
 		<ul>
-			<li><a href="/" class={getLinkClass('/')}><h5>Home</h5></a></li>
-			<li><a href="/exhibitions" class={getLinkClass('/exhibitions')}><h5>Exhibitions</h5></a></li>
-			<li><a href="/programme" class={getLinkClass('/programme')}><h5>Programme</h5></a></li>
+			<li><a href="/" class={getLinkClass('/')} onclick={handleNavLinkClick}><h5>Home</h5></a></li>
 			<li>
-				<a href="/contributors" class={getLinkClass('/contributors')}><h5>Contributors</h5></a>
+				<a href="/exhibitions" class={getLinkClass('/exhibitions')} onclick={handleNavLinkClick}
+					><h5>Exhibitions</h5></a
+				>
 			</li>
-			<li><a href="/visit" class={getLinkClass('/visit')}><h5>Visit us</h5></a></li>
+			<li>
+				<a href="/programme" class={getLinkClass('/programme')} onclick={handleNavLinkClick}
+					><h5>Programme</h5></a
+				>
+			</li>
+			<li>
+				<a href="/contributors" class={getLinkClass('/contributors')} onclick={handleNavLinkClick}
+					><h5>Contributors</h5></a
+				>
+			</li>
+			<li>
+				<a href="/visit" class={getLinkClass('/visit')} onclick={handleNavLinkClick}
+					><h5>Visit us</h5></a
+				>
+			</li>
 		</ul>
 		<section class="lang">
 			<button>
@@ -104,7 +123,7 @@
 		position: fixed;
 		top: 0;
 		width: 100%;
-		z-index: 1000;
+		z-index: 1002;
 		height: var(--nav-height);
 		align-items: start;
 		background: var(--color-primary);

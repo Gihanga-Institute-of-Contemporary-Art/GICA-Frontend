@@ -3,14 +3,14 @@
 @import './typography.css';
 
 :root {
-	/* Color variables */
+	/* Color variables - Static defaults */
 	--color-primary: rgb(188, 146, 0);
-	--color-primary-light: #d5c593;
+	--color-primary-light: #d5c593; /* Default static color */
 	--color-primary-mid: rgb(96, 87, 0);
 	--color-primary-dark: rgb(55, 56, 0);
 	--color-secondary: #00d000;
 
-	--font-color-primary: rgb(188, 146, 0);
+	--font-color-primary: rgb(188, 146, 0); /* Default static color */
 	--font-color-dark: rgb(26, 36, 0);
 	--font-color-mid: rgb(96, 87, 0);
 	--font-color-inactive: rgb(55, 56, 0);
@@ -37,10 +37,11 @@
 	--space-16: 4rem;
 
 	/* Border radius */
-	--radius-sm: 0.125rem;
-	--radius-md: 0.25rem;
-	--radius-lg: 0.5rem;
-	--radius-xl: 1rem;
+	--base-radius: 15px;
+	--radius-sm: calc(var(--base-radius) * 0.125); /* 1.875px */
+	--radius-md: calc(var(--base-radius) * 0.25); /* 3.75px */
+	--radius-lg: calc(var(--base-radius) * 0.5); /* 7.5px */
+	--radius-xl: calc(var(--base-radius) * 1); /* 15px */
 	--radius-full: 9999px;
 
 	/* Component heights */
@@ -53,7 +54,7 @@
 }
 
 body {
-	background-color: var(--color-primary-light);
+	background-color: #d5c593; /* Static default background */
 	color: var(--color-gray-900);
 	position: relative;
 }
