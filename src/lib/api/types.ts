@@ -10,29 +10,43 @@ export interface Contributor {
 	}[];
 }
 
+export interface Page {
+	title: string;
+	slug: string;
+	description: TextBlock;
+}
+
 export interface Contributors {
 	id: string;
 	title: string;
+	pages: Page[];
 	children: Contributor[];
+}
+
+export interface DateStructure {
+	date: string;
+	from_time: string;
+	to_time: string;
+	has_end_date: boolean;
+	end_date?: string;
+	end_from_time?: string;
+	end_to_time?: string;
 }
 export interface Programme {
 	id: string;
 	cover: MediaCover;
 	title: string;
-	description: string;
 	text: ContentBlock[];
-	type: string;
 	link: string;
-	date: string;
+	dates: DateStructure[];
 	contributors: Contributor[];
-	startTime: string;
-	endTime: string;
-	venue: string;
+	tags: string[];
 }
 
 export interface Programmes {
 	title: string;
 	text: ContentBlock[];
+	pages: Page[];
 	children: Programme[];
 }
 
@@ -41,11 +55,7 @@ export interface Home {
 	headline: string;
 	about: ContentBlock[];
 	carousel: MediaCover[];
-	pages: {
-		title: string;
-		slug: string;
-		description: string;
-	};
+	pages: Page[];
 }
 
 interface SrcSet {
@@ -75,6 +85,10 @@ export interface MediaCover {
 
 export interface TextContent {
 	text: string;
+}
+
+export interface TextBlock {
+	value: string;
 }
 
 // Update the ContentBlock definition to reflect the actual structure

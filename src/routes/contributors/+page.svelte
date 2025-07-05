@@ -11,19 +11,18 @@
 
 	// Type the contributors data properly
 	const contributors: Contributors = data.contributors;
-
-	console.log('Contributors data:', contributors);
+	const contributorsBlurb = contributors.pages.find((p) => p.slug === 'contributors') || {
+		title: '',
+		slug: '',
+		description: { value: '' }
+	};
 </script>
 
 <main>
 	<Nav />
 	<section class="content">
 		<article class="blurb">
-			<h1>{contributors.title}</h1>
-			<p>
-				If you like what we're doing and would like to donate, send us books for our free reading
-				room, please send us a note using the form in the next column. We will be in touch soon...
-			</p>
+			{@html contributorsBlurb.description.value}
 		</article>
 		<article class="collaborators">
 			<!-- List all contributors from API data -->
@@ -60,13 +59,6 @@
 		font-size: var(--font-size-xl);
 	}
 
-	section.content .blurb h1 {
-		font-family: var(--font-primary);
-		font-size: var(--font-size-xxl);
-		margin-bottom: var(--space-4);
-		text-transform: uppercase;
-	}
-
 	article.collaborators {
 		width: fit-content;
 		margin: 0 auto;
@@ -82,49 +74,9 @@
 		margin-bottom: var(--space-8);
 	}
 
-	.contributor.text-only {
-		display: block;
-		margin-bottom: var(--space-2);
-	}
-
-	.contributor.text-only .contributor-info {
-		width: 100%;
-	}
-
-	.contributor-image {
-		width: 60px;
-		height: 60px;
-		border-radius: 50%;
-		object-fit: cover;
-	}
-
-	.contributor-info {
-		flex: 1;
-	}
-
 	.collaborators span.name {
 		font-family: var(--font-primary);
 		text-transform: uppercase;
-	}
-
-	.collaborators .bio {
-		font-family: var(--font-secondary);
-	}
-
-	.socials {
-		margin-top: var(--space-2);
-		display: flex;
-		gap: var(--space-4);
-	}
-
-	.socials a {
-		font-size: var(--font-size-sm);
-		color: var(--color-secondary);
-		text-decoration: none;
-	}
-
-	.socials a:hover {
-		text-decoration: underline;
 	}
 
 	@media (max-width: 768px) {

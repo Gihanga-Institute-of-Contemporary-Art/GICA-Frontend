@@ -1,6 +1,11 @@
 <script lang="ts">
-	import type { Programme } from '$lib/api/types';
-	import { formatProgrammeDate } from '$lib/utils';
+	import type { Programme, TextContent } from '$lib/api/types';
+	import {
+		formatAllDateTimeRanges,
+		getTimeRange,
+		formatDateRange,
+		getPrimaryTime
+	} from '$lib/utils';
 
 	interface Props {
 		programme: Programme;
@@ -96,7 +101,7 @@
 		{/if}
 	</div>
 	<div class="modal-content" bind:this={modalContent} tabindex="-1">
-		<button class="modal-close" onclick={closeModal} aria-label="Close modal">
+		<button class="modal-close" onclick={closeModal} aria-label="Close modal" hidden>
 			<svg
 				viewBox="0 0 208 208"
 				version="1.1"
@@ -118,25 +123,48 @@
 		</button>
 
 		<div class="modal-left">
-			<h5>
-				{formatProgrammeDate(programme.date)}
-			</h5>
-			<h5>{programme.startTime}</h5>
-			<h5>{programme.venue}</h5>
+			<div class="programme-dates">
+				{#each formatAllDateTimeRanges(programme.dates) as dateTimeRange}
+					<div class="date-entry">
+						{#each dateTimeRange.split('\n') as line}
+							<h5 class="date-line">{line}</h5>
+						{/each}
+					</div>
+				{/each}
+			</div>
 		</div>
 
 		<div class="modal-middle">
-			{#if programme.cover}
+			{#if programme.cover.url}
 				<img src={programme.cover.url} alt={programme.title} class="programme-cover" />
 			{/if}
 
-			<p>
-				{@html programme.description || 'No description available for this programme.'}
-			</p>
+			{#each programme.text as block}
+				{#if block.type === 'text'}
+					{@const textContent = block.content as TextContent}
+					{@html textContent.text}
+				{/if}
+			{/each}
 		</div>
 
 		<div class="modal-right">
 			<h5 class="programme-title">{programme.title}</h5>
+
+			{#if programme.contributors && programme.contributors.length > 0}
+				<div class="programme-contributors">
+					<h6>Contributors:</h6>
+					<div class="contributors-list">
+						{#each programme.contributors as contributor}
+							<div class="contributor-item">
+								<span class="contributor-name">{contributor.title}</span>
+								{#if contributor.role}
+									<span class="contributor-role">({contributor.role})</span>
+								{/if}
+							</div>
+						{/each}
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </section>
@@ -170,6 +198,60 @@
 	.modal-left,
 	.modal-right {
 		padding-block-start: var(--space-8);
+	}
+
+	.programme-dates {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+		margin-bottom: var(--space-4);
+	}
+
+	.date-entry {
+		margin: 0;
+		padding: var(--space-2);
+		border-radius: var(--radius-sm);
+	}
+
+	.date-line {
+		text-transform: uppercase;
+	}
+
+	.date-line:first-child {
+		font-weight: 600;
+		margin-bottom: var(--space-1);
+	}
+
+	.programme-contributors {
+		margin-top: var(--space-4);
+	}
+
+	.programme-contributors h6 {
+		margin: 0 0 var(--space-2) 0;
+		font-size: var(--font-size-sm);
+		text-transform: uppercase;
+		color: var(--font-color-mid);
+	}
+
+	.contributors-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+
+	.contributor-item {
+		font-size: var(--font-size-sm);
+	}
+
+	.contributor-name {
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+
+	.contributor-role {
+		color: var(--font-color-mid);
+		font-style: italic;
+		margin-left: var(--space-1);
 	}
 
 	.modal-close {
@@ -206,14 +288,13 @@
 
 	.programme-cover {
 		width: 100%;
-		height: 200px;
+		height: 20rem;
 		object-fit: cover;
 		border-radius: var(--radius-xl);
 		margin-bottom: 1.5rem;
 	}
 
 	.programme-title {
-		color: #333;
 		text-transform: uppercase;
 	}
 

@@ -53,6 +53,10 @@
 	--content-width: 70vw;
 }
 
+[hidden] {
+	display: none !important;
+}
+
 body {
 	background-color: #d5c593; /* Static default background */
 	color: var(--color-gray-900);

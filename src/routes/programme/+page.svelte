@@ -1,10 +1,20 @@
 <script lang="ts">
 	import Nav from '$lib/components/Nav.svelte';
 	import ProgrammeModal from '$lib/components/ProgrammeModal.svelte';
-	import type { Programme } from '$lib/api/types';
-	import { formatProgrammeDate, getProgrammeStatus } from '$lib/utils';
+	import type { Programme, Programmes } from '$lib/api/types';
+	import type { PageData } from './$types';
+	import {
+		formatProgrammeDateFromArray,
+		getProgrammeStatusFromArray,
+		getTimeRange
+	} from '$lib/utils';
 
-	const { data } = $props();
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
+	const programmes: Programmes = data.programmes;
 
 	let isModalOpen = $state(false);
 	let selectedProgramme = $state<Programme | null>(null);
@@ -14,7 +24,14 @@
 	let programmesSection = $state<HTMLElement | undefined>(undefined);
 
 	// Get unique programme types and create submenu
-	const programmeTypes = Array.from(new Set(data.site.programmes.map((p) => p.type)));
+	const programmeTypes = Array.from(new Set(programmes.children.flatMap((p) => p.tags)));
+	const programmeBlurb = programmes.pages.find((p) => p.slug === 'programmes') || {
+		title: '',
+		slug: '',
+		description: {
+			value: ''
+		}
+	};
 
 	const typeSubmenu = $derived(
 		programmeTypes.map((type) => ({
@@ -60,16 +77,18 @@
 	// Filter programmes based on both selected filters
 	const filteredProgrammes = $derived(
 		(() => {
-			let filtered = data.site.programmes;
+			let filtered = programmes.children;
 
 			// Filter by type (only if a type is selected)
 			if (selectedFilter) {
-				filtered = filtered.filter((p) => p.type.toLowerCase() === selectedFilter);
+				filtered = filtered.filter((p) => p.tags.some((t) => t.toLowerCase() === selectedFilter));
 			}
 
 			// Filter by time (only if a time filter is selected)
 			if (selectedTimeFilter) {
-				filtered = filtered.filter((p) => getProgrammeStatus(p.date) === selectedTimeFilter);
+				filtered = filtered.filter(
+					(p) => getProgrammeStatusFromArray(p.dates) === selectedTimeFilter
+				);
 			}
 
 			return filtered;
@@ -144,34 +163,7 @@
 	{#if !isModalOpen}
 		<section class="content">
 			<article class="blurb">
-				<p>
-					LIBRARY: <br />
-					Named after the late visionary curator and thinker, the Koyo Kouoh library, is dedicated to
-					nurturing independent thought, innovative dialogue, and cross-disciplinary research. It aims
-					to inspire and foster critical engagement, and to support the development of artistic and intellectual
-					practices, honoring Koyo's legacy of empowering creative agency and cultural resilience.
-				</p>
-
-				<p>
-					WORKSHOPS: <br />
-					GICA's in-person and online workshops are designed to create space for collective learning,
-					exchange, and experimentation. Led by artists and cultural practitioners, they invite the public
-					to engage directly through making, discussion, and experimentation.
-				</p>
-
-				<p>
-					SCREENINGS: <br />
-					Our screening programme showcases film and moving image works that expand how we see, feel,
-					and think. From artist films and experimental shorts to documentaries and archival footage,
-					screenings offer a space for visual storytelling and critical engagement.
-				</p>
-
-				<p>
-					TALKS & EVENTS: <br />
-					Talks and events at GICA bring together artists, thinkers, and the public for conversation
-					and critical inquiry. Through lectures, roundtables, and informal gatherings, they invite critical
-					reflection on the evolving practices and ideas shaping contemporary art.
-				</p>
+				{@html programmeBlurb.description.value}
 			</article>
 			<article class="programmes" bind:this={programmesSection}>
 				<div class="programmes-grid">
@@ -179,14 +171,14 @@
 						<button type="button" class="programme-card" onclick={() => openModal(programme)}>
 							<div
 								class="programme-image"
-								style="background-color: var(--color-primary-mid); {programme.cover
-									? `background-image: url(${programme.cover})`
+								style="background-color: var(--color-primary-mid); {programme.cover?.url
+									? `background-image: url(${programme.cover.url})`
 									: ''}"
 							>
 								<div class="programme-overlay">
 									<h5 class="programme-title">{programme.title}</h5>
-									<h5 class="programme-date">{formatProgrammeDate(programme.date)}</h5>
-									<h5 class="programme-time">{programme.startTime}</h5>
+									<h5 class="programme-date">{formatProgrammeDateFromArray(programme.dates)}</h5>
+									<h5 class="programme-time">{getTimeRange(programme.dates)}</h5>
 								</div>
 							</div>
 						</button>
@@ -221,10 +213,6 @@
 	section.content .blurb {
 		font-family: var(--font-secondary);
 		font-size: var(--font-size-xl);
-	}
-
-	article.blurb p + p {
-		margin-top: var(--space-8);
 	}
 
 	article.programmes {
