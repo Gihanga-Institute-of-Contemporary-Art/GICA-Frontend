@@ -128,7 +128,7 @@
 				{#each formatAllDateTimeRanges(item.dates) as dateTimeRange}
 					<div class="date-entry">
 						{#each dateTimeRange.split('\n') as line}
-							<h5 class="date-line">{line}</h5>
+							<h4 class="date-line">{line}</h4>
 						{/each}
 					</div>
 				{/each}
@@ -136,6 +136,9 @@
 		</div>
 
 		<div class="modal-middle">
+			<!-- title -->
+			<h4 class="item-title">{item.title}</h4>
+
 			{#if item.cover?.url}
 				<img src={item.cover.url} alt={item.title} class="item-cover" />
 			{/if}
@@ -149,8 +152,6 @@
 		</div>
 
 		<div class="modal-right">
-			<h5 class="item-title">{item.title}</h5>
-
 			{#if isProgramme(item) && item.contributors && item.contributors.length > 0}
 				<div class="item-contributors">
 					<h6>Contributors:</h6>

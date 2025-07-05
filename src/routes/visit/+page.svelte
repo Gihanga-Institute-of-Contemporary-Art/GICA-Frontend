@@ -10,9 +10,6 @@
 	let { data }: Props = $props();
 	const visit: Visit = data.visit;
 
-	console.log('Visit data:', visit);
-
-	// Format the opening hours
 	const formattedHours = formatOpeningHours(visit.hours || []);
 </script>
 

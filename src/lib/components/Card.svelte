@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Programme, Exhibition } from '$lib/api/types';
-	import { formatProgrammeDateFromArray, getTimeRange } from '$lib/utils';
+	// import { formatProgrammeDateFromArray, getTimeRange } from '$lib/utils';
 
 	interface Props {
 		item: Programme | Exhibition;
@@ -8,6 +8,11 @@
 	}
 
 	const { item, onClick }: Props = $props();
+	// Type guard to check if item is a Programme
+	function isProgramme(item: Programme | Exhibition): item is Programme {
+		return 'contributors' in item;
+	}
+	const tags = isProgramme(item) ? item.tags : [];
 </script>
 
 <button type="button" class="card" onclick={onClick}>
@@ -18,9 +23,19 @@
 			: ''}"
 	>
 		<div class="card-overlay">
-			<h5 class="card-title">{item.title}</h5>
-			<h5 class="card-date">{formatProgrammeDateFromArray(item.dates)}</h5>
-			<h5 class="card-time">{getTimeRange(item.dates)}</h5>
+			<!-- show Tags if type is 'programme' -->
+			{#if isProgramme(item) && tags.length > 0}
+				<div class="tags">
+					{#each tags as tag}
+						<p class="tag">{tag}</p>
+					{/each}
+				</div>
+			{/if}
+			<div class="title">
+				<h5 class="card-title">{item.title}</h5>
+			</div>
+			<!-- <h5 class="card-date">{formatProgrammeDateFromArray(item.dates)}</h5> -->
+			<!-- <h5 class="card-time">{getTimeRange(item.dates)}</h5> -->
 		</div>
 	</div>
 </button>
@@ -79,10 +94,10 @@
 		bottom: 0;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: start;
 		align-items: center;
 		text-align: center;
-		padding: 1.5rem;
+		padding: var(--space-4);
 		color: white;
 		font-size: var(--font-size-lg);
 		z-index: 2;
@@ -93,7 +108,19 @@
 		line-height: 1.3;
 	}
 
-	.card-date {
-		margin-bottom: 0.25rem;
+	.card-overlay .tags {
+		display: flex;
+		width: 100%;
+		height: fit-content;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		text-align: left;
+		font-size: var(--font-size-sm);
+	}
+
+	.card-overlay .title {
+		height: 100%;
+		display: flex;
+		align-items: center;
 	}
 </style>
