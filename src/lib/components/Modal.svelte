@@ -140,7 +140,12 @@
 			<h4 class="item-title">{item.title}</h4>
 
 			{#if item.cover?.url}
-				<img src={item.cover.url} alt={item.title} class="item-cover" />
+				<figure>
+					<img src={item.cover.url} alt={item.title} class="item-cover" />
+					{#if item.cover.caption}
+						<figcaption>{item.cover.caption}</figcaption>
+					{/if}
+				</figure>
 			{/if}
 
 			{#each item.text as block}
@@ -190,7 +195,7 @@
 		outline: none;
 	}
 
-	.modal-content h5 {
+	.modal-content h4 {
 		text-transform: uppercase;
 	}
 
@@ -295,6 +300,7 @@
 
 	.item-title {
 		text-transform: uppercase;
+		margin-bottom: var(--space-4);
 	}
 
 	.modal-nav {
