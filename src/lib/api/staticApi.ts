@@ -20,12 +20,12 @@ export async function preloadAllData(): Promise<void> {
 	try {
 		const [homeData, programsData, contributorsData] = await Promise.all([
 			fetchApi<Home>('home'),
-			fetchApi<Programmes>('programs'),
+			fetchApi<Programmes>('programmes'),
 			fetchApi<Contributors>('contributors')
 		]);
 
 		staticData.set('home', homeData);
-		staticData.set('programs', programsData);
+		staticData.set('programmes', programsData);
 		staticData.set('contributors', contributorsData);
 
 		const programPromises = programsData.children.map((program) =>
@@ -41,9 +41,9 @@ export async function preloadAllData(): Promise<void> {
 		// Process and cache all images after data is loaded
 		await Promise.all([
 			cacheHomeImages(),
-			cacheCollectionImages<Programmes>('programs'),
+			cacheCollectionImages<Programmes>('programmes'),
 			cacheCollectionImages<Contributors>('contributors'),
-			cacheDetailImages<Programme>('programs'),
+			cacheDetailImages<Programme>('programmes'),
 			cacheDetailImages<Contributor>('contributors')
 		]);
 
