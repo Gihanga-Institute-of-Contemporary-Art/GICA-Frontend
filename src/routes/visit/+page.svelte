@@ -90,6 +90,10 @@
 		gap: var(--space-8);
 	}
 
+	.middle .images img {
+		border-radius: var(--radius-xl);
+	}
+
 	address {
 		font-style: normal;
 	}
