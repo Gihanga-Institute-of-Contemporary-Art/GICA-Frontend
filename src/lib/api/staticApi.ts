@@ -3,10 +3,10 @@ import {
 	type Home,
 	type Visit,
 	type Programmes,
-	type Programme,
+	// type Programme,
 	type Exhibitions,
-	type Exhibition,
-	type Contributor,
+	// type Exhibition,
+	// type Contributor,
 	type Contributors,
 	type ContentBlock,
 	type MediaCover
@@ -37,19 +37,19 @@ export async function preloadAllData(): Promise<void> {
 		staticData.set('exhibitions', exhibitionData);
 		staticData.set('contributors', contributorsData);
 
-		const programPromises = programsData.children.map((program) =>
-			fetchApi<Programme>(program.id).then((data) => staticData.set(program.id, data))
-		);
+		// const programPromises = programsData.children.map((program) =>
+		// 	fetchApi<Programme>(program.id).then((data) => staticData.set(program.id, data))
+		// );
 
-		const exhibitionPromises = exhibitionData.children.map((exhibition) =>
-			fetchApi<Exhibition>(exhibition.id).then((data) => staticData.set(exhibition.id, data))
-		);
+		// const exhibitionPromises = exhibitionData.children.map((exhibition) =>
+		// 	fetchApi<Exhibition>(exhibition.id).then((data) => staticData.set(exhibition.id, data))
+		// );
 
-		const contributorPromises = contributorsData.children.map((contributor) =>
-			fetchApi<Contributor>(contributor.id).then((data) => staticData.set(contributor.id, data))
-		);
+		// const contributorPromises = contributorsData.children.map((contributor) =>
+		// 	fetchApi<Contributor>(contributor.id).then((data) => staticData.set(contributor.id, data))
+		// );
 
-		await Promise.all([...programPromises, ...exhibitionPromises, ...contributorPromises]);
+		// await Promise.all([...programPromises, ...exhibitionPromises, ...contributorPromises]);
 
 		// Process and cache all images after data is loaded
 		await Promise.all([
@@ -57,10 +57,10 @@ export async function preloadAllData(): Promise<void> {
 			cacheVisitImages(),
 			cacheCollectionImages<Programmes>('programmes'),
 			cacheCollectionImages<Exhibitions>('exhibitions'),
-			cacheCollectionImages<Contributors>('contributors'),
-			cacheDetailImages<Programme>('programmes'),
-			cacheDetailImages<Exhibition>('exhibitions'),
-			cacheDetailImages<Contributor>('contributors')
+			cacheCollectionImages<Contributors>('contributors')
+			// cacheDetailImages<Programme>('programmes'),
+			// cacheDetailImages<Exhibition>('exhibitions'),
+			// cacheDetailImages<Contributor>('contributors')
 		]);
 
 		console.log('Successfully preloaded all static data with cached images');
@@ -137,7 +137,7 @@ async function cacheVisitImages(): Promise<void> {
 }
 
 /**
- * Cache all images in collection listings (announcements, programs)
+ * Cache all images in parent collection children
  */
 async function cacheCollectionImages<
 	T extends { children: Array<{ cover: MediaCover }>; text?: ContentBlock[] }
@@ -163,9 +163,9 @@ async function cacheCollectionImages<
 }
 
 /**
- * Cache all images in detail pages (individual announcement or program)
+ * Cache all images in individual collection page
  */
-async function cacheDetailImages<
+export async function cacheDetailImages<
 	T extends { id: string; cover: MediaCover; text?: ContentBlock[] | string }
 >(collectionKey: string): Promise<void> {
 	const collection = getStaticData<{ children: Array<{ id: string }> }>(collectionKey);
