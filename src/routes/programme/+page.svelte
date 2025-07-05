@@ -48,32 +48,42 @@
 		{ label: 'Upcoming', value: 'upcoming', isActive: selectedTimeFilter === 'upcoming' }
 	]);
 
-	const submenuRows = $derived([
-		{
-			items: typeSubmenu,
-			onSelect: (value: string) => {
-				// Close modal if open
-				if (isModalOpen) {
-					closeModal();
+	const submenuRows = $derived(
+		(() => {
+			const rows = [
+				{
+					items: typeSubmenu,
+					onSelect: (value: string) => {
+						// Close modal if open
+						if (isModalOpen) {
+							closeModal();
+						}
+						// Toggle logic: if already selected, deselect it
+						selectedFilter = selectedFilter === value ? null : value;
+						scrollToProgrammes();
+					}
 				}
-				// Toggle logic: if already selected, deselect it
-				selectedFilter = selectedFilter === value ? null : value;
-				scrollToProgrammes();
+			];
+
+			// Only show time submenu if there are programmes
+			if (programmes.children && programmes.children.length > 0) {
+				rows.push({
+					items: timeSubmenu,
+					onSelect: (value: string) => {
+						// Close modal if open
+						if (isModalOpen) {
+							closeModal();
+						}
+						// Toggle logic: if already selected, deselect it
+						selectedTimeFilter = selectedTimeFilter === value ? null : value;
+						scrollToProgrammes();
+					}
+				});
 			}
-		},
-		{
-			items: timeSubmenu,
-			onSelect: (value: string) => {
-				// Close modal if open
-				if (isModalOpen) {
-					closeModal();
-				}
-				// Toggle logic: if already selected, deselect it
-				selectedTimeFilter = selectedTimeFilter === value ? null : value;
-				scrollToProgrammes();
-			}
-		}
-	]);
+
+			return rows;
+		})()
+	);
 
 	// Filter programmes based on both selected filters
 	const filteredProgrammes = $derived(

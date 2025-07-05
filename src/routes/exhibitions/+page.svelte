@@ -33,20 +33,29 @@
 		{ label: 'Upcoming', value: 'upcoming', isActive: selectedTimeFilter === 'upcoming' }
 	]);
 
-	const submenuRows = $derived([
-		{
-			items: timeSubmenu,
-			onSelect: (value: string) => {
-				// Close modal if open
-				if (isModalOpen) {
-					closeModal();
-				}
-				// Toggle logic: if already selected, deselect it
-				selectedTimeFilter = selectedTimeFilter === value ? null : value;
-				scrollToExhibitions();
+	const submenuRows = $derived(
+		(() => {
+			const rows = [];
+
+			// Only show time submenu if there are exhibitions
+			if (exhibitions.children && exhibitions.children.length > 0) {
+				rows.push({
+					items: timeSubmenu,
+					onSelect: (value: string) => {
+						// Close modal if open
+						if (isModalOpen) {
+							closeModal();
+						}
+						// Toggle logic: if already selected, deselect it
+						selectedTimeFilter = selectedTimeFilter === value ? null : value;
+						scrollToExhibitions();
+					}
+				});
 			}
-		}
-	]);
+
+			return rows;
+		})()
+	);
 
 	// Filter exhibitions based on time filter
 	const filteredExhibitions = $derived(
