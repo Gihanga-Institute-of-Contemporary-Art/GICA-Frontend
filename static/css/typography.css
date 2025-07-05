@@ -220,3 +220,7 @@ small {
 .no-margin-bottom {
 	margin-bottom: 0;
 }
+
+article p + p {
+	margin-top: var(--space-8);
+}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Nav from '$lib/components/Nav.svelte';
-	import ProgrammeModal from '$lib/components/ProgrammeModal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import Card from '$lib/components/Card.svelte';
 	import type { Programme, Programmes } from '$lib/api/types';
 	import type { PageData } from './$types';
 	import {
@@ -168,20 +169,7 @@
 			<article class="programmes" bind:this={programmesSection}>
 				<div class="programmes-grid">
 					{#each filteredProgrammes as programme}
-						<button type="button" class="programme-card" onclick={() => openModal(programme)}>
-							<div
-								class="programme-image"
-								style="background-color: var(--color-primary-mid); {programme.cover?.url
-									? `background-image: url(${programme.cover.url})`
-									: ''}"
-							>
-								<div class="programme-overlay">
-									<h5 class="programme-title">{programme.title}</h5>
-									<h5 class="programme-date">{formatProgrammeDateFromArray(programme.dates)}</h5>
-									<h5 class="programme-time">{getTimeRange(programme.dates)}</h5>
-								</div>
-							</div>
-						</button>
+						<Card item={programme} onClick={() => openModal(programme)} />
 					{/each}
 				</div>
 			</article>
@@ -189,11 +177,11 @@
 	{/if}
 
 	{#if isModalOpen && selectedProgramme}
-		<ProgrammeModal
-			programme={selectedProgramme}
+		<Modal
+			item={selectedProgramme}
 			{closeModal}
-			{navigateToPreviousProgramme}
-			{navigateToNextProgramme}
+			navigateToPreviousItem={navigateToPreviousProgramme}
+			navigateToNextItem={navigateToNextProgramme}
 			canNavigatePrevious={selectedProgrammeIndex > 0}
 			canNavigateNext={selectedProgrammeIndex < filteredProgrammes.length - 1}
 		/>
@@ -226,76 +214,6 @@
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		gap: 2rem;
-	}
-
-	.programme-card {
-		background: none;
-		border: none;
-		padding: 0;
-		cursor: pointer;
-		text-decoration: none;
-		text-transform: uppercase;
-		border-radius: var(--radius-xl);
-		color: inherit;
-		width: 100%;
-	}
-
-	.programme-card:hover {
-		outline: 2.5px solid var(--color-secondary);
-	}
-	.programme-card:hover .programme-overlay {
-		color: var(--color-secondary);
-	}
-
-	.programme-card:hover .programme-image {
-		background-color: transparent !important;
-	}
-
-	.programme-image {
-		position: relative;
-		width: 100%;
-		aspect-ratio: 1;
-		background-size: cover;
-		background-position: center;
-		border-radius: var(--radius-xl);
-		overflow: hidden;
-	}
-
-	.programme-image::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: rgba(0, 0, 0, 0.4);
-		z-index: 1;
-	}
-
-	.programme-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		padding: 1.5rem;
-		color: white;
-		font-size: var(--font-size-lg);
-		z-index: 2;
-	}
-
-	.programme-title {
-		margin-bottom: 0.5rem;
-		line-height: 1.3;
-	}
-
-	.programme-date {
-		margin-bottom: 0.25rem;
 	}
 
 	/* Responsive design */

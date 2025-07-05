@@ -1,6 +1,19 @@
 <script lang="ts">
-	import Footer from '$lib/components/Footer.svelte';
 	import Nav from '$lib/components/Nav.svelte';
+	import type { PageData } from './$types';
+	import type { Visit } from '$lib/api/types';
+	import { formatOpeningHours } from '$lib/utils';
+
+	interface Props {
+		data: PageData;
+	}
+	let { data }: Props = $props();
+	const visit: Visit = data.visit;
+
+	console.log('Visit data:', visit);
+
+	// Format the opening hours
+	const formattedHours = formatOpeningHours(visit.hours || []);
 </script>
 
 <main>
@@ -9,34 +22,47 @@
 		<div class="left">
 			<div class="hours">
 				<p class="title">Opening Hours</p>
-				<p>Monday to Friday: 10:00 AM - 6:00 PM</p>
-				<p>Saturday and Sunday: 11:00 AM - 5:00 PM</p>
-				<p>Closed on public holidays.</p>
+				{#if formattedHours}
+					{@html formattedHours
+						.split('\n')
+						.map((line) => `<p>${line}</p>`)
+						.join('')}
+				{:else}
+					<p>Hours not available</p>
+				{/if}
 			</div>
 			<div class="location">
 				<p class="title">Location</p>
-				<address>KN 14 St 28, Kimihurura Sector, Kimihurura, Kigali, Rwanda</address>
+				<address>{visit.address || 'Address not available'}</address>
 			</div>
 		</div>
 		<div class="middle">
 			<div class="images">
-				<img src="https://picsum.photos/600/400?random=1" alt="Random Contact 1" />
+				{#if visit.photography && visit.photography.length > 0}
+					{#each visit.photography as photo}
+						<img src={photo.url} alt={photo.alt || 'Gallery image'} />
+					{/each}
+				{/if}
 			</div>
 		</div>
 		<div class="right">
 			<div class="email">
 				<p class="title">Email</p>
-				<p>Contact: <a href="mailto:test@test.local">test@test.local</a></p>
+				<p>Contact: <a href="mailto:{visit.email}">{visit.email || 'Email not available'}</a></p>
 			</div>
 			<div class="social">
-				<p class="title">Instagram</p>
-				<ul>
-					<li>
-						<a href="https://www.instagram.com/gica.kigali/profilecard/" target="_blank"
-							>Instagram</a
-						>
-					</li>
-				</ul>
+				<p class="title">Social Media</p>
+				{#if visit.socials && visit.socials.length > 0}
+					<ul>
+						{#each visit.socials as social}
+							<li>
+								<a href={social.url} target="_blank">{social.platform}</a>
+							</li>
+						{/each}
+					</ul>
+				{:else}
+					<p>Social media links not available</p>
+				{/if}
 			</div>
 		</div>
 	</section>
@@ -69,9 +95,6 @@
 
 	address {
 		font-style: normal;
-	}
-
-	.content p {
 	}
 
 	p.title {

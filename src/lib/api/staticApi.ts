@@ -1,8 +1,11 @@
 import { fetchApi } from './client';
 import {
 	type Home,
+	type Visit,
 	type Programmes,
 	type Programme,
+	type Exhibitions,
+	type Exhibition,
 	type Contributor,
 	type Contributors,
 	type ContentBlock,
@@ -18,32 +21,45 @@ const staticData = new Map<string, unknown>();
  */
 export async function preloadAllData(): Promise<void> {
 	try {
-		const [homeData, programsData, contributorsData] = await Promise.all([
-			fetchApi<Home>('home'),
-			fetchApi<Programmes>('programmes'),
-			fetchApi<Contributors>('contributors')
-		]);
+		const [homeData, visitData, programsData, exhibitionData, contributorsData] = await Promise.all(
+			[
+				fetchApi<Home>('home'),
+				fetchApi<Visit>('visit'),
+				fetchApi<Programmes>('programmes'),
+				fetchApi<Exhibitions>('exhibitions'),
+				fetchApi<Contributors>('contributors')
+			]
+		);
 
 		staticData.set('home', homeData);
+		staticData.set('visit', visitData);
 		staticData.set('programmes', programsData);
+		staticData.set('exhibitions', exhibitionData);
 		staticData.set('contributors', contributorsData);
 
 		const programPromises = programsData.children.map((program) =>
 			fetchApi<Programme>(program.id).then((data) => staticData.set(program.id, data))
 		);
 
+		const exhibitionPromises = exhibitionData.children.map((exhibition) =>
+			fetchApi<Exhibition>(exhibition.id).then((data) => staticData.set(exhibition.id, data))
+		);
+
 		const contributorPromises = contributorsData.children.map((contributor) =>
 			fetchApi<Contributor>(contributor.id).then((data) => staticData.set(contributor.id, data))
 		);
 
-		await Promise.all([...programPromises, ...contributorPromises]);
+		await Promise.all([...programPromises, ...exhibitionPromises, ...contributorPromises]);
 
 		// Process and cache all images after data is loaded
 		await Promise.all([
 			cacheHomeImages(),
+			cacheVisitImages(),
 			cacheCollectionImages<Programmes>('programmes'),
+			cacheCollectionImages<Exhibitions>('exhibitions'),
 			cacheCollectionImages<Contributors>('contributors'),
 			cacheDetailImages<Programme>('programmes'),
+			cacheDetailImages<Exhibition>('exhibitions'),
 			cacheDetailImages<Contributor>('contributors')
 		]);
 
@@ -101,6 +117,23 @@ async function cacheHomeImages(): Promise<void> {
 	}
 
 	staticData.set('home', homeData);
+}
+
+// Cache all images in the visit page
+async function cacheVisitImages(): Promise<void> {
+	const visitData = getStaticData<Visit>('visit');
+
+	// Process cover image
+	if (visitData.photography?.length) {
+		visitData.photography = await Promise.all(
+			visitData.photography.map(async (item) => ({
+				...item,
+				cover: await cacheMediaImage(item)
+			}))
+		);
+	}
+
+	staticData.set('visit', visitData);
 }
 
 /**

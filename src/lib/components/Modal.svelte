@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Programme, TextContent } from '$lib/api/types';
+	import type { Programme, Exhibition, TextContent } from '$lib/api/types';
 	import {
 		formatAllDateTimeRanges,
 		getTimeRange,
@@ -8,24 +8,29 @@
 	} from '$lib/utils';
 
 	interface Props {
-		programme: Programme;
+		item: Programme | Exhibition;
 		closeModal: () => void;
-		navigateToPreviousProgramme: () => void;
-		navigateToNextProgramme: () => void;
+		navigateToPreviousItem: () => void;
+		navigateToNextItem: () => void;
 		canNavigatePrevious: boolean;
 		canNavigateNext: boolean;
 	}
 
 	const {
-		programme,
+		item,
 		closeModal,
-		navigateToPreviousProgramme,
-		navigateToNextProgramme,
+		navigateToPreviousItem,
+		navigateToNextItem,
 		canNavigatePrevious,
 		canNavigateNext
 	}: Props = $props();
 
 	let modalContent: HTMLDivElement | undefined;
+
+	// Type guard to check if item is a Programme
+	function isProgramme(item: Programme | Exhibition): item is Programme {
+		return 'contributors' in item;
+	}
 
 	$effect(() => {
 		// Scroll to top of the page content, accounting for nav height
@@ -41,13 +46,13 @@
 	});
 </script>
 
-<section class="programme-modal">
+<section class="modal">
 	<div class="modal-nav">
 		{#if canNavigatePrevious}
 			<button
 				class="nav-button nav-left"
-				onclick={navigateToPreviousProgramme}
-				aria-label="Previous programme"
+				onclick={navigateToPreviousItem}
+				aria-label="Previous item"
 			>
 				<svg
 					width="100%"
@@ -72,11 +77,7 @@
 			</button>
 		{/if}
 		{#if canNavigateNext}
-			<button
-				class="nav-button nav-right"
-				onclick={navigateToNextProgramme}
-				aria-label="Next programme"
-			>
+			<button class="nav-button nav-right" onclick={navigateToNextItem} aria-label="Next item">
 				<svg
 					width="100%"
 					height="100%"
@@ -123,8 +124,8 @@
 		</button>
 
 		<div class="modal-left">
-			<div class="programme-dates">
-				{#each formatAllDateTimeRanges(programme.dates) as dateTimeRange}
+			<div class="item-dates">
+				{#each formatAllDateTimeRanges(item.dates) as dateTimeRange}
 					<div class="date-entry">
 						{#each dateTimeRange.split('\n') as line}
 							<h5 class="date-line">{line}</h5>
@@ -135,11 +136,11 @@
 		</div>
 
 		<div class="modal-middle">
-			{#if programme.cover.url}
-				<img src={programme.cover.url} alt={programme.title} class="programme-cover" />
+			{#if item.cover?.url}
+				<img src={item.cover.url} alt={item.title} class="item-cover" />
 			{/if}
 
-			{#each programme.text as block}
+			{#each item.text as block}
 				{#if block.type === 'text'}
 					{@const textContent = block.content as TextContent}
 					{@html textContent.text}
@@ -148,13 +149,13 @@
 		</div>
 
 		<div class="modal-right">
-			<h5 class="programme-title">{programme.title}</h5>
+			<h5 class="item-title">{item.title}</h5>
 
-			{#if programme.contributors && programme.contributors.length > 0}
-				<div class="programme-contributors">
+			{#if isProgramme(item) && item.contributors && item.contributors.length > 0}
+				<div class="item-contributors">
 					<h6>Contributors:</h6>
 					<div class="contributors-list">
-						{#each programme.contributors as contributor}
+						{#each item.contributors as contributor}
 							<div class="contributor-item">
 								<span class="contributor-name">{contributor.title}</span>
 								{#if contributor.role}
@@ -170,13 +171,12 @@
 </section>
 
 <style>
-	.programme-modal {
+	.modal {
 		width: 100%;
 		height: calc(100% - var(--nav-height));
 		z-index: 1000;
 		display: flex;
 		justify-content: center;
-		/* padding-bottom: var(--space-16); */
 	}
 
 	.modal-content {
@@ -186,8 +186,6 @@
 		max-width: 75vw;
 		width: 100%;
 		column-gap: var(--space-8);
-		/* max-height: 80vh; */
-		/* overflow-y: auto; */
 		outline: none;
 	}
 
@@ -200,7 +198,7 @@
 		padding-block-start: var(--space-8);
 	}
 
-	.programme-dates {
+	.item-dates {
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-3);
@@ -222,11 +220,11 @@
 		margin-bottom: var(--space-1);
 	}
 
-	.programme-contributors {
+	.item-contributors {
 		margin-top: var(--space-4);
 	}
 
-	.programme-contributors h6 {
+	.item-contributors h6 {
 		margin: 0 0 var(--space-2) 0;
 		font-size: var(--font-size-sm);
 		text-transform: uppercase;
@@ -286,7 +284,7 @@
 		font-size: var(--font-size-lg);
 	}
 
-	.programme-cover {
+	.item-cover {
 		width: 100%;
 		height: 20rem;
 		object-fit: cover;
@@ -294,7 +292,7 @@
 		margin-bottom: 1.5rem;
 	}
 
-	.programme-title {
+	.item-title {
 		text-transform: uppercase;
 	}
 
@@ -345,7 +343,7 @@
 
 	/* Responsive design */
 	@media (max-width: 768px) {
-		.programme-modal {
+		.modal {
 			padding: 1rem;
 		}
 
@@ -362,7 +360,7 @@
 			padding: 0 1.5rem 1.5rem;
 		}
 
-		.programme-title {
+		.item-title {
 			font-size: 1.5rem;
 		}
 	}

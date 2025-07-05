@@ -50,6 +50,22 @@ export interface Programmes {
 	children: Programme[];
 }
 
+export interface Exhibition {
+	id: string;
+	title: string;
+	text: ContentBlock[];
+	dates: DateStructure[];
+	cover: MediaCover;
+	image: MediaCover[];
+}
+
+export interface Exhibitions {
+	title: string;
+	text: ContentBlock[];
+	pages: Page[];
+	children: Exhibition[];
+}
+
 export interface Home {
 	title: string;
 	headline: string;
@@ -89,6 +105,23 @@ export interface TextContent {
 
 export interface TextBlock {
 	value: string;
+}
+
+export interface Visit {
+	title: string;
+	address: string;
+	email: string;
+	socials: {
+		platform: string;
+		url: string;
+	}[];
+	photography: MediaCover[];
+	hours: {
+		day: string;
+		open: string;
+		close: string;
+	}[];
+	pages: Page[];
 }
 
 // Update the ContentBlock definition to reflect the actual structure

@@ -264,3 +264,112 @@ export function formatCompactDateTimeRange(dateStructure: DateStructure): string
 
 	return result;
 }
+
+/**
+ * Formats opening hours from API data to a readable format
+ * @param hours - Array of hour objects with day, open, and close times
+ * @returns Formatted hours string with ranges and closed days
+ */
+export function formatOpeningHours(hours: { day: string; open: string; close: string }[]): string {
+	if (!hours || hours.length === 0) return '';
+
+	// Define day order for proper sorting
+	const dayOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+	// Sort hours by day order
+	const sortedHours = hours.sort(
+		(a, b) => dayOrder.indexOf(a.day.toLowerCase()) - dayOrder.indexOf(b.day.toLowerCase())
+	);
+
+	// Group consecutive days with same hours
+	const groupedHours: string[] = [];
+	let currentGroup: { days: string[]; open: string; close: string } | null = null;
+
+	for (const hour of sortedHours) {
+		const formattedOpen = formatTime12Hour(hour.open);
+		const formattedClose = formatTime12Hour(hour.close);
+
+		if (
+			currentGroup &&
+			currentGroup.open === formattedOpen &&
+			currentGroup.close === formattedClose
+		) {
+			// Add to current group
+			currentGroup.days.push(capitalizeFirstLetter(hour.day));
+		} else {
+			// Finish previous group if exists
+			if (currentGroup) {
+				groupedHours.push(formatHourGroup(currentGroup));
+			}
+			// Start new group
+			currentGroup = {
+				days: [capitalizeFirstLetter(hour.day)],
+				open: formattedOpen,
+				close: formattedClose
+			};
+		}
+	}
+
+	// Add final group
+	if (currentGroup) {
+		groupedHours.push(formatHourGroup(currentGroup));
+	}
+
+	// Add closed days information
+	const openDays = hours.map((h) => h.day.toLowerCase());
+	const closedDays = dayOrder.filter((day) => !openDays.includes(day));
+
+	if (closedDays.length > 0) {
+		const formattedClosedDays = closedDays.map(capitalizeFirstLetter);
+		if (formattedClosedDays.length === 1) {
+			groupedHours.push(`Closed on ${formattedClosedDays[0]}`);
+		} else if (formattedClosedDays.length === 2) {
+			groupedHours.push(`Closed on ${formattedClosedDays.join(' and ')}`);
+		} else {
+			const lastDay = formattedClosedDays.pop();
+			groupedHours.push(`Closed on ${formattedClosedDays.join(', ')} and ${lastDay}`);
+		}
+	}
+
+	return groupedHours.join('\n');
+}
+
+/**
+ * Helper function to format a group of days with same hours
+ */
+function formatHourGroup(group: { days: string[]; open: string; close: string }): string {
+	const { days, open, close } = group;
+
+	if (days.length === 1) {
+		return `${days[0]}: ${open} - ${close}`;
+	} else if (days.length === 2) {
+		return `${days.join(' and ')}: ${open} - ${close}`;
+	} else {
+		// Check if it's a consecutive range
+		const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+		const dayIndices = days.map((day) => dayOrder.indexOf(day)).sort((a, b) => a - b);
+
+		// Check if consecutive
+		let isConsecutive = true;
+		for (let i = 1; i < dayIndices.length; i++) {
+			if (dayIndices[i] !== dayIndices[i - 1] + 1) {
+				isConsecutive = false;
+				break;
+			}
+		}
+
+		if (isConsecutive) {
+			return `${days[0]} to ${days[days.length - 1]}: ${open} - ${close}`;
+		} else {
+			const lastDay = days.pop();
+			return `${days.join(', ')} and ${lastDay}: ${open} - ${close}`;
+		}
+	}
+}
+
+/**
+ * Helper function to capitalize first letter of a string
+ */
+function capitalizeFirstLetter(str: string): string {
+	return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
