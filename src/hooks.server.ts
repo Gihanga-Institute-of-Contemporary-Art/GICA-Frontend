@@ -1,5 +1,5 @@
 // src/hooks.server.ts
-import { preloadAllData } from '$lib/api/staticApi';
+import { preloadAllData } from '$lib/api';
 import { building } from '$app/environment';
 import type { Handle, HandleServerError } from '@sveltejs/kit';
 

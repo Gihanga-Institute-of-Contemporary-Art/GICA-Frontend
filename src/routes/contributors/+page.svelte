@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Nav from '$lib/components/Nav.svelte';
-	import type { Contributors } from '$lib/api/types';
+	import type { Contributors } from '$lib/api/schemas/gicaSchema';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -11,19 +11,11 @@
 
 	// Type the contributors data properly
 	const contributors: Contributors = data.contributors;
-	const contributorsBlurb = contributors.pages.find((p) => p.slug === 'contributors') || {
-		title: '',
-		slug: '',
-		description: { value: '' }
-	};
 </script>
 
 <main>
 	<Nav />
 	<section class="content">
-		<article class="blurb">
-			{@html contributorsBlurb.description.value}
-		</article>
 		<article class="collaborators">
 			<!-- List all contributors from API data -->
 			{#if contributors.children && contributors.children.length > 0}
@@ -54,16 +46,10 @@
 		margin-block: var(--space-2);
 	}
 
-	section.content .blurb {
-		font-family: var(--font-primary);
-		font-size: var(--font-size-xl);
-	}
-
 	article.collaborators {
 		width: fit-content;
 		margin: 0 auto;
 		font-size: var(--font-size-lg);
-		padding-block-start: var(--space-16);
 		padding-block-end: calc(2 * var(--space-16));
 	}
 

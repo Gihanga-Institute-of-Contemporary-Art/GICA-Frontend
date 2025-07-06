@@ -1,4 +1,7 @@
-// place// Utility functions
+// Enhanced API Library
+export * from './api';
+
+// Utility functions
 export {
 	formatTime12Hour,
 	formatAllDateTimeRanges,
@@ -10,6 +13,8 @@ export {
 	formatDateRange,
 	getPrimaryTime
 } from './utils';
+
+// Components
 export { default as VerticalSlider } from './components/VerticalSlider.svelte';
 export { default as Nav } from './components/Nav.svelte';
 export { default as DuotoneFilter } from './components/DuotoneFilter.svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Nav from '$lib/components/Nav.svelte';
 	import type { PageData } from './$types';
-	import type { Visit } from '$lib/api/types';
+	import type { Visit } from '$lib/api/schemas/gicaSchema';
 	import { formatOpeningHours } from '$lib/utils';
 
 	interface Props {

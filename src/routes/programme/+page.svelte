@@ -2,7 +2,7 @@
 	import Nav from '$lib/components/Nav.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Card from '$lib/components/Card.svelte';
-	import type { Programme, Programmes } from '$lib/api/types';
+	import type { Programme, Programmes } from '$lib/api/schemas/gicaSchema';
 	import type { PageData } from './$types';
 	import {
 		formatProgrammeDateFromArray,
@@ -26,7 +26,7 @@
 
 	// Get unique programme types and create submenu
 	const programmeTypes = Array.from(new Set(programmes.children.flatMap((p) => p.tags)));
-	const programmeBlurb = programmes.pages.find((p) => p.slug === 'programmes') || {
+	const programmeBlurb = data.pages.find((p) => p.slug === 'programmes') || {
 		title: '',
 		slug: '',
 		description: {

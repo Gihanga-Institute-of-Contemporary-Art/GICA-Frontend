@@ -9,7 +9,6 @@ export interface NavItem {
 // Navigation configuration that can be easily modified
 const navConfig = [
 	{ title: 'Home', href: '/', slug: 'home' },
-	{ title: 'Exhibitions', href: '/exhibitions', slug: 'exhibitions' },
 	{ title: 'Programme', href: '/programme', slug: 'programme' },
 	{ title: 'Contributors', href: '/contributors', slug: 'contributors' },
 	{ title: 'Visit us', href: '/visit', slug: 'visit' }

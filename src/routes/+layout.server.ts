@@ -1,16 +1,30 @@
 export const prerender = true;
-import { getStaticData, fetchStaticData } from '$lib/api/staticApi';
 
-import type { Home } from '$lib/api/types';
-
-const development = import.meta.env.DEV === true;
+import { getHome } from '$lib/api/adapters/gicaAdapter';
+import type { Home } from '$lib/api/schemas/gicaSchema';
 
 export const load = async () => {
-	if (!development) {
-		const site = getStaticData<Home>('home');
-		return { pages: site.pages, home: site };
-	} else {
-		const site = await fetchStaticData<Home>('home');
-		return { pages: site.pages, home: site };
+	try {
+		const home = await getHome();
+
+		// Add pages to the result for layout navigation
+		return {
+			home,
+			pages: home.pages || []
+		};
+	} catch (error) {
+		console.error('Failed to load site data in layout:', error);
+
+		// Return fallback data
+		return {
+			home: {
+				title: 'GICA',
+				headline: '',
+				about: [],
+				carousel: [],
+				pages: []
+			} as Home,
+			pages: []
+		};
 	}
 };
