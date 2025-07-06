@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Programme, Exhibition, TextContent } from '$lib/api/types';
+	import type { Programme, TextContent } from '$lib/api/schemas/gicaSchema';
 	import {
 		formatAllDateTimeRanges,
 		getTimeRange,
@@ -8,7 +8,7 @@
 	} from '$lib/utils';
 
 	interface Props {
-		item: Programme | Exhibition;
+		item: Programme;
 		closeModal: () => void;
 		navigateToPreviousItem: () => void;
 		navigateToNextItem: () => void;
@@ -28,7 +28,7 @@
 	let modalContent: HTMLDivElement | undefined;
 
 	// Type guard to check if item is a Programme
-	function isProgramme(item: Programme | Exhibition): item is Programme {
+	function isProgramme(item: Programme): item is Programme {
 		return 'contributors' in item;
 	}
 
@@ -222,7 +222,6 @@
 	}
 
 	.date-line:first-child {
-		font-weight: 600;
 		margin-bottom: var(--space-1);
 	}
 
