@@ -1,0 +1,230 @@
+/* Font face declarations */
+@font-face {
+	font-family: 'Ivory Mono LL';
+	src: url('/fonts/IvoryMonoLLSub-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory Mono LL';
+	src: url('/fonts/IvoryMonoLLWeb-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory LL';
+	src: url('static/fonts/IvoryLLWeb-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ivory LL';
+	src: url('/fonts/IvoryLLSub-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Typography variables */
+:root {
+	--font-primary: 'Ivory LL', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--font-secondary: 'Ivory Mono LL', 'Courier New', Monaco, 'Lucida Console', monospace;
+
+	--font-size-small: 0.833rem; /* 10pt = 13.33px ÷ 16 */
+	--font-size-base: 1.25rem; /* 15pt = 20px ÷ 16 */
+	--font-size-large: 1.5rem; /* 18pt = 24px ÷ 16 */
+
+	/* Font sizes using a scale approach */
+	--font-size-base: 0.875rem; /* Smaller base size for mobile */
+	--font-scale-ratio: 1.3;
+	--font-size-xs: calc(var(--font-size-base) / var(--font-scale-ratio) / var(--font-scale-ratio));
+	--font-size-sm: calc(var(--font-size-base) / var(--font-scale-ratio));
+	--font-size-lg: calc(var(--font-size-base) * var(--font-scale-ratio));
+	--font-size-xl: calc(var(--font-size-base) * var(--font-scale-ratio) * var(--font-scale-ratio));
+	--font-size-2xl: calc(var(--font-size-xl) * var(--font-scale-ratio));
+	--font-size-3xl: calc(var(--font-size-2xl) * var(--font-scale-ratio));
+	--font-size-4xl: calc(var(--font-size-3xl) * var(--font-scale-ratio));
+	--font-size-5xl: calc(var(--font-size-4xl) * var(--font-scale-ratio));
+
+	/* Line heights */
+	--line-height-tight: 1.25;
+	--line-height-normal: 1.5;
+	--line-height-relaxed: 1.75;
+
+	/* Margins */
+	--margin-heading-top: 1rem; /* Smaller margins for mobile */
+	--margin-heading-bottom: 0.75rem;
+	--margin-paragraph: 0.75rem;
+
+	/* Font weights */
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 500; /* Using medium since semibold (600) isn't available */
+	--font-weight-bold: 500; /* Using medium since bold (700) isn't available */
+}
+
+/* Responsive typography - Tablet */
+@media (min-width: 768px) {
+	:root {
+		--font-size-base: 0.9375rem; /* Slightly larger for tablets */
+		--margin-heading-top: 1.25rem;
+		--margin-heading-bottom: 0.875rem;
+		--margin-paragraph: 0.875rem;
+	}
+}
+
+/* Responsive typography - Desktop */
+@media (min-width: 1024px) {
+	:root {
+		--font-size-base: 1rem; /* Full size for desktop */
+		--margin-heading-top: 1.5rem;
+		--margin-heading-bottom: 1rem;
+		--margin-paragraph: 1rem;
+	}
+}
+
+/* Responsive typography - Large screens */
+@media (min-width: 1440px) {
+	:root {
+		--font-size-base: 1.125rem; /* Slightly larger for big screens */
+	}
+}
+
+/* Base styles */
+body {
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-normal);
+	color: #333;
+}
+
+/* Heading styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	/* margin-top: var(--margin-heading-top); */
+	/* margin-bottom: var(--margin-heading-bottom); */
+	line-height: var(--line-height-tight);
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-secondary);
+}
+
+h1,
+.text-h1 {
+	font-size: var(--font-size-4xl);
+}
+h2,
+.text-h2 {
+	font-size: var(--font-size-3xl);
+}
+h3,
+.text-h3 {
+	font-size: var(--font-size-2xl);
+}
+h4,
+.text-h4 {
+	font-size: var(--font-size-xl);
+}
+h5,
+.text-h5 {
+	font-size: var(--font-size-lg);
+}
+h6,
+.text-h6 {
+	font-size: var(--font-size-base);
+}
+
+/* Shared heading utility class properties */
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6 {
+	line-height: var(--line-height-tight);
+	font-weight: var(--font-weight-semibold);
+	margin-top: var(--margin-heading-top);
+	margin-bottom: var(--margin-heading-bottom);
+}
+
+p,
+span,
+small {
+	margin-bottom: var(--margin-paragraph);
+	font-family: var(--font-primary);
+	line-height: 120%;
+}
+
+small {
+	font-size: var(--font-size-sm);
+}
+
+/* Text style utilities */
+.text-bold {
+	font-weight: var(--font-weight-bold);
+}
+.text-semibold {
+	font-weight: var(--font-weight-semibold);
+}
+.text-italic {
+	font-style: italic;
+}
+.text-primary {
+	font-family: var(--font-primary);
+}
+.text-secondary {
+	font-family: var(--font-secondary);
+}
+
+/* Text size utilities */
+.text-xs {
+	font-size: var(--font-size-xs);
+}
+.text-sm {
+	font-size: var(--font-size-sm);
+}
+.text-base {
+	font-size: var(--font-size-base);
+}
+.text-lg {
+	font-size: var(--font-size-lg);
+}
+.text-xl {
+	font-size: var(--font-size-xl);
+}
+.text-2xl {
+	font-size: var(--font-size-2xl);
+}
+.text-3xl {
+	font-size: var(--font-size-3xl);
+}
+.text-4xl {
+	font-size: var(--font-size-4xl);
+}
+.text-5xl {
+	font-size: var(--font-size-5xl);
+}
+
+/* Margin utilities */
+.no-margin {
+	margin: 0;
+}
+.no-margin-top {
+	margin-top: 0;
+}
+.no-margin-bottom {
+	margin-bottom: 0;
+}
+
+article p + p {
+	margin-top: var(--space-8);
+}
