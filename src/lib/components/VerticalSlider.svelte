@@ -51,6 +51,31 @@
 	});
 </script>
 
+{#snippet imageItem(image: MediaCover, index: number)}
+	<li>
+		<figure>
+			<img
+				src={image.url}
+				alt={image.alt || `Gallery Image ${index + 1}`}
+				width={image.width}
+				height={image.height}
+			/>
+			{#if image.caption || image.photographer}
+				<figcaption>
+					{#if image.caption}
+						<span class="caption-text">
+							{image.caption}
+							{#if image.photographer}
+								Photo: {image.photographer}
+							{/if}
+						</span>
+					{/if}
+				</figcaption>
+			{/if}
+		</figure>
+	</li>
+{/snippet}
+
 <div class="slider-container">
 	<ul
 		style="--animation-duration: {animationDuration}s;"
@@ -59,51 +84,11 @@
 	>
 		<!-- First set of images -->
 		{#each images as image, index}
-			<li>
-				<figure>
-					<img
-						src={image.url}
-						alt={image.alt || `Gallery Image ${index + 1}`}
-						width={image.width}
-						height={image.height}
-					/>
-					{#if image.caption || image.photographer}
-						<figcaption>
-							{#if image.caption}
-								<span class="caption-text">{image.caption}</span>
-							{/if}
-							{#if image.photographer}
-								<span class="photographer-credit">Photo: {image.photographer}</span>
-							{/if}
-						</figcaption>
-					{/if}
-				</figure>
-			</li>
+			{@render imageItem(image, index)}
 		{/each}
 		<!-- Duplicate set for seamless looping -->
 		{#each images as image, index}
-			<li>
-				<figure>
-					<img
-						src={image.url}
-						alt={image.alt || `Gallery Image ${index + 1}`}
-						width={image.width}
-						height={image.height}
-					/>
-					{#if image.caption || image.photographer}
-						<figcaption>
-							{#if image.caption}
-								<span class="caption-text">
-									{image.caption}
-									{#if image.photographer}
-										Photo: {image.photographer}
-									{/if}
-								</span>
-							{/if}
-						</figcaption>
-					{/if}
-				</figure>
-			</li>
+			{@render imageItem(image, index)}
 		{/each}
 	</ul>
 	<div class="slider-btn">
@@ -259,12 +244,6 @@
 
 	.caption-text {
 		display: block;
-	}
-
-	.photographer-credit {
-		display: block;
-		color: rgba(213, 197, 147, 0.7); /* Slightly more transparent version of the caption color */
-		font-weight: 400;
 	}
 
 	/* Responsive Design */

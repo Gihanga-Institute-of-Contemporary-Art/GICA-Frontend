@@ -329,6 +329,7 @@
 
 	.modal-middle .content {
 		font-size: var(--font-size-lg);
+		hyphens: auto;
 	}
 
 	.modal-middle figure figcaption {
