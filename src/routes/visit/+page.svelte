@@ -53,7 +53,7 @@
 					<ul>
 						{#each visit.socials as social}
 							<li>
-								<a href={social.url} target="_blank">{social.platform}</a>
+								<a href={social.url} target="_blank">{social.username}</a>
 							</li>
 						{/each}
 					</ul>

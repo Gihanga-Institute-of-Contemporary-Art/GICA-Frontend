@@ -52,7 +52,7 @@ export interface GenericDateStructure {
 
 // Social media
 export interface GenericSocialLink {
-	name: string;
+	username: string;
 	url: string;
 	platform?: string;
 }

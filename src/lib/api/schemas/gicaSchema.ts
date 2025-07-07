@@ -97,16 +97,11 @@ export interface OperatingHours {
 	close: string;
 }
 
-export interface SocialPlatform {
-	platform: string;
-	url: string;
-}
-
 export interface Visit {
 	title: string;
 	address: string;
 	email: string;
-	socials: SocialPlatform[];
+	socials: GenericSocialLink[];
 	photography: MediaAsset[];
 	hours: OperatingHours[];
 	pages: GicaPage[];
