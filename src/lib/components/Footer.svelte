@@ -106,6 +106,7 @@
 
 	.headline p {
 		margin: 0;
+		padding: 0 1rem;
 	}
 
 	.title-container .title {

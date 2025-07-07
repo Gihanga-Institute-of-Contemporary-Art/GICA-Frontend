@@ -80,5 +80,13 @@
 		section.content {
 			max-width: 90vw;
 		}
+
+		article.collaborators {
+			grid-template-columns: 1fr;
+		}
+
+		.contributor {
+			margin-bottom: var(--space-2);
+		}
 	}
 </style>
