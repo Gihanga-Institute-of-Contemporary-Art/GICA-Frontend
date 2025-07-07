@@ -156,14 +156,14 @@
 
 	@media (max-width: 768px) {
 		footer {
-			padding-inline: var(--space-8);
+			/* padding-inline: var(--space-8); */
 			justify-content: start;
 		}
 
 		.content {
-			margin: 0;
+			margin: 0 auto;
 			padding-inline: 0;
-			max-width: 100%;
+			max-width: 90vw;
 			grid-template-rows: auto auto auto;
 		}
 
