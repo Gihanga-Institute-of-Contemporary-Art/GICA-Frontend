@@ -285,7 +285,7 @@
 	}
 
 	.modal-middle {
-		padding-bottom: 1rem;
+		padding-bottom: var(--space-16);
 		font-size: var(--font-size-lg);
 	}
 
@@ -365,12 +365,12 @@
 		}
 
 		.modal-left {
-			padding: 1.5rem;
-			padding-bottom: 1rem;
+			padding: var(--space-4);
+			padding-bottom: var(--space-2);
 		}
 
 		.modal-middle {
-			padding: 0 1.5rem 1.5rem;
+			padding-inline: var(--space-4);
 		}
 
 		.item-title {
