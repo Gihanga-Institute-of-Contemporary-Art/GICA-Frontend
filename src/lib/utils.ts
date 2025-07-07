@@ -359,10 +359,10 @@ function formatHourGroup(group: { days: string[]; open: string; close: string })
 		}
 
 		if (isConsecutive) {
-			return `${days[0]} to ${days[days.length - 1]}: ${open} - ${close}`;
+			return `${days[0]} to ${days[days.length - 1]}\n ${open} – ${close}`;
 		} else {
 			const lastDay = days.pop();
-			return `${days.join(', ')} and ${lastDay}: ${open} - ${close}`;
+			return `${days.join(', ')} and ${lastDay}: ${open} – ${close}`;
 		}
 	}
 }

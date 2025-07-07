@@ -45,7 +45,7 @@
 		<div class="right">
 			<div class="email">
 				<p class="title">Email</p>
-				<p>Contact: <a href="mailto:{visit.email}">{visit.email || 'Email not available'}</a></p>
+				<p><a href="mailto:{visit.email}">{visit.email || 'Email not available'}</a></p>
 			</div>
 			<div class="social">
 				<p class="title">Social Media</p>
