@@ -24,7 +24,7 @@
 						<p>
 							<span class="name">{contributor.title}</span>
 							{#if contributor.role}
-								, <span class="role">{contributor.role}</span>
+								<span class="role">{contributor.role}</span>
 							{/if}
 						</p>
 					</div>
@@ -51,6 +51,9 @@
 		margin: 0 auto;
 		font-size: var(--font-size-lg);
 		padding-block-end: calc(2 * var(--space-16));
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-2);
 	}
 
 	.contributor {
@@ -58,6 +61,15 @@
 		align-items: flex-start;
 		gap: var(--space-4);
 		margin-bottom: var(--space-8);
+	}
+
+	.contributor p {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.contributor p span {
+		margin: 0;
 	}
 
 	.collaborators span.name {
