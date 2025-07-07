@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { MediaCover } from '$lib/api/types';
+	import type { MediaCover } from '$lib/api';
 
 	interface Props {
 		images: MediaCover[];
@@ -78,7 +78,7 @@
 		{/each}
 	</ul>
 	<div class="slider-btn">
-		<button onclick={toggleAnimation}>
+		<button class="btn-text" onclick={toggleAnimation}>
 			{isPaused ? 'Play' : 'Pause'}
 		</button>
 		<button
@@ -203,6 +203,12 @@
 
 	/* Responsive Design */
 	@media (max-width: 768px) {
+		.slider-btn {
+			padding-inline-end: var(--space-8);
+		}
+		.btn-text {
+			display: none;
+		}
 	}
 
 	/* move up animation */

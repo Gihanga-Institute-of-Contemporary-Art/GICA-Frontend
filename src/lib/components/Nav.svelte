@@ -216,7 +216,7 @@
 	@media (max-width: 768px) {
 		nav ul {
 			flex-wrap: wrap;
-			column-gap: var(--space-8);
+			row-gap: var(--space-2);
 		}
 
 		nav li {

@@ -155,6 +155,7 @@
 
 		.content {
 			margin: 0;
+			padding-inline: 0;
 		}
 	}
 </style>
