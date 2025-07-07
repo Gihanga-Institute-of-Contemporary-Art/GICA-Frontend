@@ -228,7 +228,7 @@
 		/* background: rgba(255, 255, 255, 0.9); */
 		font-family: var(--font-secondary);
 		font-size: var(--font-size-md);
-		color: #d5c593;
+		color: rgb(188, 146, 0);
 		font-style: normal;
 		border-radius: 0 0 var(--radius-xl) var(--radius-xl);
 		position: relative;
