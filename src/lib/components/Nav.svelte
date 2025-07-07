@@ -66,32 +66,34 @@
 </script>
 
 <nav>
-	<div class="top-nav">
-		<ul>
-			{#each $navItems as navItem}
-				<li>
-					<a href={navItem.href} class={getLinkClass(navItem.href)} onclick={handleNavLinkClick}>
-						<h5>{navItem.title}</h5>
-					</a>
-				</li>
+	<div class="content">
+		<div class="top-nav">
+			<ul>
+				{#each $navItems as navItem}
+					<li>
+						<a href={navItem.href} class={getLinkClass(navItem.href)} onclick={handleNavLinkClick}>
+							<h5>{navItem.title}</h5>
+						</a>
+					</li>
+				{/each}
+			</ul>
+			<section class="lang">
+				<button>
+					<h5>EN</h5>
+				</button>
+				<span> / </span>
+				<button><h5>RW</h5></button>
+			</section>
+		</div>
+		{#if submenu.length > 0}
+			{@render submenuTemplate(submenu, handleSubmenuClick)}
+		{/if}
+		{#if submenuRows.length > 0}
+			{#each submenuRows as row}
+				{@render submenuTemplate(row.items, (item) => handleSubmenuRowClick(row, item))}
 			{/each}
-		</ul>
-		<section class="lang">
-			<button>
-				<h5>EN</h5>
-			</button>
-			<span> / </span>
-			<button><h5>RW</h5></button>
-		</section>
+		{/if}
 	</div>
-	{#if submenu.length > 0}
-		{@render submenuTemplate(submenu, handleSubmenuClick)}
-	{/if}
-	{#if submenuRows.length > 0}
-		{#each submenuRows as row}
-			{@render submenuTemplate(row.items, (item) => handleSubmenuRowClick(row, item))}
-		{/each}
-	{/if}
 </nav>
 
 {#snippet submenuTemplate(items: SubmenuItem[], clickHandler: (item: SubmenuItem) => void)}
@@ -214,6 +216,18 @@
 	}
 
 	@media (max-width: 768px) {
+		nav {
+			padding: 0;
+		}
+		nav .content {
+			max-width: 90vw;
+			margin: 0 auto;
+		}
+
+		.top-nav ul,
+		.top-nav section.lang {
+			padding-block-start: var(--space-2);
+		}
 		nav ul {
 			flex-wrap: wrap;
 			row-gap: var(--space-2);
@@ -221,6 +235,11 @@
 
 		nav li {
 			margin: 0;
+		}
+
+		.submenu-list {
+			/* gap: var(--space-2); */
+			row-gap: var(--space-2);
 		}
 	}
 </style>

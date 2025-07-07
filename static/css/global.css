@@ -51,6 +51,7 @@
 
 	--footer-height: 8rem;
 	--content-width: 70vw;
+	--arrow-size: 4rem; /* Default static size for arrow buttons */
 }
 
 [hidden] {

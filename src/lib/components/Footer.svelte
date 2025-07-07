@@ -96,7 +96,7 @@
 	}
 
 	.arrow-btn {
-		width: 6rem;
+		width: var(--arrow-size);
 		transition: transform 0.3s ease;
 		align-self: start;
 	}
@@ -171,12 +171,17 @@
 			grid-column: 1 / -1;
 			display: flex;
 			align-items: center;
-			justify-content: center;
+			justify-content: start;
 		}
 
 		.headline p {
+			width: 80vw;
 			padding-inline: 0;
 			margin-block-start: var(--space-2);
+		}
+
+		footer.active .headline p {
+			width: 100%;
 		}
 
 		.details {

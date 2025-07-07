@@ -336,7 +336,7 @@
 	.nav-button svg {
 		width: 100%;
 		height: 100%;
-		max-height: 6rem;
+		max-height: var(--arrow-size);
 	}
 
 	.nav-left {
