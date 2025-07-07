@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ContentBlock, TextContent } from '$lib/api/types';
+	import type { ContentBlock, TextContent } from '$lib/api';
 	import { isFooterActive } from '$lib/stores/footerStore';
 
 	let { headline, about } = $props<{
@@ -38,8 +38,10 @@
 					/></svg
 				>
 			</div>
-			<div class="details">
+			<div class="title-container">
 				<p class="title">{headline}</p>
+			</div>
+			<div class="details">
 				{#if $isFooterActive}
 					<div class="sub-text">
 						{#each about as block}
@@ -89,6 +91,7 @@
 		transition: opacity 0.2s ease;
 		display: grid;
 		grid-template-columns: 0.5fr 4fr;
+		grid-template-rows: auto;
 		align-items: center;
 	}
 
@@ -107,10 +110,14 @@
 		padding: 0 1rem;
 	}
 
-	.details .title {
+	.title-container .title {
 		font-size: var(--font-size-lg);
 		font-family: var(--font-secondary);
 		text-transform: uppercase;
+	}
+
+	.details {
+		grid-column: 2 / 3;
 	}
 
 	.details .sub-text {
@@ -156,6 +163,10 @@
 		.content {
 			margin: 0;
 			padding-inline: 0;
+		}
+
+		.details {
+			grid-column: 1 / -1;
 		}
 	}
 </style>
