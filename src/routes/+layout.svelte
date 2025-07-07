@@ -10,14 +10,21 @@
 		let animationId: number;
 		let mouseX = 0;
 		let mouseY = 0;
+		let hasMovedMouse = false;
 
 		const updateCursor = (e: MouseEvent) => {
 			mouseX = e.clientX;
 			mouseY = e.clientY;
+
+			// Show cursor on first mouse movement
+			if (!hasMovedMouse) {
+				hasMovedMouse = true;
+				showCursor();
+			}
 		};
 
 		const animateCursor = () => {
-			if (customCursor) {
+			if (customCursor && hasMovedMouse) {
 				customCursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
 			}
 			animationId = requestAnimationFrame(animateCursor);
@@ -77,6 +84,7 @@
 		will-change: transform;
 		transform: translate(-50%, -50%);
 		transition: opacity 0.2s ease;
+		opacity: 0; /* Start invisible */
 	}
 
 	/* Hide default cursor globally */
