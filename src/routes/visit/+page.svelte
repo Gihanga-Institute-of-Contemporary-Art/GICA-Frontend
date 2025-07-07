@@ -22,7 +22,7 @@
 				{#if formattedHours}
 					{@html formattedHours
 						.split('\n')
-						.map((line) => `<p>${line}</p>`)
+						.map((line) => `<p style="margin-bottom:var(--space-1);">${line}</p>`)
 						.join('')}
 				{:else}
 					<p>Hours not available</p>
@@ -96,6 +96,11 @@
 
 	address {
 		font-style: normal;
+	}
+
+	.hours p {
+		margin-bottom: var(--space-2);
+		color: tomato;
 	}
 
 	p.title {
