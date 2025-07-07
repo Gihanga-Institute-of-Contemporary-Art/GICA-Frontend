@@ -1,6 +1,6 @@
 // Date and time utility functions
 
-import type { DateStructure } from './api/types';
+import type { DateStructure } from './api';
 
 /**
  * Formats a date string as "MONTH DAY" in uppercase
@@ -183,7 +183,7 @@ export function formatSingleDateTimeRange(dateStructure: DateStructure): string 
 
 		if (endFromTime) {
 			if (endToTime && endToTime !== endFromTime) {
-				result += `\n${endFromTime} — ${endToTime}`;
+				result += `\n${endFromTime} – ${endToTime}`;
 			} else {
 				result += `\n${endFromTime}`;
 			}
@@ -217,7 +217,7 @@ export function getTimeRange(dates: DateStructure[]): string {
 	if (!fromTime) return '';
 
 	if (toTime && toTime !== fromTime) {
-		return `${fromTime} — ${toTime}`;
+		return `${fromTime} – ${toTime}`;
 	}
 
 	return fromTime;
@@ -238,7 +238,7 @@ export function formatCompactDateTimeRange(dateStructure: DateStructure): string
 	// Add time range for main date
 	if (fromTime) {
 		if (toTime && toTime !== fromTime) {
-			result += ` ${fromTime} — ${toTime}`;
+			result += ` ${fromTime} – ${toTime}`;
 		} else {
 			result += ` ${fromTime}`;
 		}
@@ -255,7 +255,7 @@ export function formatCompactDateTimeRange(dateStructure: DateStructure): string
 
 		if (endFromTime) {
 			if (endToTime && endToTime !== endFromTime) {
-				result += ` ${endFromTime} — ${endToTime}`;
+				result += ` ${endFromTime} – ${endToTime}`;
 			} else {
 				result += ` ${endFromTime}`;
 			}

@@ -37,8 +37,15 @@ function lerpColor(
 }
 
 function getTimeOfDayFloat(): number {
+	// Get current time in Rwanda timezone (Central Africa Time - CAT, UTC+2)
 	const now = new Date();
-	return now.getHours() + now.getMinutes() / 60;
+	const rwandaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Kigali' }));
+	return rwandaTime.getHours() + rwandaTime.getMinutes() / 60;
+}
+
+function getRwandaTime(): Date {
+	const now = new Date();
+	return new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Kigali' }));
 }
 
 function getInterpolatedColor(time: number): string {
@@ -81,15 +88,32 @@ function updateScopedColors(element: HTMLElement): void {
 	element.style.setProperty('--font-color-primary', contrastColor);
 }
 
-function getCurrentColors(): { backgroundColor: string; textColor: string } {
+function getRwandaTimeString(): string {
+	const rwandaTime = getRwandaTime();
+	return rwandaTime.toLocaleString('en-US', {
+		timeZone: 'Africa/Kigali',
+		hour12: false,
+		hour: '2-digit',
+		minute: '2-digit'
+	});
+}
+
+function getCurrentColors(): { backgroundColor: string; textColor: string; rwandaTime: string } {
 	const currentTime = getTimeOfDayFloat();
 	const bgColor = getInterpolatedColor(currentTime);
 	const contrastColor = getContrastingColor(bgColor);
 
 	return {
 		backgroundColor: bgColor,
-		textColor: contrastColor
+		textColor: contrastColor,
+		rwandaTime: getRwandaTimeString()
 	};
 }
 
-export { updateCSSVariables, updateScopedColors, getCurrentColors };
+export {
+	updateCSSVariables,
+	updateScopedColors,
+	getCurrentColors,
+	getRwandaTime,
+	getRwandaTimeString
+};

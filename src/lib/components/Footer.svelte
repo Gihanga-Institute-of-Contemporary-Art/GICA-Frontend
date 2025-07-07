@@ -80,7 +80,6 @@
 	footer.active {
 		height: 99vh;
 		display: block;
-		/* padding-block-start: var(--nav-height); */
 		padding-top: var(--nav-height);
 		background: linear-gradient(0deg, rgba(1, 21, 0, 1) 70%, rgba(255, 255, 0, 0) 92%);
 	}
@@ -106,7 +105,6 @@
 
 	.headline p {
 		margin: 0;
-		padding: 0 1rem;
 	}
 
 	.title-container .title {
