@@ -67,9 +67,8 @@
 		background: #011500;
 		background: linear-gradient(
 			0deg,
-			rgba(1, 21, 0, 1) 45%,
-			rgba(1, 21, 0, 0.5) 75%,
-			rgba(255, 255, 0, 0) 88%
+			rgba(1, 21, 0, 1) 65%,
+			/* rgba(1, 21, 0, 0.5) 85%, */ rgba(255, 255, 0, 0) 100%
 		);
 		display: flex;
 		align-items: center;
