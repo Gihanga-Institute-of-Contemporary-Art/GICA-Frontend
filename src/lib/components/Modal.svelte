@@ -354,7 +354,14 @@
 		}
 
 		.modal-content {
-			max-height: 90vh;
+			max-height: fit-content;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.modal-nav {
+			position: fixed;
+			padding: 0;
 		}
 
 		.modal-left {
