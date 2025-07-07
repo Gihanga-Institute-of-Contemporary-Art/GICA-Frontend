@@ -174,6 +174,11 @@
 			justify-content: center;
 		}
 
+		.headline p {
+			padding-inline: 0;
+			margin-block-start: var(--space-2);
+		}
+
 		.details {
 			grid-column: 1 / -1;
 		}
