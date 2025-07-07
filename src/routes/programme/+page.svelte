@@ -17,6 +17,12 @@
 	let { data }: Props = $props();
 	const programmes: Programmes = data.programmes;
 
+	// Debug: Log all programmes data
+	// console.log(
+	// 	'All programmes:',
+	// 	programmes.children.map((p) => ({ title: p.title, tags: p.tags }))
+	// );
+
 	let isModalOpen = $state(false);
 	let selectedProgramme = $state<Programme | null>(null);
 	let selectedProgrammeIndex = $state<number>(0);
@@ -101,6 +107,12 @@
 					(p) => getProgrammeStatusFromArray(p.dates) === selectedTimeFilter
 				);
 			}
+
+			// Debug: Log filtered programmes
+			console.log(
+				'Filtered programmes:',
+				filtered.map((p) => ({ title: p.title, tags: p.tags }))
+			);
 
 			return filtered;
 		})()

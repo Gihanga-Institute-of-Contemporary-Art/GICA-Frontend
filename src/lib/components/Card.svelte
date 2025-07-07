@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { Programme, Exhibition } from '$lib/api/types';
+	import type { Programme } from '$lib/api/schemas/gicaSchema';
+	import type { Exhibition } from '$lib/api/legacy/types';
 	// import { formatProgrammeDateFromArray, getTimeRange } from '$lib/utils';
 
 	interface Props {
@@ -12,7 +13,14 @@
 	function isProgramme(item: Programme | Exhibition): item is Programme {
 		return 'contributors' in item;
 	}
-	const tags = isProgramme(item) ? item.tags : [];
+
+	// Make tags reactive to item changes
+	const tags = $derived(isProgramme(item) ? item.tags : []);
+
+	// // Debug: Log the item data to understand what's happening
+	// $effect(() => {
+	// 	console.log('Card item:', item.title, 'tags:', tags);
+	// });
 </script>
 
 <button type="button" class="card" onclick={onClick}>
