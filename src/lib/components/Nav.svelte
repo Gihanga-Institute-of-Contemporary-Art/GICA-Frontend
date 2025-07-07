@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { isFooterActive } from '$lib/stores/footerStore';
-	import { navItems, initializeNavigation } from '$lib/stores/navStore';
+	import { navItems, initializeNavigation, type NavItem } from '$lib/stores/navStore';
 	import { onMount } from 'svelte';
 
 	interface SubmenuItem {
@@ -19,9 +19,13 @@
 		submenu?: SubmenuItem[];
 		submenuRows?: SubmenuRow[];
 		onSubmenuSelect?: (value: string) => void;
+		onProgrammeNavClick?: () => void;
 	}
 
-	let { submenu = [], submenuRows = [], onSubmenuSelect }: Props = $props();
+	let { submenu = [], submenuRows = [], onSubmenuSelect, onProgrammeNavClick }: Props = $props();
+
+	// Language state - default is English
+	let currentLanguage = $state('EN');
 
 	// Initialize navigation on mount
 	onMount(() => {
@@ -63,6 +67,41 @@
 	function handleNavLinkClick() {
 		isFooterActive.set(false);
 	}
+
+	function handleNavLinkClickWithReset(navItem: NavItem) {
+		handleNavLinkClick();
+		// If clicking on programme nav and we have a reset function and we're on the programme page
+		if (
+			navItem.href === '/programme' &&
+			onProgrammeNavClick &&
+			page.url.pathname === '/programme'
+		) {
+			onProgrammeNavClick();
+		}
+	}
+
+	function handleLanguageChange() {
+		// TODO: Implement comprehensive language switching functionality
+		// Implementation suggestions:
+		// 1. Create a language store to manage global language state
+		// 2. Set up i18n library (like svelte-i18n) for translations
+		// 3. Load appropriate translation files (en.json, rw.json)
+		// 4. Update all text content across the application
+		// 5. Consider URL structure changes (/en/programme vs /rw/programme)
+		// 6. Store language preference in localStorage or cookies
+		// 7. Update document lang attribute for accessibility
+
+		console.log(`Switching language from ${currentLanguage} to ${displayLanguage}`);
+
+		// For now, just toggle the display language for demonstration
+		currentLanguage = currentLanguage === 'EN' ? 'RW' : 'EN';
+
+		// TODO: Replace this with actual language switching logic
+		// Example: languageStore.set(currentLanguage);
+	}
+
+	// Get the language to display (the one to switch TO, not the current one)
+	const displayLanguage = $derived(currentLanguage === 'EN' ? 'RW' : 'EN');
 </script>
 
 <nav>
@@ -71,18 +110,20 @@
 			<ul>
 				{#each $navItems as navItem}
 					<li>
-						<a href={navItem.href} class={getLinkClass(navItem.href)} onclick={handleNavLinkClick}>
+						<a
+							href={navItem.href}
+							class={getLinkClass(navItem.href)}
+							onclick={() => handleNavLinkClickWithReset(navItem)}
+						>
 							<h5>{navItem.title}</h5>
 						</a>
 					</li>
 				{/each}
 			</ul>
 			<section class="lang">
-				<button>
-					<h5>EN</h5>
+				<button onclick={handleLanguageChange}>
+					<h5>{displayLanguage}</h5>
 				</button>
-				<span> / </span>
-				<button><h5>RW</h5></button>
 			</section>
 		</div>
 		{#if submenu.length > 0}
@@ -143,6 +184,11 @@
 		color: var(--font-color-mid);
 		text-transform: uppercase;
 		cursor: pointer;
+		transition: color 0.2s ease;
+	}
+
+	section.lang button:hover {
+		color: var(--color-secondary);
 	}
 	nav ul {
 		list-style: none;

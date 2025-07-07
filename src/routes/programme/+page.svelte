@@ -30,6 +30,17 @@
 	let selectedTimeFilter = $state<string | null>(null);
 	let programmesSection = $state<HTMLElement | undefined>(undefined);
 
+	// Function to reset modal and filters
+	function resetProgrammePage() {
+		if (isModalOpen) {
+			closeModal();
+		}
+		selectedFilter = null;
+		selectedTimeFilter = null;
+		// Optionally scroll to top of programmes
+		scrollToProgrammes();
+	}
+
 	// Get unique programme types and create submenu
 	const programmeTypes = Array.from(new Set(programmes.children.flatMap((p) => p.tags)));
 	const programmeBlurb = data.pages.find((p) => p.slug === 'programmes') || {
@@ -182,7 +193,7 @@
 <svelte:window onkeydown={handleKeydown} />
 
 <main>
-	<Nav {submenuRows} />
+	<Nav {submenuRows} onProgrammeNavClick={resetProgrammePage} />
 	{#if !isModalOpen}
 		<section class="content">
 			<article class="blurb">
