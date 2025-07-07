@@ -1,6 +1,6 @@
 // Date and time utility functions
 
-import type { DateStructure } from './api';
+import type { GenericDateStructure } from './api/core/types';
 
 /**
  * Formats a date string as "MONTH DAY" in uppercase
@@ -62,40 +62,40 @@ export function formatShortDate(dateString: string): string {
 
 /**
  * Gets the primary date from a programme's dates array (first date entry)
- * @param dates - Array of DateStructure objects
+ * @param dates - Array of GenericDateStructure objects
  * @returns The date of the first date entry, or empty string if no dates
  */
-export function getPrimaryDate(dates: DateStructure[]): string {
+export function getPrimaryDate(dates: GenericDateStructure[]): string {
 	return dates.length > 0 ? dates[0].date : '';
 }
 
 /**
  * Gets the primary time from a programme's dates array (first date entry) formatted for display
- * @param dates - Array of DateStructure objects
+ * @param dates - Array of GenericDateStructure objects
  * @returns The formatted from_time of the first date entry, or empty string if no dates
  */
-export function getPrimaryTime(dates: DateStructure[]): string {
-	const rawTime = dates.length > 0 ? dates[0].from_time : '';
+export function getPrimaryTime(dates: GenericDateStructure[]): string {
+	const rawTime = dates.length > 0 ? dates[0].from_time || '' : '';
 	return formatTime12Hour(rawTime);
 }
 
 /**
  * Formats the primary date from a programme's dates array as "MONTH DAY" in uppercase
- * @param dates - Array of DateStructure objects
+ * @param dates - Array of GenericDateStructure objects
  * @returns Formatted date string like "JANUARY 15"
  */
-export function formatProgrammeDateFromArray(dates: DateStructure[]): string {
+export function formatProgrammeDateFromArray(dates: GenericDateStructure[]): string {
 	const primaryDate = getPrimaryDate(dates);
 	return primaryDate ? formatProgrammeDate(primaryDate) : '';
 }
 
 /**
  * Determines the status of a programme based on its dates array
- * @param dates - Array of DateStructure objects
+ * @param dates - Array of GenericDateStructure objects
  * @returns The status of the programme
  */
 export function getProgrammeStatusFromArray(
-	dates: DateStructure[]
+	dates: GenericDateStructure[]
 ): 'past' | 'current' | 'upcoming' {
 	const primaryDate = getPrimaryDate(dates);
 	return primaryDate ? getProgrammeStatus(primaryDate) : 'upcoming';
@@ -103,10 +103,10 @@ export function getProgrammeStatusFromArray(
 
 /**
  * Formats a date range for display
- * @param dates - Array of DateStructure objects
+ * @param dates - Array of GenericDateStructure objects
  * @returns Formatted date range string
  */
-export function formatDateRange(dates: DateStructure[]): string {
+export function formatDateRange(dates: GenericDateStructure[]): string {
 	if (dates.length === 0) return '';
 
 	if (dates.length === 1) {
@@ -153,13 +153,13 @@ export function formatTime12Hour(timeString: string): string {
 
 /**
  * Formats a single DateStructure to show date and time range in the specified format
- * @param dateStructure - Single DateStructure object
+ * @param dateStructure - Single GenericDateStructure object
  * @returns Formatted string with date and time range
  */
-export function formatSingleDateTimeRange(dateStructure: DateStructure): string {
+export function formatSingleDateTimeRange(dateStructure: GenericDateStructure): string {
 	const date = formatProgrammeDate(dateStructure.date);
-	const fromTime = formatTime12Hour(dateStructure.from_time);
-	const toTime = formatTime12Hour(dateStructure.to_time);
+	const fromTime = formatTime12Hour(dateStructure.from_time || '');
+	const toTime = formatTime12Hour(dateStructure.to_time || '');
 
 	let result = date;
 
@@ -195,24 +195,24 @@ export function formatSingleDateTimeRange(dateStructure: DateStructure): string 
 
 /**
  * Formats all dates from a programme's dates array with full details
- * @param dates - Array of DateStructure objects
+ * @param dates - Array of GenericDateStructure objects
  * @returns Array of formatted date/time strings
  */
-export function formatAllDateTimeRanges(dates: DateStructure[]): string[] {
+export function formatAllDateTimeRanges(dates: GenericDateStructure[]): string[] {
 	return dates.map((date) => formatSingleDateTimeRange(date));
 }
 
 /**
  * Gets a comprehensive time range for display (from and to times)
- * @param dates - Array of DateStructure objects
+ * @param dates - Array of GenericDateStructure objects
  * @returns Formatted time range string
  */
-export function getTimeRange(dates: DateStructure[]): string {
+export function getTimeRange(dates: GenericDateStructure[]): string {
 	if (dates.length === 0) return '';
 
 	const firstDate = dates[0];
-	const fromTime = formatTime12Hour(firstDate.from_time);
-	const toTime = formatTime12Hour(firstDate.to_time);
+	const fromTime = formatTime12Hour(firstDate.from_time || '');
+	const toTime = formatTime12Hour(firstDate.to_time || '');
 
 	if (!fromTime) return '';
 
@@ -225,13 +225,13 @@ export function getTimeRange(dates: DateStructure[]): string {
 
 /**
  * Formats a single DateStructure for compact display (single line)
- * @param dateStructure - Single DateStructure object
+ * @param dateStructure - Single GenericDateStructure object
  * @returns Formatted string with date and time in compact format
  */
-export function formatCompactDateTimeRange(dateStructure: DateStructure): string {
+export function formatCompactDateTimeRange(dateStructure: GenericDateStructure): string {
 	const date = formatReadableDate(dateStructure.date);
-	const fromTime = formatTime12Hour(dateStructure.from_time);
-	const toTime = formatTime12Hour(dateStructure.to_time);
+	const fromTime = formatTime12Hour(dateStructure.from_time || '');
+	const toTime = formatTime12Hour(dateStructure.to_time || '');
 
 	let result = date;
 

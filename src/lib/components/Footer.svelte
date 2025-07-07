@@ -155,6 +155,7 @@
 		footer {
 			/* padding-inline: var(--space-8); */
 			justify-content: start;
+			padding-block-end: var(--space-2);
 		}
 
 		.content {

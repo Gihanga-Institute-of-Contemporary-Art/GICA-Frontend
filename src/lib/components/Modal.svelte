@@ -285,7 +285,7 @@
 	}
 
 	.modal-middle {
-		padding-bottom: var(--space-16);
+		padding-bottom: var(--footer-height);
 		font-size: var(--font-size-lg);
 	}
 

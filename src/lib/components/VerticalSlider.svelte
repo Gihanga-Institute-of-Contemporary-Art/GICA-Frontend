@@ -161,7 +161,7 @@
 		height: fit-content;
 		width: var(--content-width);
 		flex-direction: column;
-		gap: 5rem;
+		gap: var(--space-16);
 		list-style: none;
 		padding: 0;
 		margin: 0;
@@ -205,6 +205,10 @@
 	@media (max-width: 768px) {
 		.slider-btn {
 			padding-inline-end: var(--space-8);
+		}
+
+		.slider-container ul {
+			gap: var(--space-8);
 		}
 		.btn-text {
 			display: none;
