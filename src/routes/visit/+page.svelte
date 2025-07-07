@@ -98,11 +98,6 @@
 		font-style: normal;
 	}
 
-	.hours p {
-		margin-bottom: var(--space-2);
-		color: tomato;
-	}
-
 	p.title {
 		font-family: var(--font-secondary);
 		text-transform: uppercase;
