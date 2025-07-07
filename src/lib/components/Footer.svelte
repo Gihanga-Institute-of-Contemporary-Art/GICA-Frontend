@@ -163,10 +163,23 @@
 		.content {
 			margin: 0;
 			padding-inline: 0;
+			max-width: 100%;
+			grid-template-rows: auto auto auto;
+		}
+
+		.title-container {
+			grid-column: 1 / -1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 
 		.details {
 			grid-column: 1 / -1;
+		}
+
+		.details .sub-text {
+			margin-top: var(--space-2);
 		}
 	}
 </style>
