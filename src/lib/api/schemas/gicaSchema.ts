@@ -69,6 +69,12 @@ export interface Programme extends GenericEntity {
 	text: ContentBlock[];
 	link: string;
 	dates: GenericDateStructure[];
+	metadata: {
+		title: string;
+		description: {
+			value: string;
+		};
+	}[];
 	contributors: Contributor[];
 	tags: string[];
 }

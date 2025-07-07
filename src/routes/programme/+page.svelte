@@ -119,12 +119,6 @@
 				);
 			}
 
-			// Debug: Log filtered programmes
-			console.log(
-				'Filtered programmes:',
-				filtered.map((p) => ({ title: p.title, tags: p.tags }))
-			);
-
 			return filtered;
 		})()
 	);

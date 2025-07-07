@@ -2,6 +2,9 @@
 	import { onMount } from 'svelte';
 	import type { MediaCover } from '$lib/api';
 
+	// MediaCover now includes photographer support!
+	// Current MediaCover now includes: url, alt, caption, photographer, width, height, srcset
+
 	interface Props {
 		images: MediaCover[];
 	}
@@ -57,23 +60,47 @@
 		<!-- First set of images -->
 		{#each images as image, index}
 			<li>
-				<img
-					src={image.url}
-					alt={image.alt || `Gallery Image ${index + 1}`}
-					width={image.width}
-					height={image.height}
-				/>
+				<figure>
+					<img
+						src={image.url}
+						alt={image.alt || `Gallery Image ${index + 1}`}
+						width={image.width}
+						height={image.height}
+					/>
+					{#if image.caption || image.photographer}
+						<figcaption>
+							{#if image.caption}
+								<span class="caption-text">{image.caption}</span>
+							{/if}
+							{#if image.photographer}
+								<span class="photographer-credit">Photo: {image.photographer}</span>
+							{/if}
+						</figcaption>
+					{/if}
+				</figure>
 			</li>
 		{/each}
 		<!-- Duplicate set for seamless looping -->
 		{#each images as image, index}
 			<li>
-				<img
-					src={image.url}
-					alt={image.alt || `Gallery Image ${index + 1}`}
-					width={image.width}
-					height={image.height}
-				/>
+				<figure>
+					<img
+						src={image.url}
+						alt={image.alt || `Gallery Image ${index + 1}`}
+						width={image.width}
+						height={image.height}
+					/>
+					{#if image.caption || image.photographer}
+						<figcaption>
+							{#if image.caption}
+								<span class="caption-text">{image.caption}</span>
+							{/if}
+							{#if image.photographer}
+								<span class="photographer-credit">Photo: {image.photographer}</span>
+							{/if}
+						</figcaption>
+					{/if}
+				</figure>
 			</li>
 		{/each}
 	</ul>
@@ -121,7 +148,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 1.5rem;
+		gap: var(--space-1);
 	}
 
 	.slider-btn button {
@@ -178,7 +205,7 @@
 	.slider-container li {
 		width: 100%;
 		height: 100%;
-		background-color: white;
+		/* background-color: white; */
 		mix-blend-mode: multiply;
 		border-radius: var(--radius-xl);
 		contain: layout style paint; /* CSS containment for performance */
@@ -199,6 +226,43 @@
 		filter: url(#duotone-filter);
 		transform: translateZ(0); /* Force hardware acceleration for images */
 		backface-visibility: hidden;
+		border-radius: var(--radius-xl);
+	}
+
+	.slider-container figure {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.slider-container figcaption {
+		padding-block-start: var(--space-2);
+		/* background: rgba(255, 255, 255, 0.9); */
+		font-family: var(--font-secondary);
+		font-size: var(--font-size-md);
+		color: #d5c593;
+		font-style: normal;
+		border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+
+	.slider-container figcaption span {
+		margin-bottom: var(--space-2);
+	}
+
+	.caption-text {
+		display: block;
+	}
+
+	.photographer-credit {
+		display: block;
+		color: rgba(213, 197, 147, 0.7); /* Slightly more transparent version of the caption color */
+		font-weight: 400;
 	}
 
 	/* Responsive Design */

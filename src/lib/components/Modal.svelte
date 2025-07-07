@@ -32,6 +32,8 @@
 		return 'contributors' in item;
 	}
 
+	console.log(item);
+
 	$effect(() => {
 		// Scroll to top of the page content, accounting for nav height
 		document.documentElement.scrollTo({
@@ -157,9 +159,26 @@
 		</div>
 
 		<div class="modal-right">
-			{#if isProgramme(item) && item.contributors && item.contributors.length > 0}
+			{#if item.metadata && item.metadata.length > 0}
+				<div class="item-metadata">
+					{#each item.metadata as metadataItem}
+						{#if metadataItem.title}
+							<div class="metadata-item">
+								<span class="metadata-value">{metadataItem.title}</span>
+							</div>
+						{/if}
+						{#if metadataItem.description}
+							<div class="metadata-item">
+								<span class="metadata-value">{@html metadataItem.description.value}</span>
+							</div>
+						{/if}
+					{/each}
+				</div>
+			{/if}
+
+			{#if item.contributors && item.contributors.length > 0}
 				<div class="item-contributors">
-					<h6>Contributors:</h6>
+					<h6>Contributors</h6>
 					<div class="contributors-list">
 						{#each item.contributors as contributor}
 							<div class="contributor-item">
@@ -231,7 +250,7 @@
 
 	.item-contributors h6 {
 		margin: 0 0 var(--space-2) 0;
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-md);
 		text-transform: uppercase;
 		color: var(--font-color-mid);
 	}
@@ -243,7 +262,7 @@
 	}
 
 	.contributor-item {
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-md);
 	}
 
 	.contributor-name {
@@ -255,6 +274,18 @@
 		color: var(--font-color-mid);
 		font-style: italic;
 		margin-left: var(--space-1);
+	}
+
+	.item-metadata {
+		margin-bottom: var(--space-4);
+	}
+
+	.metadata-item {
+		font-size: var(--font-size-md);
+	}
+
+	.metadata-value {
+		color: var(--font-color-dark);
 	}
 
 	.modal-close {

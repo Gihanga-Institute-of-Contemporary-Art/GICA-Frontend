@@ -26,6 +26,7 @@ export interface MediaCover {
 	url: string;
 	alt?: string | null;
 	caption?: string;
+	photographer?: string;
 	width?: number;
 	height?: number;
 	srcset?: SrcSet;
