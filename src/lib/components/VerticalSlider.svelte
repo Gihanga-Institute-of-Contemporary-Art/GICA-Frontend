@@ -93,10 +93,12 @@
 					{#if image.caption || image.photographer}
 						<figcaption>
 							{#if image.caption}
-								<span class="caption-text">{image.caption}</span>
-							{/if}
-							{#if image.photographer}
-								<span class="photographer-credit">Photo: {image.photographer}</span>
+								<span class="caption-text">
+									{image.caption}
+									{#if image.photographer}
+										Photo: {image.photographer}
+									{/if}
+								</span>
 							{/if}
 						</figcaption>
 					{/if}

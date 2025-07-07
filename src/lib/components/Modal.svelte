@@ -145,17 +145,25 @@
 				<figure>
 					<img src={item.cover.url} alt={item.title} class="item-cover" />
 					{#if item.cover.caption}
-						<figcaption>{item.cover.caption}</figcaption>
+						<figcaption>
+							<span class="caption-text">
+								{item.cover.caption}
+								{#if item.cover.photographer}
+									Photo: {item.cover.photographer}
+								{/if}
+							</span>
+						</figcaption>
 					{/if}
 				</figure>
 			{/if}
-
-			{#each item.text as block}
-				{#if block.type === 'text'}
-					{@const textContent = block.content as TextContent}
-					{@html textContent.text}
-				{/if}
-			{/each}
+			<div class="content">
+				{#each item.text as block}
+					{#if block.type === 'text'}
+						{@const textContent = block.content as TextContent}
+						{@html textContent.text}
+					{/if}
+				{/each}
+			</div>
 		</div>
 
 		<div class="modal-right">
@@ -317,7 +325,29 @@
 
 	.modal-middle {
 		padding-bottom: var(--footer-height);
+	}
+
+	.modal-middle .content {
 		font-size: var(--font-size-lg);
+	}
+
+	.modal-middle figure figcaption {
+		padding-block-end: var(--space-4);
+		font-family: var(--font-secondary);
+		font-size: var(--font-size-md);
+		font-style: normal;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+
+	.modal-middle figure figcaption span {
+		display: inline;
+		margin-bottom: var(--space-2);
+	}
+
+	.modal-middle figure figcaption .caption-text {
+		display: block;
 	}
 
 	.item-cover {
@@ -325,7 +355,7 @@
 		height: 20rem;
 		object-fit: cover;
 		border-radius: var(--radius-xl);
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--space-2);
 	}
 
 	.item-title {
