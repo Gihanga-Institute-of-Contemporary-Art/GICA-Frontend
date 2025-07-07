@@ -78,7 +78,7 @@
 		grid-template-columns: 0.5fr 1fr 0.5fr;
 		grid-template-areas: 'left middle right';
 		column-gap: var(--space-8);
-		font-size: var(--font-size-md);
+		font-size: var(--font-size-lg);
 		font-family: var(--font-primary);
 		/* font-family: var(--font-secondary); */
 	}
