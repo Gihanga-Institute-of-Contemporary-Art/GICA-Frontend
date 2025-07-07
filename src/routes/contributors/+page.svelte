@@ -47,8 +47,7 @@
 	}
 
 	article.collaborators {
-		width: fit-content;
-		margin: 0 auto;
+		width: 100%;
 		font-size: var(--font-size-lg);
 		padding-block-end: calc(2 * var(--space-16));
 		display: grid;
