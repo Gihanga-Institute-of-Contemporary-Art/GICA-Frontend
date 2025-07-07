@@ -355,8 +355,14 @@
 
 		.modal-content {
 			max-height: fit-content;
-			display: flex;
-			flex-direction: column;
+			grid-template-columns: 1fr;
+			grid-template-rows: auto auto auto;
+			gap: var(--space-4);
+			padding-bottom: var(--footer-height);
+			grid-template-areas:
+				'middle'
+				'left'
+				'right';
 		}
 
 		.modal-nav {
@@ -365,12 +371,18 @@
 		}
 
 		.modal-left {
-			padding: var(--space-4);
-			padding-bottom: var(--space-2);
+			padding: 0;
+			grid-area: left;
 		}
 
 		.modal-middle {
-			padding-inline: var(--space-4);
+			padding: 0;
+			grid-area: middle;
+		}
+
+		.modal-right {
+			padding: 0;
+			grid-area: right;
 		}
 
 		.item-title {

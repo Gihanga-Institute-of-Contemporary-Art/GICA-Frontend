@@ -123,7 +123,7 @@
 			max-width: 90vw;
 			grid-template-columns: 1fr;
 			grid-template-rows: auto auto auto;
-			gap: var(--space-8);
+			gap: var(--space-4);
 			padding-bottom: var(--footer-height);
 			grid-template-areas:
 				'middle'
