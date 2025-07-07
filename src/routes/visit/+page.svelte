@@ -25,7 +25,7 @@
 						.map((line) => `<p style="margin-bottom:var(--space-1);">${line}</p>`)
 						.join('')}
 				{:else}
-					<p>Hours not available</p>
+					<p>Forthcoming - Opening Fall 2025</p>
 				{/if}
 			</div>
 			<div class="location">

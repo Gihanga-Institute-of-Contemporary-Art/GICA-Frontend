@@ -89,6 +89,11 @@ export interface Home {
 	about: ContentBlock[];
 	carousel: MediaAsset[];
 	pages: GicaPage[];
+	translation: {
+		language: string;
+		headline: string;
+		about: ContentBlock[];
+	};
 }
 
 export interface OperatingHours {
