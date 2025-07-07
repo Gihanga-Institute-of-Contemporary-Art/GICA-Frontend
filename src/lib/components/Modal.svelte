@@ -324,7 +324,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 6rem;
+		height: var(--arrow-size);
 		aspect-ratio: 1;
 		transition: opacity 0.3s ease;
 	}

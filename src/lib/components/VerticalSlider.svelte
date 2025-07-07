@@ -204,7 +204,9 @@
 	/* Responsive Design */
 	@media (max-width: 768px) {
 		.slider-btn {
-			padding-inline-end: var(--space-8);
+			padding-block-start: var(--space-4);
+			align-items: start;
+			padding-inline-end: 0;
 		}
 
 		.slider-container ul {
