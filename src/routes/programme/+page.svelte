@@ -255,6 +255,10 @@
 		section.content {
 			max-width: 90vw;
 		}
+
+		article.programmes {
+			max-width: 100%;
+		}
 		.programmes-grid {
 			grid-template-columns: 1fr;
 			gap: 1.5rem;
