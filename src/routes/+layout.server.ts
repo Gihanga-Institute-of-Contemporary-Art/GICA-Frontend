@@ -22,7 +22,12 @@ export const load = async () => {
 				headline: '',
 				about: [],
 				carousel: [],
-				pages: []
+				pages: [],
+				translation: {
+					language: 'en',
+					headline: '',
+					about: []
+				}
 			} as Home,
 			pages: []
 		};

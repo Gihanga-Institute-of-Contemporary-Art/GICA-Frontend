@@ -1,8 +1,10 @@
 <script lang="ts">
 	import Nav from '$lib/components/Nav.svelte';
+	import Header from '$lib/components/Header.svelte';
 	import VerticalSlider from '$lib/components/VerticalSlider.svelte';
 	import DuotoneFilter from '$lib/components/DuotoneFilter.svelte';
 	import { isFooterActive } from '$lib/stores/footerStore';
+	import { createSEOData } from '$lib/seo';
 	import type { PageData } from './$types';
 	import { updateScopedColors, getCurrentColors } from '$lib/colorTime';
 	import { onMount } from 'svelte';
@@ -10,6 +12,16 @@
 
 	let sliderRef: VerticalSlider;
 	let mainElement: HTMLElement;
+
+	// SEO data for home page
+	const seoData = createSEOData({
+		title: 'GICA',
+		description: 'A LIVING SPACE FOR ART, RESEARCH, AND COLLECTIVE IMAGINATION',
+		keywords: 'GICA, innovation, technology, creative solutions, digital experiences',
+		// image: '/images/gica-home-og.jpg',
+		imageAlt: 'GICA Homepage - A LIVING SPACE FOR ART, RESEARCH, AND COLLECTIVE IMAGINATION',
+		type: 'website'
+	});
 
 	onMount(() => {
 		if (mainElement) {
@@ -25,6 +37,8 @@
 		}
 	});
 </script>
+
+<Header {...seoData} />
 
 <main bind:this={mainElement} class="home-page">
 	<Nav />

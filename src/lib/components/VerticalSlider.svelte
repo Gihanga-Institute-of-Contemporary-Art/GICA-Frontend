@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { MediaCover } from '$lib/api';
+	import type { MediaAsset } from '$lib/api';
 
 	// MediaCover now includes photographer support!
 	// Current MediaCover now includes: url, alt, caption, photographer, width, height, srcset
 
 	interface Props {
-		images: MediaCover[];
+		images: MediaAsset[];
 	}
 
 	let { images }: Props = $props();
@@ -51,7 +51,7 @@
 	});
 </script>
 
-{#snippet imageItem(image: MediaCover, index: number)}
+{#snippet imageItem(image: MediaAsset, index: number)}
 	<li>
 		<figure>
 			<img
