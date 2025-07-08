@@ -37,7 +37,9 @@
 			<div class="images">
 				{#if visit.photography && visit.photography.length > 0}
 					{#each visit.photography as photo}
-						<img src={photo.url} alt={photo.alt || 'Gallery image'} />
+						<div class="image">
+							<img src={photo.url} alt={photo.alt || 'Gallery image'} />
+						</div>
 					{/each}
 				{/if}
 			</div>
@@ -103,8 +105,16 @@
 		gap: var(--space-8);
 	}
 
+	.middle .images .image {
+		height: 20rem;
+		width: 100%;
+	}
+
 	.middle .images img {
 		border-radius: var(--radius-xl);
+		object-fit: cover;
+		height: 100%;
+		width: 100%;
 	}
 
 	address {
