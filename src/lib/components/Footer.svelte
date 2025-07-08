@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ContentBlock, TextContent } from '$lib/api';
 	import { isFooterActive } from '$lib/stores/footerStore';
+	import { onMount } from 'svelte';
 
 	let { headline, about } = $props<{
 		headline: string;
@@ -10,6 +11,25 @@
 	function toggleFooter() {
 		isFooterActive.update((active) => !active);
 	}
+
+	// Prevent page scrolling when footer is active
+	onMount(() => {
+		const unsubscribe = isFooterActive.subscribe((active) => {
+			if (active) {
+				// Prevent body scrolling
+				document.body.style.overflow = 'hidden';
+			} else {
+				// Restore body scrolling
+				document.body.style.overflow = '';
+			}
+		});
+
+		return () => {
+			// Cleanup: restore scrolling and unsubscribe
+			document.body.style.overflow = '';
+			unsubscribe();
+		};
+	});
 </script>
 
 <footer class:active={$isFooterActive}>
@@ -117,8 +137,31 @@
 		grid-column: 2 / 3;
 	}
 
+	footer.active .details {
+		max-height: calc(99vh - var(--nav-height) - 10rem);
+		overflow-y: auto;
+	}
+
 	.details .sub-text {
 		font-size: var(--font-size-xl);
+	}
+
+	/* Custom scrollbar for details */
+	.details::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	.details::-webkit-scrollbar-track {
+		background: rgba(188, 146, 0, 0.1);
+	}
+
+	.details::-webkit-scrollbar-thumb {
+		background: rgba(188, 146, 0, 0.5);
+		border-radius: 2px;
+	}
+
+	.details::-webkit-scrollbar-thumb:hover {
+		background: rgba(188, 146, 0, 0.8);
 	}
 
 	.headline:hover {
@@ -186,8 +229,24 @@
 			grid-column: 1 / -1;
 		}
 
+		footer.active .details {
+			max-height: calc(99vh - var(--nav-height) - 8rem);
+			overflow-y: auto;
+			padding-right: var(--space-2);
+		}
+
+		footer.active .details .sub-text {
+			margin-bottom: var(--space-2);
+		}
+
+		/* Mobile scrollbar styling */
+		footer.active .details::-webkit-scrollbar {
+			width: 3px;
+		}
+
 		.details .sub-text {
 			margin-top: var(--space-2);
+			hyphens: auto;
 		}
 	}
 </style>
