@@ -256,6 +256,7 @@
 
 		.slider-container ul {
 			gap: var(--space-8);
+			width: 100%;
 		}
 		.btn-text {
 			display: none;
