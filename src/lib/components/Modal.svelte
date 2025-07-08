@@ -373,7 +373,7 @@
 		display: flex;
 		justify-content: space-between;
 		pointer-events: none;
-		z-index: 999;
+		z-index: 1005;
 		padding: 0 1rem;
 	}
 

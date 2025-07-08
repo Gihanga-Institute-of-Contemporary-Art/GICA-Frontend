@@ -85,11 +85,7 @@
 		width: 100%;
 		height: var(--footer-height);
 		background: #011500;
-		background: linear-gradient(
-			0deg,
-			rgba(1, 21, 0, 1) 65%,
-			/* rgba(1, 21, 0, 0.5) 85%, */ rgba(255, 255, 0, 0) 100%
-		);
+		background: linear-gradient(0deg, rgba(1, 21, 0, 1) 65%, rgba(255, 255, 0, 0) 100%);
 		display: flex;
 		align-items: center;
 		padding-top: var(--space-4);
@@ -198,7 +194,7 @@
 		footer {
 			/* padding-inline: var(--space-8); */
 			justify-content: start;
-			padding-block-end: var(--space-2);
+			padding-block-end: 0;
 		}
 
 		.content {
