@@ -235,9 +235,9 @@
 			padding-right: var(--space-2);
 		}
 
-		footer.active .details .sub-text {
+		/* footer.active .details .sub-text {
 			margin-bottom: var(--space-2);
-		}
+		} */
 
 		/* Mobile scrollbar styling */
 		footer.active .details::-webkit-scrollbar {

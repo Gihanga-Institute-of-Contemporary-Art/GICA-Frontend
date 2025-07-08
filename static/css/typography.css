@@ -69,6 +69,7 @@
 /* Responsive typography - Tablet */
 @media (min-width: 768px) {
 	:root {
+		--font-size-base: 0.9375rem; /* Slightly larger for tablets */
 		--margin-heading-top: 1.25rem;
 		--margin-heading-bottom: 0.875rem;
 		--margin-paragraph: 0.875rem;
