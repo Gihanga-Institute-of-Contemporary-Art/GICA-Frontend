@@ -163,7 +163,7 @@
 		height: var(--nav-height);
 		align-items: start;
 		background: var(--color-primary);
-		background: linear-gradient(0deg, rgba(255, 255, 0, 0) 0%, var(--color-primary) 45%);
+		background: linear-gradient(0deg, rgba(255, 255, 0, 0) 0%, var(--color-primary) 55%);
 		padding-inline: var(--space-8);
 	}
 
