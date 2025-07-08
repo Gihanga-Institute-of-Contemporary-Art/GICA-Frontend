@@ -161,7 +161,6 @@ small {
 	margin-bottom: var(--margin-paragraph);
 	font-family: var(--font-primary);
 	line-height: 120%;
-	text-wrap: balance;
 }
 
 small {

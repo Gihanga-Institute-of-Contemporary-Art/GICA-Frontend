@@ -170,6 +170,7 @@
 	.top-nav {
 		display: flex;
 		justify-content: space-between;
+		gap: var(--space-4);
 	}
 
 	section.lang {
