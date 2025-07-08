@@ -119,6 +119,7 @@
 
 	address {
 		font-style: normal;
+		line-height: 120%;
 	}
 
 	p.title {
