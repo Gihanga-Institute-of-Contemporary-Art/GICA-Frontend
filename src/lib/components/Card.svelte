@@ -16,11 +16,6 @@
 
 	// Make tags reactive to item changes
 	const tags = $derived(isProgramme(item) ? item.tags : []);
-
-	// // Debug: Log the item data to understand what's happening
-	// $effect(() => {
-	// 	console.log('Card item:', item.title, 'tags:', tags);
-	// });
 </script>
 
 <button type="button" class="card" onclick={onClick}>
@@ -42,8 +37,6 @@
 			<div class="title">
 				<h5 class="card-title">{item.title}</h5>
 			</div>
-			<!-- <h5 class="card-date">{formatProgrammeDateFromArray(item.dates)}</h5> -->
-			<!-- <h5 class="card-time">{getTimeRange(item.dates)}</h5> -->
 		</div>
 	</div>
 </button>
@@ -107,7 +100,6 @@
 		text-align: center;
 		padding: var(--space-4);
 		color: white;
-		font-size: var(--font-size-lg);
 		z-index: 2;
 	}
 
@@ -123,7 +115,8 @@
 		flex-wrap: wrap;
 		gap: var(--space-2);
 		text-align: left;
-		font-size: var(--font-size-sm);
+		font-family: var(--font-secondary);
+		font-size: var(--font-size-md);
 	}
 
 	.card-overlay .title {
