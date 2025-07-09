@@ -32,6 +32,12 @@
 			{:else}
 				<p>No contributors data available.</p>
 			{/if}
+			<div class="contributor">
+				<div class="sponsor__logo">
+					<span class="name">Major Sponsors</span>
+					<img src="/images/MellonFoundation_Black.png" alt="Mellon Foundation Logo" />
+				</div>
+			</div>
 		</article>
 	</section>
 </main>
@@ -69,6 +75,10 @@
 
 	.contributor p span {
 		margin: 0;
+	}
+
+	.contributor .sponsor__logo {
+		width: 12rem;
 	}
 
 	.collaborators span.name {
