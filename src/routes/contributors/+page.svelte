@@ -84,6 +84,7 @@
 	.collaborators span.name {
 		font-family: var(--font-primary);
 		text-transform: uppercase;
+		white-space: nowrap;
 	}
 
 	@media (max-width: 768px) {
