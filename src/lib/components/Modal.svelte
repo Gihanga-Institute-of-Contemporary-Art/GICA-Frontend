@@ -59,21 +59,18 @@
 				<svg
 					width="100%"
 					height="100%"
-					viewBox="0 0 208 365"
+					viewBox="0 0 79 73"
 					version="1.1"
 					xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink"
 					xml:space="preserve"
 					style="fill-rule:evenodd;clip-rule:evenodd;"
-					class="feather feather-chevron-left"
 				>
-					<g transform="matrix(1,0,0,1,-1243,-1099)">
-						<g id="Left" transform="matrix(4.16667,0,0,4.16667,1425,1437.3)">
-							<path
-								d="M0,-74.953L-37.477,-37.476L0,0"
-								style="fill:none;fill-rule:nonzero;stroke:rgb(26,36,0);stroke-width:3px;"
-							/>
-						</g>
+					<g transform="matrix(3.06162e-16,1,-1,3.06162e-16,77,-3)">
+						<path
+							d="M22,19C28,31 34,43 40,55C46,43 52,31 58,19"
+							style="fill:none;fill-rule:nonzero;stroke:rgb(26,36,0);stroke-width:3px;"
+						/>
 					</g>
 				</svg>
 			</button>
@@ -83,47 +80,25 @@
 				<svg
 					width="100%"
 					height="100%"
-					viewBox="0 0 208 365"
+					viewBox="0 0 79 73"
 					version="1.1"
 					xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink"
 					xml:space="preserve"
 					style="fill-rule:evenodd;clip-rule:evenodd;"
-					class="feather feather-chevron-right"
 				>
-					<g transform="matrix(1,0,0,1,-1474,-1099)">
-						<g id="Right" transform="matrix(4.16667,0,0,4.16667,1500,1125)">
-							<path
-								d="M0,74.953L37.477,37.476L0,0"
-								style="fill:none;fill-rule:nonzero;stroke:rgb(26,36,0);stroke-width:3px;"
-							/>
-						</g>
+					<g transform="matrix(-1.83697e-16,-1,1,-1.83697e-16,3,77)">
+						<path
+							d="M22,19C28,31 34,43 40,55C46,43 52,31 58,19"
+							style="fill:none;fill-rule:nonzero;stroke:rgb(26,36,0);stroke-width:3px;"
+						/>
 					</g>
 				</svg>
 			</button>
 		{/if}
 	</div>
 	<div class="modal-content" bind:this={modalContent} tabindex="-1">
-		<button class="modal-close" onclick={closeModal} aria-label="Close modal" hidden>
-			<svg
-				viewBox="0 0 208 208"
-				version="1.1"
-				xmlns="http://www.w3.org/2000/svg"
-				xmlns:xlink="http://www.w3.org/1999/xlink"
-				xml:space="preserve"
-				style="fill-rule:evenodd;clip-rule:evenodd;"
-				class="feather feather-x"
-			>
-				<g transform="matrix(1,0,0,1,-1243,-1099)">
-					<g id="Close" transform="matrix(4.16667,0,0,4.16667,1347,1203)">
-						<path
-							d="M-12,-12L12,12M12,-12L-12,12"
-							style="fill:none;fill-rule:nonzero;stroke:rgb(26,36,0);stroke-width:2px;"
-						/>
-					</g>
-				</g>
-			</svg>
-		</button>
+		<button class="modal-close" onclick={closeModal} aria-label="Close modal" hidden> </button>
 
 		<div class="modal-left">
 			<div class="item-dates">

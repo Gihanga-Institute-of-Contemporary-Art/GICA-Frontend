@@ -116,12 +116,7 @@
 				</svg>
 			</div>
 			<div class="play" class:hidden={!isPaused}>
-				<svg
-					id="Layer_1"
-					xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					viewBox="0 0 79 73"
-				>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79 73">
 					<defs>
 						<style>
 							.cls-1,
@@ -139,11 +134,14 @@
 							}
 						</style>
 						<clipPath id="clippath">
-							<rect class="cls-1" x="19" y="16" width="41" height="41" />
+							<rect class="cls-1" x="4.15" y="15.98" width="40.74" height="41.04" />
 						</clipPath>
 					</defs>
 					<g class="cls-3">
-						<path class="cls-2" d="M57,36c-12-6-24-12-36-18,0,12,0,24,0,36,12-6,24-12,36-18Z" />
+						<path
+							class="cls-2"
+							d="M41.5,36.36c-11.94-5.97-23.88-11.94-35.82-17.91.03,12.03.07,24.06.1,36.09,11.91-6.06,23.81-12.12,35.72-18.18Z"
+						/>
 					</g>
 				</svg>
 			</div>
