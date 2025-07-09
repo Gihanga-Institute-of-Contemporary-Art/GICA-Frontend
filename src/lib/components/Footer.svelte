@@ -42,21 +42,18 @@
 			onkeydown={(e) => e.key === 'Enter' && toggleFooter()}
 		>
 			<div class="arrow-btn" class:flipped={$isFooterActive}>
-				<svg
-					width="100%"
-					height="100%"
-					viewBox="0 0 88 50"
-					version="1.1"
-					xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					xml:space="preserve"
-					style="fill-rule:evenodd;clip-rule:evenodd;"
-					class="feather feather-chevron-up"
-					><path
-						d="M6.203,43.68l37.477,-37.477l37.476,37.477"
-						style="fill:none;fill-rule:nonzero;stroke:#bc9200;stroke-width:3px;"
-					/></svg
-				>
+				<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79 73">
+					<defs>
+						<style>
+							.cls-1 {
+								fill: none;
+								stroke: #bc9200;
+								stroke-width: 3px;
+							}
+						</style>
+					</defs>
+					<path class="cls-1" d="M22,19c6,12,12,24,18,36,6-12,12-24,18-36" />
+				</svg>
 			</div>
 			<div class="title-container">
 				<p class="title">{headline}</p>

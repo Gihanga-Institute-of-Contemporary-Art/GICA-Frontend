@@ -101,13 +101,50 @@
 			aria-label={isPaused ? 'Play animation' : 'Pause animation'}
 		>
 			<div class="pause" class:hidden={isPaused}>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79 73">
+					<defs>
+						<style>
+							.cls-1 {
+								fill: none;
+								stroke: #bc9200;
+								stroke-width: 3px;
+							}
+						</style>
+					</defs>
+					<line class="cls-1" x1="35.83" y1="16.18" x2="35.83" y2="56.84" />
+					<line class="cls-1" x1="46.74" y1="16.18" x2="46.74" y2="56.84" />
 				</svg>
 			</div>
 			<div class="play" class:hidden={!isPaused}>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-					<path d="M8 5v14l11-7z" />
+				<svg
+					id="Layer_1"
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+					viewBox="0 0 79 73"
+				>
+					<defs>
+						<style>
+							.cls-1,
+							.cls-2 {
+								fill: none;
+							}
+
+							.cls-2 {
+								stroke: #bc9200;
+								stroke-width: 3px;
+							}
+
+							.cls-3 {
+								clip-path: url(#clippath);
+							}
+						</style>
+						<clipPath id="clippath">
+							<rect class="cls-1" x="19" y="16" width="41" height="41" />
+						</clipPath>
+					</defs>
+					<g class="cls-3">
+						<path class="cls-2" d="M57,36c-12-6-24-12-36-18,0,12,0,24,0,36,12-6,24-12,36-18Z" />
+					</g>
 				</svg>
 			</div>
 		</button>
@@ -127,7 +164,7 @@
 	}
 
 	.slider-btn {
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 		right: var(--space-4);
 		height: var(--footer-height);
@@ -136,6 +173,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: var(--space-1);
+		z-index: 1020;
 	}
 
 	.slider-btn button {
@@ -145,7 +183,6 @@
 		font-size: var(--font-size-lg);
 		text-transform: uppercase;
 		color: rgb(188, 146, 0);
-		z-index: 1001;
 	}
 
 	.slider-btn .icon {
@@ -156,8 +193,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 1.5em; /* Match the font size */
-		width: 1.5em; /* Keep it square */
+		height: var(--arrow-size);
+		width: var(--arrow-size);
 	}
 
 	.slider-btn .icon svg {
