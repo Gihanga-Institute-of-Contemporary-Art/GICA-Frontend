@@ -52,13 +52,11 @@
 			<div class="social">
 				<p class="title">Social Media</p>
 				{#if visit.socials && visit.socials.length > 0}
-					<ul>
-						{#each visit.socials as social}
-							<li>
-								<a href={social.url} target="_blank">{social.username}</a>
-							</li>
-						{/each}
-					</ul>
+					{#each visit.socials as social}
+						<p>
+							<a href={social.url} target="_blank">{social.username}</a>
+						</p>
+					{/each}
 				{:else}
 					<p>Social media links not available</p>
 				{/if}
@@ -83,6 +81,10 @@
 		font-size: var(--font-size-lg);
 		font-family: var(--font-primary);
 		/* font-family: var(--font-secondary); */
+	}
+
+	section.content p {
+		margin-bottom: 0;
 	}
 
 	.left {
@@ -115,6 +117,12 @@
 		object-fit: cover;
 		height: 100%;
 		width: 100%;
+	}
+
+	.social ul {
+		margin: 0;
+		padding: 0;
+		height: fit-content;
 	}
 
 	address {
