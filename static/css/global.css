@@ -46,7 +46,7 @@
 
 	/* Component heights */
 	--nav-height: calc(
-		(var(--font-size-xl) * 1.5 + 20px + 2rem) * 1.5
+		(var(--font-size-xl) * 1.5 + 20px + 2rem) * 2.5
 	); /* font-size * line-height + padding + margin */
 
 	--footer-height: 8rem;
@@ -89,4 +89,12 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
 	background: var(--color-gray-900);
+}
+
+@media (max-width: 768px) {
+	:root {
+		--nav-height: calc(
+			(var(--font-size-xl) * 1.5 + 20px + 2rem) * 1.5
+		); /* Adjusted for smaller screens */
+	}
 }

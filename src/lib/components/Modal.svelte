@@ -293,11 +293,6 @@
 		opacity: 0.7;
 	}
 
-	.modal-close svg {
-		width: 100%;
-		height: 100%;
-	}
-
 	.modal-middle {
 		padding-bottom: var(--footer-height);
 	}

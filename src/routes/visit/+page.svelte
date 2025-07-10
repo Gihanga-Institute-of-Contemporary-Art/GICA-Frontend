@@ -119,12 +119,6 @@
 		width: 100%;
 	}
 
-	.social ul {
-		margin: 0;
-		padding: 0;
-		height: fit-content;
-	}
-
 	address {
 		font-style: normal;
 		line-height: 120%;
