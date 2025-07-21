@@ -24,7 +24,7 @@ export const load = async () => {
 				carousel: [],
 				pages: [],
 				translation: {
-					language: 'en',
+					language: 'rw',
 					headline: '',
 					about: []
 				}

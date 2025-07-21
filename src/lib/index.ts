@@ -21,6 +21,7 @@ export { default as DuotoneFilter } from './components/DuotoneFilter.svelte';
 export { default as Modal } from './components/Modal.svelte';
 export { default as Card } from './components/Card.svelte';
 export { default as Header } from './components/Header.svelte';
+export { default as LanguageSwitcher } from './components/LanguageSwitcher.svelte';
 
 // Types
 export type { SEOData } from './types/seo';
@@ -36,4 +37,14 @@ export {
 } from './seo';
 
 // Stores
-export { navItems, initializeNavigation, updateNavItemTitle } from './stores/navStore';
+export {
+	navItems,
+	translatedNavItems,
+	initializeNavigation,
+	updateNavItemTitle
+} from './stores/navStore';
+
+// i18n & Language
+export * from './stores/languageStore';
+export * from './i18n';
+export * from './i18n/translate';

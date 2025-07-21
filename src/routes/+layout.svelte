@@ -68,7 +68,7 @@
 <!-- Page content -->
 {@render children()}
 
-<Footer headline={data.home.headline} about={data.home.about} />
+<Footer headline={data.home.headline} about={data.home.about} translation={data.home.translation} />
 
 <style>
 	.custom-cursor {

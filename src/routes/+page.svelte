@@ -5,13 +5,19 @@
 	import DuotoneFilter from '$lib/components/DuotoneFilter.svelte';
 	import { isFooterActive } from '$lib/stores/footerStore';
 	import { createSEOData } from '$lib/seo';
+	import { translateHomeContent } from '$lib/i18n/translate';
+	import { currentLanguage } from '$lib/stores/languageStore';
 	import type { PageData } from './$types';
 	import { updateScopedColors, getCurrentColors } from '$lib/colorTime';
 	import { onMount } from 'svelte';
+
 	let { data }: { data: PageData } = $props();
 
 	let sliderRef: VerticalSlider;
 	let mainElement: HTMLElement;
+
+	// Get translated home content based on current language
+	const translatedHome = $derived(translateHomeContent(data.home));
 
 	// SEO data for home page
 	const seoData = createSEOData({
@@ -45,7 +51,7 @@
 	<DuotoneFilter />
 
 	<section class="content">
-		<VerticalSlider bind:this={sliderRef} images={data.home.carousel} />
+		<VerticalSlider bind:this={sliderRef} images={translatedHome.carousel} />
 	</section>
 </main>
 

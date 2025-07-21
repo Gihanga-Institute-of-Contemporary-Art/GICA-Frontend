@@ -1,8 +1,8 @@
 /**
  * API Configuration and Environment Management
  * Centralized configuration for API client with validation and fallbacks
+ * Client-safe version - no private environment variables
  */
-import { KIRBY_BASE_URL, KIRBY_API_TOKEN } from '$env/static/private';
 
 export interface ApiConfig {
 	baseUrl: string;
@@ -31,16 +31,20 @@ export interface RetryConfig {
 }
 
 // Default configuration
+/**
+ * Default configuration for API client
+ * Safe for client-side use - no private environment variables
+ */
 const DEFAULT_CONFIG: Required<ApiConfig> = {
-	baseUrl: KIRBY_BASE_URL || 'http://localhost:3000',
-	apiToken: KIRBY_API_TOKEN || '',
+	baseUrl: 'http://localhost:3000', // Default fallback
+	apiToken: 'test', // Will be set by server-side code if needed
 	timeout: 30000, // 30 seconds
 	retryAttempts: 3,
 	retryDelay: 1000, // 1 second
 	cacheEnabled: true,
 	cacheTtl: 300000, // 5 minutes
 	maxCacheSize: 100,
-	environment: 'production'
+	environment: 'development'
 };
 
 class ConfigManager {
@@ -53,30 +57,19 @@ class ConfigManager {
 
 	/**
 	 * Initialize configuration with environment variables or provided config
+	 * Client-safe version - no private environment variables
 	 */
 	init(customConfig?: Partial<ApiConfig>): void {
 		if (this.initialized) {
 			return;
 		}
 
-		// Try to load from environment variables
 		try {
 			const envConfig: Partial<ApiConfig> = {};
 
-			// First try SvelteKit environment variables
-			if (KIRBY_BASE_URL && KIRBY_BASE_URL.trim() !== '') {
-				envConfig.baseUrl = KIRBY_BASE_URL;
-			}
-			if (KIRBY_API_TOKEN && KIRBY_API_TOKEN.trim() !== '') {
-				envConfig.apiToken = KIRBY_API_TOKEN;
-			}
-
-			// Check for Node.js process.env (works in most environments)
+			// Check for Node.js process.env (works in server environments)
 			if (typeof process !== 'undefined' && process.env) {
-				envConfig.baseUrl =
-					envConfig.baseUrl || process.env.KIRBY_BASE_URL || process.env.API_BASE_URL || '';
-				envConfig.apiToken =
-					envConfig.apiToken || process.env.KIRBY_API_TOKEN || process.env.API_TOKEN || '';
+				// Only use public environment variables or fallback to defaults
 				const nodeEnv = process.env.NODE_ENV;
 				envConfig.environment =
 					nodeEnv === 'development' || nodeEnv === 'test' ? nodeEnv : 'production';

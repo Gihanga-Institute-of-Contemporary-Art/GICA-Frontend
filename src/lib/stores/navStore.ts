@@ -1,20 +1,36 @@
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
+import { currentLanguage } from './languageStore';
+import { ui } from '../i18n';
 
 export interface NavItem {
 	title: string;
 	href: string;
 	slug: string;
+	translationKey?: keyof typeof import('../i18n').uiTranslations;
 }
 
-// Navigation configuration that can be easily modified
-const navConfig = [
-	{ title: 'Home', href: '/', slug: 'home' },
-	{ title: 'Programme', href: '/programme', slug: 'programme' },
-	{ title: 'Contributors', href: '/contributors', slug: 'contributors' },
-	{ title: 'Visit us', href: '/visit', slug: 'visit' }
+// Navigation configuration with translation keys
+const navConfig: NavItem[] = [
+	{ title: 'Home', href: '/', slug: 'home', translationKey: 'home' },
+	{ title: 'Programme', href: '/programme', slug: 'programme', translationKey: 'programme' },
+	{
+		title: 'Contributors',
+		href: '/contributors',
+		slug: 'contributors',
+		translationKey: 'contributors'
+	},
+	{ title: 'Visit us', href: '/visit', slug: 'visit', translationKey: 'visit' }
 ];
 
 export const navItems = writable<NavItem[]>(navConfig);
+
+// Create a derived store that provides translated nav items
+export const translatedNavItems = derived([navItems, currentLanguage], ([items]) => {
+	return items.map((item) => ({
+		...item,
+		title: item.translationKey ? ui(item.translationKey) : item.title
+	}));
+});
 
 // Function to initialize navigation (can be extended for dynamic data)
 export function initializeNavigation() {

@@ -12,8 +12,8 @@ export * from './dataManager';
 // Server utilities
 export * from './serverUtils';
 
-// Configuration
-export { setupApiConfig, setupApiConfigWithEnv, configManager } from './config';
+// Configuration (client-safe exports only)
+export { setupApiConfig, configManager } from './config';
 export type { ApiConfig, CacheConfig, RetryConfig } from './config';
 
 // HTTP Client

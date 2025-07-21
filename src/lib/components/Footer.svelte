@@ -1,12 +1,35 @@
 <script lang="ts">
 	import type { ContentBlock, TextContent } from '$lib/api';
 	import { isFooterActive } from '$lib/stores/footerStore';
+	import { currentLanguage } from '$lib/stores/languageStore';
 	import { onMount } from 'svelte';
 
-	let { headline, about } = $props<{
+	let { headline, about, translation } = $props<{
 		headline: string;
 		about: ContentBlock[];
+		translation?: {
+			language: string;
+			headline: string;
+			about: ContentBlock[];
+		};
 	}>();
+
+	// Get translated content - now reactive to language changes
+	const translatedHeadline = $derived(
+		$currentLanguage === 'en' ||
+			!translation?.headline ||
+			translation?.language !== $currentLanguage
+			? headline
+			: translation.headline
+	);
+
+	const translatedAbout = $derived(
+		$currentLanguage === 'en' || !translation?.about || translation?.language !== $currentLanguage
+			? about
+			: translation.about
+	);
+
+	$inspect({ translatedHeadline, translatedAbout });
 
 	function toggleFooter() {
 		isFooterActive.update((active) => !active);
@@ -61,12 +84,12 @@
 				</svg>
 			</div>
 			<div class="title-container">
-				<p class="title">{headline}</p>
+				<p class="title">{translatedHeadline}</p>
 			</div>
 			<div class="details">
 				{#if $isFooterActive}
 					<div class="sub-text">
-						{#each about as block}
+						{#each translatedAbout as block}
 							{#if block.type === 'text'}
 								{@const textContent = block.content as TextContent}
 								{@html textContent.text}

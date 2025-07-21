@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { isFooterActive } from '$lib/stores/footerStore';
-	import { navItems, initializeNavigation, type NavItem } from '$lib/stores/navStore';
+	import { translatedNavItems, initializeNavigation, type NavItem } from '$lib/stores/navStore';
+	import { LanguageSwitcher } from '$lib';
 	import { onMount } from 'svelte';
 
 	interface SubmenuItem {
@@ -23,9 +24,6 @@
 	}
 
 	let { submenu = [], submenuRows = [], onSubmenuSelect, onProgrammeNavClick }: Props = $props();
-
-	// Language state - default is English
-	let currentLanguage = $state('EN');
 
 	// Initialize navigation on mount
 	onMount(() => {
@@ -79,36 +77,13 @@
 			onProgrammeNavClick();
 		}
 	}
-
-	function handleLanguageChange() {
-		// TODO: Implement comprehensive language switching functionality
-		// Implementation suggestions:
-		// 1. Create a language store to manage global language state
-		// 2. Set up i18n library (like svelte-i18n) for translations
-		// 3. Load appropriate translation files (en.json, rw.json)
-		// 4. Update all text content across the application
-		// 5. Consider URL structure changes (/en/programme vs /rw/programme)
-		// 6. Store language preference in localStorage or cookies
-		// 7. Update document lang attribute for accessibility
-
-		console.log(`Switching language from ${currentLanguage} to ${displayLanguage}`);
-
-		// For now, just toggle the display language for demonstration
-		currentLanguage = currentLanguage === 'EN' ? 'RW' : 'EN';
-
-		// TODO: Replace this with actual language switching logic
-		// Example: languageStore.set(currentLanguage);
-	}
-
-	// Get the language to display (the one to switch TO, not the current one)
-	const displayLanguage = $derived(currentLanguage === 'EN' ? 'RW' : 'EN');
 </script>
 
 <nav>
 	<div class="content">
 		<div class="top-nav">
 			<ul>
-				{#each $navItems as navItem}
+				{#each $translatedNavItems as navItem}
 					<li>
 						<a
 							href={navItem.href}
@@ -121,9 +96,7 @@
 				{/each}
 			</ul>
 			<section class="lang">
-				<button onclick={handleLanguageChange}>
-					<h5>{displayLanguage}</h5>
-				</button>
+				<LanguageSwitcher showFlag={false} style="button" size="small" />
 			</section>
 		</div>
 		{#if submenu.length > 0}
@@ -178,19 +151,11 @@
 		font-family: var(--font-secondary);
 	}
 
-	section.lang button {
-		background: none;
-		border: none;
-		font-size: var(--font-size-lg);
-		color: var(--font-color-mid);
-		text-transform: uppercase;
-		cursor: pointer;
-		transition: color 0.2s ease;
+	section.lang {
+		display: flex;
+		align-items: center;
 	}
 
-	section.lang button:hover {
-		color: var(--color-secondary);
-	}
 	nav ul {
 		list-style: none;
 		padding: 0;

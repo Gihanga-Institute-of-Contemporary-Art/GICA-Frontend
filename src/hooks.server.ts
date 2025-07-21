@@ -1,7 +1,11 @@
 // src/hooks.server.ts
 import { preloadAllData } from '$lib/api';
+import { initializeApiConfig } from '$lib/api/server/config';
 import { building } from '$app/environment';
 import type { Handle, HandleServerError } from '@sveltejs/kit';
+
+// Initialize API configuration with environment variables
+initializeApiConfig();
 
 // Preload data once at build time
 let dataInitialized = false;

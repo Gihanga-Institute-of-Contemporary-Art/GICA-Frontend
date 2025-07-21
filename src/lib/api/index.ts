@@ -129,7 +129,7 @@ export function initializeApi(config?: {
 }): void {
 	try {
 		_setupApiConfig(config || {});
-		console.log('API library initialized successfully');
+		console.log('API library initialized successfully', config);
 	} catch (error) {
 		console.error('Failed to initialize API library:', error);
 		throw error;
