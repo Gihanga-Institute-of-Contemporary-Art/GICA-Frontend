@@ -209,7 +209,7 @@ export function setupApiConfigWithEnv(envVars: {
 	[key: string]: string | undefined;
 }): void {
 	console.log('setupApiConfigWithEnv called with:', envVars);
-	
+
 	const config: Partial<ApiConfig> = {};
 
 	// Set baseUrl if the environment variable is defined
@@ -223,7 +223,10 @@ export function setupApiConfigWithEnv(envVars: {
 	// Set apiToken if the environment variable is defined
 	if (envVars.KIRBY_API_TOKEN) {
 		config.apiToken = envVars.KIRBY_API_TOKEN;
-		console.log('Setting apiToken from env (masked):', envVars.KIRBY_API_TOKEN ? '***' : 'undefined');
+		console.log(
+			'Setting apiToken from env (masked):',
+			envVars.KIRBY_API_TOKEN ? '***' : 'undefined'
+		);
 	} else {
 		console.log('KIRBY_API_TOKEN not found in env vars');
 	}
