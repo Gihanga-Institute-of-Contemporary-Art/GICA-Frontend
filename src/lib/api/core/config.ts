@@ -208,17 +208,26 @@ export function setupApiConfigWithEnv(envVars: {
 	KIRBY_API_TOKEN?: string;
 	[key: string]: string | undefined;
 }): void {
+	console.log('setupApiConfigWithEnv called with:', envVars);
+	
 	const config: Partial<ApiConfig> = {};
 
-	// Only set baseUrl if the environment variable is defined and not empty
-	if (envVars.KIRBY_BASE_URL && envVars.KIRBY_BASE_URL.trim() !== '') {
+	// Set baseUrl if the environment variable is defined
+	if (envVars.KIRBY_BASE_URL) {
 		config.baseUrl = envVars.KIRBY_BASE_URL;
+		console.log('Setting baseUrl from env:', envVars.KIRBY_BASE_URL);
+	} else {
+		console.log('KIRBY_BASE_URL not found in env vars');
 	}
 
-	// Only set apiToken if the environment variable is defined and not empty
-	if (envVars.KIRBY_API_TOKEN && envVars.KIRBY_API_TOKEN.trim() !== '') {
+	// Set apiToken if the environment variable is defined
+	if (envVars.KIRBY_API_TOKEN) {
 		config.apiToken = envVars.KIRBY_API_TOKEN;
+		console.log('Setting apiToken from env (masked):', envVars.KIRBY_API_TOKEN ? '***' : 'undefined');
+	} else {
+		console.log('KIRBY_API_TOKEN not found in env vars');
 	}
 
+	console.log('Final config to pass to init:', config);
 	configManager.init(config);
 }
