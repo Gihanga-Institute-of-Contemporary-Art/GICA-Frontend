@@ -103,8 +103,6 @@ class ConfigManager {
 			console.warn(
 				'API base URL not configured, using development fallback: http://localhost:3000'
 			);
-		} else {
-			console.log(`API configured with baseUrl: ${this.config.baseUrl}`);
 		}
 
 		try {
@@ -119,15 +117,6 @@ class ConfigManager {
 
 		if (this.config.retryAttempts > 5) {
 			console.warn('High retry attempts may cause performance issues');
-		}
-
-		// Debug logging for development
-		if (this.config.environment === 'development') {
-			console.log('API Config initialized:', {
-				baseUrl: this.config.baseUrl,
-				hasToken: !!this.config.apiToken,
-				environment: this.config.environment
-			});
 		}
 	}
 
@@ -208,29 +197,17 @@ export function setupApiConfigWithEnv(envVars: {
 	KIRBY_API_TOKEN?: string;
 	[key: string]: string | undefined;
 }): void {
-	console.log('setupApiConfigWithEnv called with:', envVars);
-
 	const config: Partial<ApiConfig> = {};
 
 	// Set baseUrl if the environment variable is defined
 	if (envVars.KIRBY_BASE_URL) {
 		config.baseUrl = envVars.KIRBY_BASE_URL;
-		console.log('Setting baseUrl from env:', envVars.KIRBY_BASE_URL);
-	} else {
-		console.log('KIRBY_BASE_URL not found in env vars');
 	}
 
 	// Set apiToken if the environment variable is defined
 	if (envVars.KIRBY_API_TOKEN) {
 		config.apiToken = envVars.KIRBY_API_TOKEN;
-		console.log(
-			'Setting apiToken from env (masked):',
-			envVars.KIRBY_API_TOKEN ? '***' : 'undefined'
-		);
-	} else {
-		console.log('KIRBY_API_TOKEN not found in env vars');
 	}
 
-	console.log('Final config to pass to init:', config);
 	configManager.init(config);
 }

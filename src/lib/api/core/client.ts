@@ -32,8 +32,6 @@ export interface ApiResponse<T> {
  * Enhanced API Client class
  */
 export class ApiClient {
-	private baseUrl: string;
-	private defaultHeaders: Record<string, string>;
 	private requestInterceptors: Array<
 		(options: RequestOptions) => RequestOptions | Promise<RequestOptions>
 	> = [];
@@ -42,10 +40,22 @@ export class ApiClient {
 	> = [];
 
 	constructor() {
+		// Don't cache config values - get them dynamically
+	}
+
+	/**
+	 * Get current base URL from config
+	 */
+	private getBaseUrl(): string {
+		return configManager.getConfig().baseUrl;
+	}
+
+	/**
+	 * Get current default headers from config
+	 */
+	private getDefaultHeaders(): Record<string, string> {
 		const config = configManager.getConfig();
-		this.baseUrl = config.baseUrl;
-		console.log('API Client initialized with base URL:', this.baseUrl);
-		this.defaultHeaders = {
+		return {
 			'Content-Type': 'application/json',
 			...(config.apiToken && { Authorization: `Bearer ${config.apiToken}` })
 		};
@@ -95,6 +105,8 @@ export class ApiClient {
 			abortSignal
 		} = processedOptions;
 
+		console.log('API Client initialized with base URL:', this.getBaseUrl());
+
 		// Check cache for GET requests
 		if (method === 'GET' && cache) {
 			const cachedResponse = apiCache.getApiResponse<T>(endpoint);
@@ -119,7 +131,7 @@ export class ApiClient {
 		}
 
 		const url = this.buildUrl(endpoint);
-		const requestHeaders = { ...this.defaultHeaders, ...headers };
+		const requestHeaders = { ...this.getDefaultHeaders(), ...headers };
 
 		const makeRequest = async (): Promise<ApiResponse<T>> => {
 			try {
@@ -237,7 +249,8 @@ export class ApiClient {
 	 */
 	private buildUrl(endpoint: string): string {
 		const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
-		const cleanBaseUrl = this.baseUrl.endsWith('/') ? this.baseUrl.slice(0, -1) : this.baseUrl;
+		const baseUrl = this.getBaseUrl();
+		const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 		return `${cleanBaseUrl}/${cleanEndpoint}`;
 	}
 
