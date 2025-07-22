@@ -10,7 +10,6 @@ import { setupApiConfigWithEnv } from '$lib/api/core/config';
  * Call this from server-side code (like hooks.server.ts or +layout.server.ts)
  */
 export function initializeApiConfig(): void {
-	console.log(KIRBY_API_TOKEN, KIRBY_BASE_URL, 'Initializing API config with env vars');
 	setupApiConfigWithEnv({
 		KIRBY_BASE_URL,
 		KIRBY_API_TOKEN
