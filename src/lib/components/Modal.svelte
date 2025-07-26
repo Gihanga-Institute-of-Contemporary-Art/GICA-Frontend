@@ -185,6 +185,8 @@
 		z-index: 1000;
 		display: flex;
 		justify-content: center;
+		background-color: var(--color-primary);
+		color: var(--color-primary-light);
 	}
 
 	.modal-content {
@@ -235,7 +237,7 @@
 		margin: 0 0 var(--space-2) 0;
 		font-size: var(--font-size-md);
 		text-transform: uppercase;
-		color: var(--font-color-mid);
+		color: var(--color-primary-light);
 	}
 
 	.contributors-list {
@@ -254,7 +256,7 @@
 	}
 
 	.contributor-role {
-		color: var(--font-color-mid);
+		color: var(--color-primary-light);
 		font-style: italic;
 		margin-left: var(--space-1);
 	}

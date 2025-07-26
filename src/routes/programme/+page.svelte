@@ -203,7 +203,7 @@
 
 <Header {...seoData} />
 
-<main>
+<main class:modal-open={isModalOpen}>
 	<Nav {submenuRows} onProgrammeNavClick={resetProgrammePage} />
 	{#if !isModalOpen}
 		<section class="content">
@@ -236,6 +236,11 @@
 	main {
 		padding-block-start: var(--nav-height);
 	}
+
+	main.modal-open {
+		background-color: var(--color-primary);
+	}
+
 	section.content {
 		max-width: var(--content-width);
 		margin: 0 auto;
