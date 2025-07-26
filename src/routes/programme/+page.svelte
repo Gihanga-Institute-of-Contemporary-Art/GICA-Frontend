@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Nav from '$lib/components/Nav.svelte';
+	import Header from '$lib/components/Header.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Card from '$lib/components/Card.svelte';
 	import type { Programme, Programmes } from '$lib/api/schemas/gicaSchema';
 	import type { PageData } from './$types';
+	import { createSEOData } from '$lib/seo';
 	import {
 		formatProgrammeDateFromArray,
 		getProgrammeStatusFromArray,
@@ -50,6 +52,19 @@
 			value: ''
 		}
 	};
+
+	// Create SEO data for the programme page
+	const seoData = createSEOData({
+		title: 'Programmes',
+		description: programmeBlurb.description.value
+			? programmeBlurb.description.value.replace(/<[^>]*>/g, '').substring(0, 160) + '...'
+			: 'Explore our current and upcoming programmes at GICA - workshops, exhibitions, talks, and artistic residencies.',
+		keywords:
+			'GICA programmes, workshops, exhibitions, talks, residencies, contemporary art, Rwanda, cultural events',
+		type: 'website',
+		section: 'programmes',
+		tags: programmeTypes
+	});
 
 	const typeSubmenu = $derived(
 		programmeTypes.map((type) => ({
@@ -185,6 +200,8 @@
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
+
+<Header {...seoData} />
 
 <main>
 	<Nav {submenuRows} onProgrammeNavClick={resetProgrammePage} />

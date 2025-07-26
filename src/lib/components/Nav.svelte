@@ -143,7 +143,15 @@
 	.top-nav {
 		display: flex;
 		justify-content: space-between;
+		padding-block-end: var(--space-2);
 		gap: var(--space-4);
+	}
+
+	.top-nav ul li a h5 {
+		border: 2px solid var(--font-color-primary);
+		padding-inline: var(--space-1);
+		margin: 0;
+		border-radius: 4px;
 	}
 
 	section.lang {
@@ -184,12 +192,16 @@
 
 	nav a.active {
 		/* Active page styling */
-		color: var(--color-secondary);
+		color: var(--color-primary-light);
+	}
+
+	nav ul li a.active h5 {
+		background-color: var(--color-secondary);
+		border: none !important;
 	}
 
 	nav a.inactive {
-		/* Non-active links when not on home */
-		color: var(--font-color-mid);
+		color: var(--font-color-primary);
 	}
 
 	/* Submenu styles */
@@ -209,7 +221,7 @@
 	.submenu-item {
 		background: none;
 		border: none;
-		color: var(--font-color-dark);
+		color: var(--font-color-primary);
 		font-size: var(--font-size-lg);
 		text-transform: uppercase;
 		cursor: pointer;

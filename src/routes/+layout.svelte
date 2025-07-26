@@ -77,7 +77,7 @@
 		left: 0;
 		width: 25px;
 		height: 25px;
-		background-color: #04cf00;
+		background-color: var(--color-secondary);
 		border-radius: 50%;
 		pointer-events: none;
 		z-index: 9999;

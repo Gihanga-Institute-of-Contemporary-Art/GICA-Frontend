@@ -192,6 +192,7 @@
 		font-weight: 500;
 		font-size: var(--font-size-lg, 1rem);
 		letter-spacing: 0.025em;
+		margin: 0;
 	}
 
 	/* Dark mode support */

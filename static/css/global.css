@@ -8,7 +8,7 @@
 	--color-primary-light: rgb(247, 233, 209); /* Default static color */
 	--color-primary-mid: rgb(96, 87, 0);
 	--color-primary-dark: rgb(55, 56, 0);
-	--color-secondary: #00d000;
+	--color-secondary: rgb(250, 217, 0);
 
 	--font-color-primary: rgb(59, 47, 27); /* Default static color */
 	--font-color-dark: rgb(26, 36, 0);
