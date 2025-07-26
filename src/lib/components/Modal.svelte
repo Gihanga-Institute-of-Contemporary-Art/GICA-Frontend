@@ -335,7 +335,7 @@
 	}
 
 	.modal-nav {
-		position: absolute;
+		position: fixed;
 		top: 50%;
 		left: 0;
 		right: 0;

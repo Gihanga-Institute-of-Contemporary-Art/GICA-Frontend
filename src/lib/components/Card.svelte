@@ -27,13 +27,13 @@
 	>
 		<div class="card-overlay">
 			<!-- show Tags if type is 'programme' -->
-			{#if isProgramme(item) && tags.length > 0}
+			<!-- {#if isProgramme(item) && tags.length > 0}
 				<div class="tags">
 					{#each tags as tag}
 						<p class="tag">{tag}</p>
 					{/each}
 				</div>
-			{/if}
+			{/if} -->
 			<div class="title">
 				<h5 class="card-title">{item.title}</h5>
 			</div>
