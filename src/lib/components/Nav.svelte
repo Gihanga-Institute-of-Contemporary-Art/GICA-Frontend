@@ -230,6 +230,15 @@
 		transition: all 0.2s ease;
 		letter-spacing: 0.5px;
 	}
+
+	.submenu:nth-child(3) .submenu-item {
+		color: var(--color-primary-light);
+	}
+
+	.submenu:nth-child(3) .submenu-item.active {
+		color: var(--color-secondary);
+	}
+
 	/* 
 	.submenu-item:hover {
 		background: rgba(0, 0, 0, 0.1);
