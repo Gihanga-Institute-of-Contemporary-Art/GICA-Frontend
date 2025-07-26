@@ -7,11 +7,11 @@
 	--color-primary: rgb(117, 108, 77);
 	--color-primary-light: rgb(247, 233, 209); /* Default static color */
 	--color-primary-mid: rgb(96, 87, 0);
-	--color-primary-dark: rgb(55, 56, 0);
+	--color-primary-dark: rgb(59, 47, 27);
 	--color-secondary: rgb(250, 217, 0);
 
 	--font-color-primary: rgb(59, 47, 27); /* Default static color */
-	--font-color-dark: rgb(26, 36, 0);
+	--font-color-dark: rgb(59, 47, 27);
 	--font-color-mid: rgb(96, 87, 0);
 	--font-color-inactive: rgb(55, 56, 0);
 
@@ -24,7 +24,7 @@
 	--color-gray-600: #4b5563;
 	--color-gray-700: #374151;
 	--color-gray-800: #1f2937;
-	--color-gray-900: rgb(26, 36, 0);
+	--color-gray-900: rgb(59, 47, 27);
 
 	/* Spacing */
 	--space-1: 0.25rem;

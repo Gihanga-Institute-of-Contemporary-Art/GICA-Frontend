@@ -235,6 +235,7 @@
 <style>
 	main {
 		padding-block-start: var(--nav-height);
+		color: var(--font-color-primary);
 	}
 
 	main.modal-open {
