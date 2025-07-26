@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Nav from '$lib/components/Nav.svelte';
+	import Header from '$lib/components/Header.svelte';
 	import type { Contributors } from '$lib/api/schemas/gicaSchema';
 	import type { PageData } from './$types';
+	import { createSEOData } from '$lib/seo';
 
 	interface Props {
 		data: PageData;
@@ -11,7 +13,23 @@
 
 	// Type the contributors data properly
 	const contributors: Contributors = data.contributors;
+
+	// Create SEO data for the contributors page
+	const seoData = createSEOData({
+		title: 'Contributors',
+		description: `Meet the team and contributors behind GICA - artists, curators, researchers, and cultural practitioners who make our work possible. ${
+			contributors.children?.length
+				? `Featuring ${contributors.children.length} contributors and collaborators.`
+				: 'Our growing community of creative professionals.'
+		}`,
+		keywords:
+			'GICA contributors, team, collaborators, artists, curators, researchers, staff, Rwanda, contemporary art',
+		type: 'website',
+		section: 'contributors'
+	});
 </script>
+
+<Header {...seoData} />
 
 <main>
 	<Nav />

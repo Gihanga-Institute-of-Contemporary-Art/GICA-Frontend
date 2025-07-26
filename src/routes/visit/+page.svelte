@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Nav from '$lib/components/Nav.svelte';
+	import Header from '$lib/components/Header.svelte';
 	import type { PageData } from './$types';
 	import type { Visit } from '$lib/api/schemas/gicaSchema';
+	import { createSEOData } from '$lib/seo';
 	import { formatOpeningHours } from '$lib/utils';
 
 	interface Props {
@@ -11,7 +13,23 @@
 	const visit: Visit = data.visit;
 
 	const formattedHours = formatOpeningHours(visit.hours || []);
+
+	// Create SEO data for the visit page
+	const seoData = createSEOData({
+		title: 'Visit',
+		description: `Visit GICA at ${visit.address || 'our gallery'}. ${
+			formattedHours
+				? 'Open ' + formattedHours.replace(/<[^>]*>/g, '').split('\n')[0]
+				: 'Opening Fall 2025'
+		}. Contact us at ${visit.email || 'our gallery'} for more information.`,
+		keywords:
+			'GICA visit, gallery hours, location, address, contact, contemporary art gallery Rwanda',
+		type: 'website',
+		section: 'visit'
+	});
 </script>
+
+<Header {...seoData} />
 
 <main>
 	<Nav />
