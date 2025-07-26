@@ -6,6 +6,7 @@
 	import { isFooterActive } from '$lib/stores/footerStore';
 	import { createSEOData } from '$lib/seo';
 	import { translateHomeContent } from '$lib/i18n/translate';
+	import StochasticPattern from '$lib/components/StochasticPattern.svelte';
 	// import { currentLanguage } from '$lib/stores/languageStore';
 	import type { PageData } from './$types';
 	// import { updateScopedColors, getCurrentColors } from '$lib/colorTime';
@@ -45,7 +46,7 @@
 </script>
 
 <Header {...seoData} />
-
+<StochasticPattern />
 <main bind:this={mainElement} class="home-page">
 	<Nav />
 	<DuotoneFilter baseHex="#756c4d" />
