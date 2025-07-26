@@ -106,7 +106,7 @@
 						<style>
 							.cls-1 {
 								fill: none;
-								stroke: #bc9200;
+								stroke: var(--color-primary-light);
 								stroke-width: 3px;
 							}
 						</style>
@@ -125,7 +125,7 @@
 							}
 
 							.cls-2 {
-								stroke: #bc9200;
+								stroke: var(--color-primary-light);
 								stroke-width: 3px;
 							}
 
@@ -180,7 +180,7 @@
 		cursor: pointer;
 		font-size: var(--font-size-lg);
 		text-transform: uppercase;
-		color: rgb(188, 146, 0);
+		color: var(--color-primary-light);
 	}
 
 	.slider-btn .icon {

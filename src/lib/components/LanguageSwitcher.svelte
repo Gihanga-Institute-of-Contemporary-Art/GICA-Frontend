@@ -89,6 +89,7 @@
 		display: inline-flex;
 		align-items: center;
 		font-family: inherit;
+		color: var(--font-color-primary, #666);
 	}
 
 	/* Button Style */
@@ -124,7 +125,7 @@
 		font-size: inherit;
 		font-weight: 500;
 		transition: all 0.2s ease;
-		color: var(--text-secondary, #666);
+		color: var(--font-color-primary, #666);
 	}
 
 	.language-switcher__option.active {

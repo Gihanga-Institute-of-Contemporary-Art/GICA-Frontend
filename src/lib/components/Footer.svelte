@@ -76,7 +76,7 @@
 					<g transform="matrix(-1,1.22465e-16,-1.22465e-16,-1,80,74)">
 						<path
 							d="M22,19C28,31 34,43 40,55C46,43 52,31 58,19"
-							style="fill:none;fill-rule:nonzero;stroke:rgb(188,146,0);stroke-width:3px;"
+							style="fill:none;fill-rule:nonzero;stroke:var(--color-primary-light);stroke-width:3px;"
 						/>
 					</g>
 				</svg>
@@ -112,7 +112,7 @@
 		display: flex;
 		align-items: center;
 		padding-top: var(--space-4);
-		color: rgb(188, 146, 0);
+		color: var(--color-primary-light);
 		z-index: 1010;
 	}
 
