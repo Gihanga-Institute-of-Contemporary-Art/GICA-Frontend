@@ -4,8 +4,8 @@
 
 :root {
 	/* Color variables - Static defaults */
-	--color-primary: rgb(188, 146, 0);
-	--color-primary-light: #ffefc9; /* Default static color */
+	--color-primary: rgb(117, 108, 77);
+	--color-primary-light: rgb(247, 233, 209); /* Default static color */
 	--color-primary-mid: rgb(96, 87, 0);
 	--color-primary-dark: rgb(55, 56, 0);
 	--color-secondary: #00d000;
@@ -59,7 +59,7 @@
 }
 
 body {
-	background-color: #ffefc9; /* Static default background */
+	background-color: rgb(247, 233, 209); /* Static default background */
 	color: var(--color-gray-900);
 	position: relative;
 }

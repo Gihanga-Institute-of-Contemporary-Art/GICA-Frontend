@@ -11,7 +11,7 @@
 
 	let {
 		id = 'duotone-filter',
-		baseHex = '#1A2400',
+		baseHex = '#756c4d',
 		dither = false,
 		dithering_amount = 3,
 		noise_scale = 0.8

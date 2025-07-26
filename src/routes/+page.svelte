@@ -6,10 +6,10 @@
 	import { isFooterActive } from '$lib/stores/footerStore';
 	import { createSEOData } from '$lib/seo';
 	import { translateHomeContent } from '$lib/i18n/translate';
-	import { currentLanguage } from '$lib/stores/languageStore';
+	// import { currentLanguage } from '$lib/stores/languageStore';
 	import type { PageData } from './$types';
-	import { updateScopedColors, getCurrentColors } from '$lib/colorTime';
-	import { onMount } from 'svelte';
+	// import { updateScopedColors, getCurrentColors } from '$lib/colorTime';
+	// import { onMount } from 'svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -29,12 +29,12 @@
 		type: 'website'
 	});
 
-	onMount(() => {
-		if (mainElement) {
-			updateScopedColors(mainElement);
-			setInterval(() => updateScopedColors(mainElement), 10 * 60 * 1000); // every 10 minutes
-		}
-	});
+	// onMount(() => {
+	// 	if (mainElement) {
+	// 		updateScopedColors(mainElement);
+	// 		setInterval(() => updateScopedColors(mainElement), 10 * 60 * 1000); // every 10 minutes
+	// 	}
+	// });
 
 	// Reactive effect to pause/unpause slider based on footer state
 	$effect(() => {
@@ -48,7 +48,7 @@
 
 <main bind:this={mainElement} class="home-page">
 	<Nav />
-	<DuotoneFilter />
+	<DuotoneFilter baseHex="#756c4d" />
 
 	<section class="content">
 		<VerticalSlider bind:this={sliderRef} images={translatedHome.carousel} />
@@ -57,7 +57,8 @@
 
 <style>
 	.home-page {
-		background-color: var(--color-primary-light);
+		/* background-color: var(--color-primary-light); */
+		background-color: rgb(247, 233, 209);
 		color: var(--font-color-primary);
 		min-height: 100vh;
 	}

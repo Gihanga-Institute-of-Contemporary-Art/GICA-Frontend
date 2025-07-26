@@ -29,8 +29,6 @@
 			: translation.about
 	);
 
-	$inspect({ translatedHeadline, translatedAbout });
-
 	function toggleFooter() {
 		isFooterActive.update((active) => !active);
 	}
@@ -109,8 +107,8 @@
 		left: 0;
 		width: 100%;
 		height: var(--footer-height);
-		background: #011500;
-		background: linear-gradient(0deg, rgba(1, 21, 0, 1) 65%, rgba(255, 255, 0, 0) 100%);
+		background: var(--color-primary);
+		background: linear-gradient(0deg, var(--color-primary) 65%, rgba(255, 255, 0, 0) 100%);
 		display: flex;
 		align-items: center;
 		padding-top: var(--space-4);
@@ -122,7 +120,7 @@
 		height: 99vh;
 		display: block;
 		padding-top: var(--nav-height);
-		background: linear-gradient(0deg, rgba(1, 21, 0, 1) 70%, rgba(255, 255, 0, 0) 92%);
+		background: var(--color-primary);
 	}
 
 	.headline {
