@@ -245,7 +245,7 @@
 	section.content {
 		max-width: var(--content-width);
 		margin: 0 auto;
-		padding-block-end: var(--space-2);
+		padding-block-end: var(--space-8);
 	}
 
 	section.content .blurb {
