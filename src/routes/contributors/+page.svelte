@@ -67,7 +67,7 @@
 	section.content {
 		max-width: var(--content-width);
 		margin: 0 auto;
-		margin-block: var(--space-2);
+		margin-block-end: var(--space-2);
 	}
 
 	article.collaborators {

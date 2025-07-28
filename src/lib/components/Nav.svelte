@@ -190,14 +190,9 @@
 		color: inherit;
 	}
 
-	nav a.active {
-		/* Active page styling */
-		color: var(--color-primary-light);
-	}
-
 	nav ul li a.active h5 {
 		background-color: var(--color-secondary);
-		border: none !important;
+		border: 2px solid var(--color-secondary);
 	}
 
 	nav a.inactive {
