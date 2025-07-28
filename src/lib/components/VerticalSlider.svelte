@@ -284,7 +284,7 @@
 	/* Responsive Design */
 	@media (max-width: 768px) {
 		.slider-btn {
-			padding-block-start: var(--space-4);
+			padding-block-start: var(--space-2);
 			align-items: start;
 			padding-inline-end: 0;
 		}

@@ -255,6 +255,7 @@
 		.top-nav ul,
 		.top-nav section.lang {
 			padding-block-start: var(--space-2);
+			align-items: start;
 		}
 		nav ul {
 			flex-wrap: wrap;
