@@ -20,8 +20,8 @@
 
 <button type="button" class="card" onclick={onClick}>
 	<div
-		class="card-image"
-		style="background-color: var(--color-primary-mid); {item.cover?.url
+		class="card-image {item.cover?.url ? 'has-image' : ''}"
+		style="background-color: var(--color-primary); {item.cover?.url
 			? `background-image: url(${item.cover.url})`
 			: ''}"
 	>
@@ -76,7 +76,7 @@
 		overflow: hidden;
 	}
 
-	.card-image::before {
+	.card-image.has-image::before {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -108,7 +108,7 @@
 		line-height: 1.3;
 	}
 
-	.card-overlay .tags {
+	/* .card-overlay .tags {
 		display: flex;
 		width: 100%;
 		height: fit-content;
@@ -117,7 +117,7 @@
 		text-align: left;
 		font-family: var(--font-secondary);
 		font-size: var(--font-size-md);
-	}
+	} */
 
 	.card-overlay .title {
 		height: 100%;
