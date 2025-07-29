@@ -163,6 +163,7 @@
 
 	.details .sub-text {
 		font-size: var(--font-size-xl);
+		max-width: var(--content-width);
 	}
 
 	/* Custom scrollbar for details */
