@@ -41,10 +41,6 @@
 		const isHomePage = page.url.pathname === '/';
 		const isCurrentActive = isActive(href);
 
-		if (isHomePage) {
-			return 'default';
-		}
-
 		if (isCurrentActive) {
 			return 'active';
 		}
