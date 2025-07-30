@@ -8,7 +8,7 @@
 	let height: number;
 
 	const FINAL_DENSITY_MULTIPLIER = 0.25;
-	const INITIAL_DENSITY_MULTIPLIER = 0.02;
+	const INITIAL_DENSITY_MULTIPLIER = 0.00002;
 	const ANIMATION_DURATION = 10000; // 10 seconds in milliseconds
 	const DOT_SIZE = 1.5;
 	const NOISE_SCALE = 0.01;
