@@ -94,6 +94,9 @@
 							{/if}
 						{/each}
 					</div>
+					<div class="logo">
+						<img src="GICA.svg" alt="GICA Logo" />
+					</div>
 				{/if}
 			</div>
 		</div>
@@ -157,7 +160,7 @@
 	}
 
 	footer.active .details {
-		max-height: calc(99vh - var(--nav-height) - 10rem);
+		max-height: calc(99vh - var(--nav-height) - 4rem);
 		overflow-y: auto;
 	}
 
@@ -182,6 +185,17 @@
 
 	.details::-webkit-scrollbar-thumb:hover {
 		background: rgba(188, 146, 0, 0.8);
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 2rem;
+	}
+	.logo img {
+		width: 100px;
+		height: auto;
 	}
 
 	.headline:hover {
