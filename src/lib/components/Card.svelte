@@ -22,7 +22,7 @@
 	<div
 		class="card-image {item.cover?.url ? 'has-image' : ''}"
 		style="background-color: var(--color-primary); {item.cover?.url
-			? `background-image: url(${item.cover.url})`
+			? `--bg-image: url(${item.cover.url});`
 			: ''}"
 	>
 		<div class="card-overlay">
@@ -62,18 +62,23 @@
 		color: var(--color-secondary);
 	}
 
-	.card:hover .card-image {
-		background-color: transparent !important;
+	.card:hover .card-image.has-image {
+		background-image: var(--bg-image);
+		background-size: cover;
+		background-position: center;
+	}
+
+	.card:hover .card-image.has-image::before {
+		opacity: 1;
 	}
 
 	.card-image {
 		position: relative;
 		width: 100%;
 		aspect-ratio: 1;
-		background-size: cover;
-		background-position: center;
 		border-radius: var(--radius-xl);
 		overflow: hidden;
+		transition: background-image 0.3s ease;
 	}
 
 	.card-image.has-image::before {
@@ -85,6 +90,8 @@
 		bottom: 0;
 		background: rgba(0, 0, 0, 0.4);
 		z-index: 1;
+		opacity: 0;
+		transition: opacity 0.3s ease;
 	}
 
 	.card-overlay {
