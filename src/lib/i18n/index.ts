@@ -118,7 +118,7 @@ export const uiTranslations = {
 	},
 	contributors: {
 		en: 'Contributors',
-		rw: 'Contributors'
+		rw: 'Abafashije'
 	},
 	visit: {
 		en: 'Visit us',

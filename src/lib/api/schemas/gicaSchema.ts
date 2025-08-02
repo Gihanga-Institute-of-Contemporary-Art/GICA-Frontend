@@ -86,6 +86,11 @@ export interface Contributors extends GenericCollection<Contributor> {
 
 export interface Programmes extends GenericCollection<Programme> {
 	text: ContentBlock[];
+	translation: {
+		language: string;
+		title: string;
+		pages: GicaPage[];
+	};
 }
 
 // GICA Page types
