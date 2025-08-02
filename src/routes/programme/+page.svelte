@@ -11,6 +11,8 @@
 		getProgrammeStatusFromArray,
 		getTimeRange
 	} from '$lib/utils';
+	import { currentLanguage } from '$lib/stores/languageStore';
+	import { getTranslatedText } from '$lib/i18n/translate';
 
 	interface Props {
 		data: PageData;
@@ -45,26 +47,60 @@
 
 	// Get unique programme types and create submenu
 	const programmeTypes = Array.from(new Set(programmes.children.flatMap((p) => p.tags)));
-	const programmeBlurb = data.pages.find((p) => p.slug === 'programmes') || {
-		title: '',
-		slug: '',
-		description: {
-			value: ''
+
+	// Find the programme page blurb with translation support
+	const programmePageData = (() => {
+		const found = programmes.pages?.find((p) => p.slug === 'programmes');
+		if (found) {
+			return {
+				...found,
+				description:
+					typeof found.description === 'string' ? { value: found.description } : found.description
+			};
 		}
-	};
+		return {
+			title: '',
+			slug: '',
+			description: { value: '' }
+		};
+	})();
+
+	// Get translated pages from programmes collection if available
+	const translatedPages = programmes.translation?.pages || [];
+	const translatedProgrammePage = translatedPages.find((p) => p.slug === 'programmes');
+
+	// Create reactive programme blurb that responds to language changes
+	const programmeBlurb = $derived(() => {
+		// Explicitly reference currentLanguage to make this derived reactive
+		const currentLang = $currentLanguage;
+		const originalDescription = programmePageData.description?.value || '';
+		const translatedDescription = translatedProgrammePage?.description?.value;
+		const translationLanguage = programmes.translation?.language;
+
+		return {
+			...programmePageData,
+			description: {
+				value: getTranslatedText(originalDescription, translatedDescription, translationLanguage)
+			}
+		};
+	});
 
 	// Create SEO data for the programme page
-	const seoData = createSEOData({
-		title: 'Programmes',
-		description: programmeBlurb.description.value
-			? programmeBlurb.description.value.replace(/<[^>]*>/g, '').substring(0, 160) + '...'
-			: 'Explore our current and upcoming programmes at GICA - workshops, exhibitions, talks, and artistic residencies.',
-		keywords:
-			'GICA programmes, workshops, exhibitions, talks, residencies, contemporary art, Rwanda, cultural events',
-		type: 'website',
-		section: 'programmes',
-		tags: programmeTypes
-	});
+	const seoData = $derived(() =>
+		createSEOData({
+			title: 'Programmes',
+			description: programmeBlurb().description.value
+				? programmeBlurb()
+						.description.value.replace(/<[^>]*>/g, '')
+						.substring(0, 160) + '...'
+				: 'Explore our current and upcoming programmes at GICA - workshops, exhibitions, talks, and artistic residencies.',
+			keywords:
+				'GICA programmes, workshops, exhibitions, talks, residencies, contemporary art, Rwanda, cultural events',
+			type: 'website',
+			section: 'programmes',
+			tags: programmeTypes
+		})
+	);
 
 	const typeSubmenu = $derived(
 		programmeTypes.map((type) => ({
@@ -201,14 +237,14 @@
 
 <svelte:window onkeydown={handleKeydown} />
 
-<Header {...seoData} />
+<Header {...seoData()} />
 
 <main class:modal-open={isModalOpen}>
 	<Nav {submenuRows} onProgrammeNavClick={resetProgrammePage} />
 	{#if !isModalOpen}
 		<section class="content">
 			<article class="blurb">
-				{@html programmeBlurb.description.value}
+				{@html programmeBlurb().description.value}
 			</article>
 			<article class="programmes" bind:this={programmesSection}>
 				<div class="programmes-grid">
