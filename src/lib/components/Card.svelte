@@ -22,7 +22,7 @@
 	<div
 		class="card-image {item.cover?.url ? 'has-image' : ''}"
 		style="background-color: var(--color-primary); {item.cover?.url
-			? `--bg-image: url(${item.cover.url});`
+			? `background-image: url(${item.cover.url}); background-size: cover; background-position: center;`
 			: ''}"
 	>
 		<div class="card-overlay">
@@ -63,13 +63,11 @@
 	}
 
 	.card:hover .card-image.has-image {
-		background-image: var(--bg-image);
-		background-size: cover;
-		background-position: center;
+		background-image: none !important;
 	}
 
 	.card:hover .card-image.has-image::before {
-		opacity: 1;
+		opacity: 0;
 	}
 
 	.card-image {
@@ -90,7 +88,7 @@
 		bottom: 0;
 		background: rgba(0, 0, 0, 0.4);
 		z-index: 1;
-		opacity: 0;
+		opacity: 1;
 		transition: opacity 0.3s ease;
 	}
 
