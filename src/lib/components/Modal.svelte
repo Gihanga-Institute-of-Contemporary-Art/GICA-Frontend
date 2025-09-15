@@ -187,6 +187,7 @@
 		justify-content: center;
 		background-color: var(--color-primary);
 		color: var(--color-primary-light);
+		position: relative;
 	}
 
 	.modal-content {
@@ -197,6 +198,7 @@
 		width: 100%;
 		column-gap: var(--space-8);
 		outline: none;
+		padding: var(--space-4) 0;
 	}
 
 	.modal-content h4 {
@@ -354,11 +356,14 @@
 		justify-content: center;
 		height: var(--arrow-size);
 		aspect-ratio: 1;
-		transition: opacity 0.3s ease;
+		transition:
+			opacity 0.3s ease,
+			transform 0.2s ease;
 	}
 
 	.nav-button:hover {
 		opacity: 0.7;
+		transform: scale(1.05);
 	}
 
 	.nav-button svg {
@@ -375,6 +380,13 @@
 		margin-left: auto;
 	}
 
+	/* Additional minimalist styles */
+	@media (hover: hover) {
+		.nav-button:hover {
+			opacity: 0.8;
+		}
+	}
+
 	/* Responsive design */
 	@media (max-width: 768px) {
 		.modal {
@@ -386,7 +398,9 @@
 			grid-template-columns: 1fr;
 			grid-template-rows: auto auto auto;
 			gap: var(--space-4);
+			padding-top: var(--space-4);
 			padding-bottom: var(--footer-height);
+			max-width: 100vw;
 			grid-template-areas:
 				'middle'
 				'left'
@@ -394,8 +408,16 @@
 		}
 
 		.modal-nav {
-			position: fixed;
-			padding: 0;
+			display: none; /* Hide navigation on mobile */
+		}
+
+		.nav-button:active {
+			transform: scale(0.95);
+		}
+
+		.nav-button svg {
+			width: 100%;
+			height: 100%;
 		}
 
 		.modal-left {
