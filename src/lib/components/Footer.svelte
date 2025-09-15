@@ -281,6 +281,7 @@
 		.details .sub-text {
 			margin-top: var(--space-2);
 			hyphens: auto;
+			max-width: 100%;
 		}
 	}
 </style>
