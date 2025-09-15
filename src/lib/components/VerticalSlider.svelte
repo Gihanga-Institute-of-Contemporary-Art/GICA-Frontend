@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { MediaAsset } from '$lib/api';
+	import { isFooterActive } from '$lib/stores/footerStore';
 
 	// MediaCover now includes photographer support!
 	// Current MediaCover now includes: url, alt, caption, photographer, width, height, srcset
@@ -91,7 +92,7 @@
 			{@render imageItem(image, index)}
 		{/each}
 	</ul>
-	<div class="slider-btn">
+	<div class="slider-btn" class:hidden={$isFooterActive}>
 		<button class="btn-text" onclick={toggleAnimation}>
 			{isPaused ? 'Play' : 'Pause'}
 		</button>
@@ -172,6 +173,12 @@
 		justify-content: center;
 		gap: var(--space-1);
 		z-index: 1020;
+		transition: opacity 0.3s ease;
+	}
+
+	.slider-btn.hidden {
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	.slider-btn button {
