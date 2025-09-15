@@ -46,7 +46,6 @@
 </script>
 
 <Header {...seoData} />
-<StochasticPattern />
 <main bind:this={mainElement} class="home-page">
 	<Nav />
 	<DuotoneFilter baseHex="#756c4d" />
