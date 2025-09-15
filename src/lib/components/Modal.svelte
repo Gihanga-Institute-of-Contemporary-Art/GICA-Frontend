@@ -36,7 +36,7 @@
 
 	$effect(() => {
 		// Scroll to top of the page content, accounting for nav height
-		document.documentElement.scrollTo({
+		window.scrollTo({
 			top: 0,
 			behavior: 'smooth'
 		});
