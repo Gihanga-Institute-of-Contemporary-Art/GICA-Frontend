@@ -253,14 +253,15 @@
 			padding-inline: 0;
 			max-width: 90vw;
 			grid-template-rows: auto auto auto;
+			width: 100%;
 		}
 
 		.details .sub-text {
 			font-size: var(--font-size-lg);
 		}
 
-		.headline {
-			margin-left: -1.25rem;
+		.headline .arrow-btn {
+			margin-left: -1rem;
 		}
 
 		/* .title-container {
