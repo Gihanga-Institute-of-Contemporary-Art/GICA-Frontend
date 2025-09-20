@@ -259,6 +259,10 @@
 			font-size: var(--font-size-lg);
 		}
 
+		.headline {
+			margin-left: -1.25rem;
+		}
+
 		/* .title-container {
 			grid-column: 1 / -1;
 			display: flex;
