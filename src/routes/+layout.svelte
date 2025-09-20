@@ -91,4 +91,10 @@
 	:global(*) {
 		cursor: none !important;
 	}
+
+	@media (max-width: 768px) {
+		:global(*) {
+			cursor: auto !important;
+		}
+	}
 </style>

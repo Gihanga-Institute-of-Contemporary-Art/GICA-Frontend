@@ -245,13 +245,18 @@
 			/* padding-inline: var(--space-8); */
 			justify-content: start;
 			padding-block-end: 0;
+			height: auto;
 		}
 
 		.content {
-			/* margin: 0 auto; */
+			margin: 0 auto;
 			padding-inline: 0;
 			max-width: 90vw;
 			grid-template-rows: auto auto auto;
+		}
+
+		.details .sub-text {
+			font-size: var(--font-size-lg);
 		}
 
 		/* .title-container {
