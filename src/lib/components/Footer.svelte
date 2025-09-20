@@ -14,6 +14,8 @@
 		};
 	}>();
 
+	let isMobile = $state(false);
+
 	// Get translated content - now reactive to language changes
 	const translatedHeadline = $derived(
 		$currentLanguage === 'en' ||
@@ -35,6 +37,15 @@
 
 	// Prevent page scrolling when footer is active
 	onMount(() => {
+		const mediaQuery = window.matchMedia('(max-width: 768px)');
+		const updateIsMobile = () => {
+			isMobile = mediaQuery.matches;
+		};
+
+		updateIsMobile();
+
+		mediaQuery.addEventListener('change', updateIsMobile);
+
 		const unsubscribe = isFooterActive.subscribe((active) => {
 			if (active) {
 				// Prevent body scrolling
@@ -48,6 +59,7 @@
 		return () => {
 			// Cleanup: restore scrolling and unsubscribe
 			document.body.style.overflow = '';
+			mediaQuery.removeEventListener('change', updateIsMobile);
 			unsubscribe();
 		};
 	});
@@ -82,7 +94,7 @@
 				</svg>
 			</div>
 			<div class="title-container">
-				<p class="title">{translatedHeadline}</p>
+				<p class="title">{isMobile ? 'GICA' : translatedHeadline}</p>
 			</div>
 			<div class="details">
 				{#if $isFooterActive}
@@ -242,18 +254,18 @@
 			grid-template-rows: auto auto auto;
 		}
 
-		.title-container {
+		/* .title-container {
 			grid-column: 1 / -1;
 			display: flex;
 			align-items: center;
 			justify-content: start;
-		}
+		} */
 
-		.headline p {
+		/* .headline p {
 			width: 80vw;
 			padding-inline: 0;
 			margin-block-start: var(--space-2);
-		}
+		} */
 
 		footer.active .headline p {
 			width: 100%;

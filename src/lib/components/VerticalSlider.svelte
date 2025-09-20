@@ -290,11 +290,11 @@
 
 	/* Responsive Design */
 	@media (max-width: 768px) {
-		.slider-btn {
+		/* .slider-btn {
 			padding-block-start: var(--space-2);
 			align-items: start;
 			padding-inline-end: 0;
-		}
+		} */
 
 		.slider-container ul {
 			gap: var(--space-8);
