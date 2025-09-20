@@ -248,7 +248,7 @@
 		}
 
 		.content {
-			margin: 0 auto;
+			/* margin: 0 auto; */
 			padding-inline: 0;
 			max-width: 90vw;
 			grid-template-rows: auto auto auto;
@@ -261,11 +261,9 @@
 			justify-content: start;
 		} */
 
-		/* .headline p {
-			width: 80vw;
-			padding-inline: 0;
-			margin-block-start: var(--space-2);
-		} */
+		.title-container .title {
+			font-size: var(--font-size-xl);
+		}
 
 		footer.active .headline p {
 			width: 100%;
