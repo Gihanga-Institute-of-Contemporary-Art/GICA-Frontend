@@ -98,7 +98,7 @@
 			</div>
 			<div class="details">
 				{#if $isFooterActive}
-					<div class="sub-text">
+					<div class="about-text">
 						{#each translatedAbout as block}
 							{#if block.type === 'text'}
 								{@const textContent = block.content as TextContent}
@@ -176,9 +176,9 @@
 		overflow-y: auto;
 	}
 
-	.details .sub-text {
+	.details .about-text {
 		font-size: var(--font-size-xl);
-		max-width: var(--content-width);
+		/* max-width: var(--content-width); */
 	}
 
 	/* Custom scrollbar for details */
@@ -224,7 +224,7 @@
 		/* margin: 0 auto; */
 	}
 
-	.sub-text {
+	.about-text {
 		margin-top: 2rem;
 		animation: fadeIn 0.3s ease-in-out;
 	}
@@ -256,7 +256,7 @@
 			width: 100%;
 		}
 
-		.details .sub-text {
+		.details .about-text {
 			font-size: var(--font-size-lg);
 		}
 
@@ -289,7 +289,7 @@
 			padding-right: var(--space-2);
 		}
 
-		/* footer.active .details .sub-text {
+		/* footer.active .details .about-text {
 			margin-bottom: var(--space-2);
 		} */
 
@@ -298,7 +298,7 @@
 			width: 3px;
 		}
 
-		.details .sub-text {
+		.details .about-text {
 			margin-top: var(--space-2);
 			hyphens: auto;
 			max-width: 100%;

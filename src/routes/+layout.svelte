@@ -7,6 +7,15 @@
 	let customCursor: HTMLDivElement;
 
 	onMount(() => {
+		const hasFinePointer = window.matchMedia('(any-pointer: fine)').matches && window.matchMedia('(hover: hover)').matches;
+
+		if (!hasFinePointer) {
+			if (customCursor) {
+				customCursor.style.display = 'none';
+			}
+			return;
+		}
+
 		let animationId: number;
 		let mouseX = 0;
 		let mouseY = 0;
@@ -87,14 +96,16 @@
 		opacity: 0; /* Start invisible */
 	}
 
-	/* Hide default cursor globally */
-	:global(*) {
-		cursor: none !important;
+	/* Hide default cursor only when a fine pointer is available */
+	@media (any-pointer: fine) and (hover: hover) {
+		:global(*) {
+			cursor: none !important;
+		}
 	}
 
-	@media (max-width: 768px) {
-		:global(*) {
-			cursor: auto !important;
+	@media (any-pointer: coarse), (hover: none) {
+		.custom-cursor {
+			display: none;
 		}
 	}
 </style>
