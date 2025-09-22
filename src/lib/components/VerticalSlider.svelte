@@ -163,6 +163,7 @@
 	}
 
 	.slider-btn {
+		font-family: var(--font-primary);
 		position: fixed;
 		bottom: 0;
 		right: var(--space-4);

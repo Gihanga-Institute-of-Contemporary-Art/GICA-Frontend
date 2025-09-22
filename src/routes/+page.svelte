@@ -60,7 +60,7 @@
 		/* background-color: var(--color-primary-light); */
 		background-color: rgb(247, 233, 209);
 		color: var(--font-color-primary);
-		min-height: 100vh;
+		min-height: 100dvh;
 	}
 
 	section.content {
